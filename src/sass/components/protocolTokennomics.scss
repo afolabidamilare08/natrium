@@ -4,6 +4,10 @@
     background-size: cover;
     padding: 3rem 5rem;
 
+    @include respond(tab-land){
+        padding: 2rem;
+      }
+
     & img{
         // border: 1px solid red;
         display: block;
