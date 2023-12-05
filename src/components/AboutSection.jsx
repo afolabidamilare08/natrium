@@ -1,4 +1,3 @@
-import React from 'react'
 import aboutimg from "../assets/aboutimg.png"
 
 
@@ -6,15 +5,18 @@ import aboutimg from "../assets/aboutimg.png"
 const AboutSection = () => {
   return (
     <div className='aboutContainer'>
-        <div className="aboutHeader">
-            <div className="whiteleft"><></></div>
-            <h1>Protocol Architecture</h1>
-            <div className="whiteright"><></></div>
+
+        <div className="aboutContainer_Header">
+            <div className="aboutContainer_Header_whiteleft"><></></div>
+            <h5>Protocol Architecture</h5>
+            <div className="aboutContainer_Header_whiteright"><></></div>
         </div>
-        <div className="aboutBody">
-            <div className="aboutUs">
-                <h2>About Us</h2>
-                <div className="aboutText">
+
+        <div className="aboutContainer_body" >
+
+            <div className="aboutContainer_body_left">
+                <p className="aboutContainer_body_left_title" >About Us</p>
+                <div className="aboutContainer_body_left_body">
                     <p>Natrium introduces an innovative framework empowering individuals to establish a dynamic monetary market for various tokens</p>
                     <p>Through a groundbreaking two-layer architecture, Natrium effectively addresses liquidity challenges by segregating risk between assets.</p>
                     <p>At its core, Natrium employs risk-isolated pools for robust risk management.</p>
@@ -22,10 +24,14 @@ const AboutSection = () => {
                 </div>
                 
             </div>
-            <div className="aboutImage">
-                <img src={aboutimg} alt="" />
-            </div>
+
+            <img src={aboutimg} alt="" />
+
         </div>
+
+        {/* <div className="aboutBody">
+            
+        </div> */}
     </div>
   )
 

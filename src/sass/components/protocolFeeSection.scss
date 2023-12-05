@@ -1,0 +1,110 @@
+.pfContainer{
+    /* background-color: #03251c; */
+    background-image: url("../assets/bg3.png");
+    background-size: cover;
+    border: 1px solid transparent;
+    padding: 2rem 5rem;
+    // padding-top: 2rem;
+
+    @include respond(tab-land){
+        padding: 2rem;
+    }
+
+    &_title{
+        font-family: 'Poppins', sans-serif;
+        color: white;
+        text-align: center;
+        margin: 4rem auto;
+        margin-bottom: 2rem;
+        font-size: 2rem;
+
+        @include respond(tab-land){
+            font-size: 1.4rem;
+        }
+
+    }
+
+    &_body{
+
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        @include respond(mini-desktop){
+            justify-content: space-evenly;
+        }
+
+        &_part{
+            width: 25%;
+            border: 1px solid #083A2B;
+            background-color: #000E0A;
+            border-radius: 10px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            @include respond(mini-desktop){
+                width: 40%;
+                margin-top: 2rem;
+                // border: 1px solid red;
+            }
+
+            @include respond(tab-land){
+                width: 80%;
+            }
+
+            &_top{
+                width: 3rem;
+                height: 3rem;
+                background-color: #1bfd0678;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 8px;
+                margin-bottom: 1rem;
+
+                &_ic{
+                    color: white;
+                    width: 60%;
+                    height: 60%;
+                }
+
+            }
+            
+            &_title{
+                margin-bottom: 1rem;
+                font-size: 1.4rem;
+                color: #d1d1d1;
+                font-family: 'Poppins', sans-serif;
+            }
+
+            &_body{
+                color: #8B8B8B;
+                font-family: 'Poppins', sans-serif;
+                font-size: .9rem;
+                margin-bottom: 2rem;
+                line-height: 1.2rem;
+            }
+
+            & button{
+                padding: .8rem;
+                border-radius: 10px;
+                border: 1px solid #169570;
+                display: flex;
+                justify-content: center;
+                color: #169570;
+                font-family: 'Poppins', sans-serif;
+                font-weight: 600;
+                cursor: pointer;
+                align-items: center;
+                background-color: #083A2B;
+                width: fit-content;
+                // justify-self:flex-end;
+            }
+
+        }
+
+    }
+
+  }

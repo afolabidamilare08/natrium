@@ -1,0 +1,129 @@
+/* About Section */
+.aboutContainer{
+  /* background-color: #000E0A; */
+  background-image: url("../assets/aboutbg.png");
+  background-size: cover;
+  // display: flex;
+  // flex-direction: column;
+  align-items: center;
+  border: 2px solid transparent;
+  padding: 0rem 5rem;
+  padding-bottom: 2rem;
+
+  @include respond(tab-land){
+    padding: 2rem;
+  }
+
+
+  &_Header{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin: 1rem auto;
+
+    & h5{
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    &_whiteleft{
+      background-color: white;
+      height: 3px;
+      flex: 1;
+      border-top-left-radius: 100%;
+      border-bottom-left-radius: 100%;
+      margin-right: 30px;
+
+      @include respond(tab-port){
+        margin-right: 10px;
+      }
+
+    }
+
+    &_whiteright{
+      background-color: white;
+      height: 3px;
+      flex: 1;
+      border-bottom-right-radius: 100%;
+      border-top-right-radius: 100%;
+      margin-left: 30px;
+
+      @include respond(tab-port){
+        margin-left: 10px;
+      }
+
+    }
+
+  }
+
+  &_body{
+    margin-top: 5rem;
+    display: flex;
+    // align-items: center;
+    justify-content: space-between;
+
+    @include respond(tab-land){
+      flex-direction: column;
+    }
+
+    &_left{
+      width: 40%;
+
+      @include respond(mini-desktop){
+        width: 45%;
+      }
+
+      @include respond(tab-land){
+        width: 100%;
+      }
+
+      &_title{
+        color: #8B8B8B;
+        font-family: 'Poppins', sans-serif;
+        font-size: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      &_body{
+        background: linear-gradient(180deg, #169570 0%, rgba(115, 149, 22, 0.348) 100%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+        @include respond(tab-land){
+          color: #DCF2EB;
+          background: transparent#DCF2EB;
+          background-clip: unset;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: #DCF2EB;
+        }
+
+      }
+
+    }
+
+    & img{
+      width: 35rem;
+      object-fit: contain;
+
+      @include respond(mini-desktop){
+        width: 25rem;
+      }
+
+      @include respond(tab-land){
+        display: block;
+        margin: 3rem auto;
+        width: 19rem;
+      }
+
+    }
+
+  }
+
+}
+
+

@@ -1,0 +1,23 @@
+.ptContainer{
+    /* background-color: #000E0A; */
+    background-image: url("../assets/bg4.png");
+    background-size: cover;
+    padding: 3rem 5rem;
+
+    & img{
+        // border: 1px solid red;
+        display: block;
+        margin: 4rem auto;
+        transition: all .5s;
+
+        @include respond(mini-desktop){
+            width: 100%;
+        }
+
+        &:hover{
+            transform: scale(1.1);
+        }
+
+    }
+
+  }

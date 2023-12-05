@@ -1,0 +1,32 @@
+*{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+  }
+
+  @font-face{
+    font-family: "FractulBold";
+    src: local("FractulBold"),url("../assets/fonts/fractul/Fractul-Bold.ttf") format('truetype')
+  }
+
+  @font-face{
+    font-family: "FractulSemibold";
+    src: local("FractulSemibold"),url("../assets/fonts/fractul/Fractul-SemiBold.ttf") format('truetype')
+  }
+
+  @font-face{
+    font-family: "FractulRegular";
+    src: local("FractulRegular"),url("../assets/fonts/fractul/Fractul-Regular.ttf") format('truetype')
+  }
+
+  body{
+    font-family: 'FractulRegular'
+  }
+
+  @import './components/mixins.scss';
+  @import './components/navbar.scss';
+  @import './components/heroSection.scss';
+  @import './components/aboutSection.scss';
+  @import './components/protocolFeeSection.scss';
+  @import './components/protocolTokennomics.scss';
+  @import './components/footer.scss';

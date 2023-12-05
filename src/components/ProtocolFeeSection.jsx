@@ -1,58 +1,105 @@
 import React from 'react'
 import firsticon from "../assets/firsticon.svg"
+import { BiMovie } from "react-icons/bi";
+import { FaShuffle } from "react-icons/fa6";
+import {motion} from 'framer-motion';
 
 const ProtocolFeeSection = () => {
   return (
     <div className='pfContainer'>
-      <div className="pfHeader">
-            <div className="whiteleft"><></></div>
-            <h1>Protocol Architecture</h1>
-            <div className="whiteright"><></></div>
-      </div>
-      <div className="pfSubHeader">
-        <h2>Protocol Fee Structure</h2>
-      </div>
-      <div className="pfBoxes">
-        <div className="pfBox">
-          <div className="pfbContent">
-            <div className="pfbIcon">
-              <img src={firsticon} alt="movie icon" />
-            </div>
-            <h2>Bucket Creation Fee:</h2>
-            <p>Users engaging in the creation of silos within the protocol will incur a fee.</p>
-            <p>This fee is intended to support the ongoing development, maintenance, and improvement of the protocol.</p>
-          </div>
-          <div className="pfbButton">
-            <p>Learn More</p>
-          </div>
+
+        <div className="aboutContainer_Header">
+            <div className="aboutContainer_Header_whiteleft"><></></div>
+            <h5>Protocol Fees</h5>
+            <div className="aboutContainer_Header_whiteright"><></></div>
         </div>
 
-        <div className="pfBox">
-          <div className="pfbContent">
-            <div className="pfbIcon">
-              <img src={firsticon} alt="movie icon" />
+        <div className='pfContainer_title' >Protocol Fee Structure</div>
+
+        <div className='pfContainer_body' >
+
+          <motion.div className='pfContainer_body_part'
+          
+            // initial={{ scale: 0,}}
+            // whileInView={{ scale: 1, }}
+            // transition={{ duration: 0.4 }}
+          
+          >  
+
+            <div className='pfContainer_body_part_top' >
+              <BiMovie className='pfContainer_body_part_top_ic' />
             </div>
-            <h2>Shuffler Creation Fee:</h2>
-            <p>Users initiating the creation of shuffler within the system will be subject to a fee. This fee contributes to the sustainability and enhancement of the protocol's functionality.</p>
-          </div>
-          <div className="pfbButton">
-            <p>Learn More</p>
-          </div>
+
+            <div className='pfContainer_body_part_title' >Bucket Creation Fee:</div>
+
+            <div className='pfContainer_body_part_body' >
+              Users engaging in the creation of 
+              silos within the protocol will incur a fee. 
+              <br/>
+              <br/>
+              This fee is intended to support the 
+              ongoing development, maintenance, 
+              and improvement of the protocol.
+            </div>
+
+            <button>
+              Learn More
+            </button>
+
+          </motion.div>
+
+          <motion.div className='pfContainer_body_part'
+          
+            initial={{ scale: 0,}}
+            whileInView={{ scale: 1, }}
+            transition={{ duration: 0.4 }}
+
+          >  
+
+            <div className='pfContainer_body_part_top' >
+              <FaShuffle className='pfContainer_body_part_top_ic' />
+            </div>
+
+            <div className='pfContainer_body_part_title' >Shuffler Creation Fee:</div>
+
+            <div className='pfContainer_body_part_body' >
+              Users initiating the creation of shuffler within the system will be subject to a fee. 
+              This fee contributes to the sustainability and enhancement of the protocol's functionality.
+            </div>
+
+            <button>
+              Learn More
+            </button>
+
+          </motion.div>
+
+          <motion.div className='pfContainer_body_part'
+          
+            initial={{ scale: 0,}}
+            whileInView={{ scale: 1, }}
+            transition={{ duration: 0.4 }}
+          
+          >  
+
+            <div className='pfContainer_body_part_top' >
+              <FaShuffle className='pfContainer_body_part_top_ic' />
+            </div>
+
+            <div className='pfContainer_body_part_title' >Deposit and <br/> Withdrawal Fees:</div>
+
+            <div className='pfContainer_body_part_body' >
+              Transactions involving deposits and withdrawals within the protocol will be subject to fees. 
+              These fees are implemented to ensure the integrity and efficiency of the system, supporting its overall stability and continuous development.
+            </div>
+
+            <button>
+              Learn More
+            </button>
+
+          </motion.div>
+
         </div>
 
-        <div className="pfBox">
-          <div className="pfbContent">
-            <div className="pfbIcon">
-              <img src={firsticon} alt="movie icon" />
-            </div>
-            <h2>Deposit and Withdrawal Fees:</h2>
-            <p>Transactions involving deposits and withdrawals within the protocol will be subject to fees. These fees are implemented to ensure the integrity and efficiency of the system, supporting its overall stability and continuous development.</p>
-          </div>
-          <div className="pfbButton">
-            <p>Learn More</p>
-          </div>
-        </div>
-      </div>
     </div>
   )
 }

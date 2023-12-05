@@ -15,11 +15,7 @@ const Footer = () => {
         <div className="footer">
             <div className="leftFooter">
                 <div className="footerItem">
-                    {/* <img src={discordicon} alt="" /> */}
-                    <div className="copyIcon">
-                        <p>C</p>
-                    </div>
-                    <p>2023 Natrium</p>
+                    <p>©2023 Natrium</p>
                 </div>
             </div>
             <div className="rightFooter">

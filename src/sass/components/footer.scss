@@ -1,0 +1,53 @@
+.footerContainer{
+    // height: 55px;
+    background-color: #000E0A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+  .footer{
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // border: 1px solid red;
+
+    @include respond(tab-land){
+        // width: 100%;
+        width: fit-content;
+    }
+
+  }
+  .copyIcon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+    border: 1px solid white;
+    border-radius: 100%;
+    width: 26px;
+    height: 26px;
+  }
+  .footerItem{
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+    gap: 5px;
+
+    & p{
+        color: white;
+
+        @include respond(tab-land){
+            display: none;
+        }
+
+    }
+
+  }
+  .rightFooter{
+    display: flex;
+    gap: 20px;
+  }
+

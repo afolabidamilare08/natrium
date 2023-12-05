@@ -1,0 +1,135 @@
+.heroContainer{
+  background-image: url("../assets/herobg.png");
+  // height: 90vh;
+  padding: 0rem 5rem;
+  padding-bottom: 5rem;
+  // border: 2px solid red;
+
+  @include respond(tab-land){
+    padding: 2rem;
+  }
+
+  &_top{ 
+    display: flex;
+    justify-content: space-between;
+
+      @include respond(tab-land){
+        flex-direction: column;
+      }
+
+      &_txt{
+        // font-family: ;
+        font-size: 7rem;
+        color: #BABABA;
+        line-height: 6rem;
+        margin-top: 7rem;
+
+        @include respond(mini-desktop){
+          font-size: 5rem;
+          line-height: 4.5rem;
+          margin-top: 5rem;
+        }
+
+        @include respond(tab-land){
+          margin-top: 0rem;
+          // border: 1px solid red;
+          text-align: center;
+        }
+
+        @include respond(tab-port){
+          font-size: 3rem;
+          line-height: 3rem;
+        }
+
+      }
+    
+      &_img{
+        width: 28rem;
+        margin-right: 1rem;
+
+        animation-name: spining;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+
+        @include respond(mini-desktop){
+          width: 24rem;
+        }
+
+        @include respond(tab-land){
+          display: block;
+          margin: 1rem auto;
+        }
+
+        @include respond(tab-port){
+          width: 15rem;
+        }
+        
+      }
+
+  }
+
+  &_btm{
+    margin-top: -10rem;
+
+    @include respond(tab-land){
+      margin-top: 0;
+    }
+
+    &_txt{
+      font-family: 'Poppins', sans-serif;
+      color: #AEAEAE;
+      font-size: 1.3rem;
+      width: 35%;
+      margin-top: 2rem;
+
+      @include respond(mini-desktop){
+        width: 44%;
+        margin-top: 1rem;
+      }
+
+      @include respond(tab-land){
+        width: 100%;
+      }
+
+      @include respond(tab-port){
+        font-size: .9rem;
+      }
+
+    }
+
+    &_button{
+      margin-top: 30px;
+      padding: 1rem;
+      border-radius: 10px;
+      border: 1px solid #169570;
+      display: flex;
+      justify-content: center;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      align-items: center;
+      background-color: #083A2B;
+
+      @include respond(tab-port){
+        font-size: .9rem;
+        padding: .8rem;
+      }
+      
+    }
+
+  }
+
+}
+
+@keyframes spining{
+
+  0%{
+    transform: rotate(0deg);
+  }
+
+  100%{
+    transform: rotate(360deg);
+  }
+
+}
