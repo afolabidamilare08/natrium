@@ -3,6 +3,7 @@ import logo from "../assets/logo.png"
 import threebars from "../assets/threebars.svg";
 import { GiHamburgerMenu } from "react-icons/gi";
 import {motion} from 'framer-motion';
+import { Link } from "react-router-dom";
 
 
 const NavBar = () => {
@@ -21,9 +22,9 @@ const NavBar = () => {
             </div>
 
             <div className="navBarContainer_navBar_navLinksContainer">
-                <a href="#" className="navBarContainer_navBar_navLinksContainer_selectedNavLink">
+                <Link to="/dashboard" className="navBarContainer_navBar_navLinksContainer_selectedNavLink">
                     <p>Features</p>
-                </a>
+                </Link>
                 <a href="#" className="navLink">
                     <p>Security</p>
                 </a>
