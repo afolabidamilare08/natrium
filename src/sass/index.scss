@@ -2,6 +2,18 @@
     padding: 0;
     margin: 0;
     text-decoration: none;
+    box-sizing: border-box;
+  }
+
+  h1,h2,h3,h4,h5,h6{
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+  }
+
+  :root{
+    --primary:#18A57C;
+    --poppins: 'Poppins', sans-serif;
   }
 
   @font-face{
@@ -26,7 +38,9 @@
   @import './components/mixins.scss';
   @import './components/navbar.scss';
   @import './components/heroSection.scss';
+  @import './components/dappHeader.scss';
   @import './components/aboutSection.scss';
   @import './components/protocolFeeSection.scss';
   @import './components/protocolTokennomics.scss';
   @import './components/footer.scss';
+  @import './pages/dappIndex.scss';

@@ -1,22 +1,19 @@
-import NavBar from './components/NavBar'
-import HeroSection from './components/HeroSection'
-import AboutSection from './components/AboutSection'
-import ProtocolFeeSection from './components/ProtocolFeeSection'
-import ProtocolTokenomics from './components/ProtocolTokenomics'
-import Footer from './components/Footer'
+import { Route, Routes } from 'react-router-dom'
+import LandingPage from './pages/landingPage.jsx'
+import DappIndex from './pages/dapp/dappIndex.jsx'
+import DappDashboard from './pages/dapp/dappDashboard.jsx'
 
 function App() {
 
   return (
     <>
-      <div className="appWrapper">
-        <NavBar />
-        <HeroSection />
-        <AboutSection />
-        <ProtocolFeeSection />
-        <ProtocolTokenomics />
-        <Footer />
-      </div>
+      <Routes>
+        <Route path='/' element={<LandingPage/>} />
+        <Route path='/dapp' element={ <DappIndex/> } />
+        <Route path='/dashboard' element={ <DappIndex
+          Component={<DappDashboard/>}
+        /> } />
+      </Routes>
     </>
   )
 }

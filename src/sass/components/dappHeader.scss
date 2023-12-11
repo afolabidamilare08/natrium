@@ -1,0 +1,152 @@
+.dappHeader{
+    background-color: #060A08;
+    padding: 3rem 3rem .4rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #083A2B;
+
+    @include respond(mini-desktop){
+        padding: 2rem 1rem;
+    }
+
+    @include respond(mobile-land){
+        padding:1rem;
+    }
+
+    &_burger{
+        display: none;
+        align-items: center;
+
+        @include respond(tab-land){
+           display: flex;
+        }
+
+        
+
+        &_a{
+            color: #127C5D;
+            font-family: var(--poppins);
+            font-size: rem;
+            font-weight: 500;
+        }
+
+    }
+
+    &_left{
+        display: flex;
+        align-items: center;
+
+        &_ic{
+            width: 1.5rem;
+            height: 1.5rem;
+            color: white;
+            margin-right: 1rem;
+            display: none;
+
+            @include respond(tab-land){
+                display: block;
+             }
+
+        }
+
+        & h4{
+            color: #127C5D;
+            font-family: var(--poppins);
+            font-size: 1.5rem;
+            font-weight: 500;
+
+            @include respond(mini-desktop){
+                font-size: 1.2rem;
+            }
+
+        }
+
+        & button{
+            display: block;
+            margin-left: 1rem;
+            padding: .5rem;
+            border-radius: 5px;
+            border: none;
+            color: white;
+            background-color: #51515166;
+            font-family: var(--poppins);
+            font-weight: 600;
+
+            @include respond(mini-desktop){
+                font-size: .9rem;
+                font-weight: 500;
+            }
+
+            @include respond(mobile-land){
+                display: none;
+            }
+
+        }
+
+    }
+
+    &_right{
+        display: flex;
+        align-items: center;
+
+        &_connect{
+            display: block;
+            border: none;
+            background-color: transparent;
+            border: 1px solid #169570;
+            margin-left: 4rem;
+            padding: .5rem 1rem ;
+            border-radius: 10px;
+            color: white;
+            font-family: var(--poppins);
+            font-weight: 600;
+
+            @include respond(mini-desktop){
+                margin-left: 1rem;
+            }
+
+            @include respond(mobile-land){
+                display: none;
+            }
+
+        }
+
+    }
+
+}
+
+.tokenChange{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    & img{
+        width: 1.6rem;
+        height: 1.6rem;
+        border: 2px solid #138463;
+        border-radius: 500px;
+    }
+
+    & h4{
+        color: var(--poppins);
+        color: white;
+        padding: 0;
+        height: fit-content;
+        font-weight: 600;
+        // border: 1px solid red;
+        margin-left: .5rem;
+    }
+
+    &_ic{
+        color: white;
+        margin-left: .5rem;
+        // border: 1px solid red;
+
+        @include respond(mini-desktop){
+            // margin-top: 0rem;
+        }
+
+    }
+
+}

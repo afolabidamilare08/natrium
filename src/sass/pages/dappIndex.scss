@@ -1,0 +1,187 @@
+.dappIndex{
+    background-color: #2F2F2F;
+    min-height: 100vh;
+    display: flex;
+
+    &_left{
+        // border: 1px solid red;
+        width: 23%;
+        background: linear-gradient(180deg, #001C14 0%, #080808 100%);
+        padding: 3rem 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        @include respond(mini-desktop){
+            width: 30%;
+        }
+
+        @include respond(tab-land){
+            // width: 35%;
+            display: none;
+        }
+
+        &_top{
+            display: flex;
+            align-items: center;
+
+            & img{
+                width: 3.4rem;
+                height: 3.4rem;
+            }
+
+            & h6{
+                color: var(--primary);
+                font-size: 1.3rem;
+                font-weight: 400;
+            }
+
+        }
+
+        &_pack{
+            margin-top: 2rem;
+
+            &_link{
+                display: flex;
+                // margin: 0 auto;
+                color: #BABABA;
+                align-items: center;
+                border: 1px solid transparent;
+                padding: .6rem .7rem;
+                transition: all .5s;
+                border-radius: 5px;
+
+                @include respond(mini-desktop){
+                    width: 100%;
+                    // border: 1px solid red;
+                }
+
+                &:hover{
+                    background-color: #083A2B;
+                }
+
+                &:not(:first-child){
+                    margin-top: .5rem;
+                }
+
+                &_ic{
+                    width: 1.6rem;
+                    height: 1.6rem;
+                }
+
+                & h6{
+                    margin-left: 1rem;
+                    font-size: 1rem;
+                    font-weight: 400;
+                    font-family: var(--poppins);
+                }
+
+            }
+
+        }
+
+        &_lastP{
+
+            &_link{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border: 1px solid transparent;
+                padding: .6rem .7rem;
+                transition: all .5s;
+                border-radius: 5px;
+
+                &:hover{
+                    background-color: #083A2B;
+                }
+
+                &_left{
+                    display: flex;
+                    align-items: center;
+                    color: #BABABA;
+
+                    &_ic{
+                        width: 1.4rem;
+                        height: 1.4rem;
+                    }
+
+                    & img{
+                        width: 2rem;
+                        height: 2rem;
+                        // border: 1px solid red;
+                        margin-left: -.5rem;
+                    }
+
+                    & h6{
+                        margin-left: 1rem;
+                        font-size: .9rem;
+                        font-weight: 400;
+                        font-family: var(--poppins);
+                    }
+
+                }
+
+                &_ic{
+                    width: 1.2rem;
+                    height: 1.2rem;
+                    color: #BABABA;
+
+                    @include respond(mini-desktop){
+                        display: none;
+                    }
+
+                }
+
+            }
+
+        }
+
+        &_split{
+            margin-top: 2rem;
+            display: flex;
+            padding-left:.9rem ;
+            align-items: center;
+
+            &_left{
+                width: 2rem;
+                height: 2rem;
+                background-color: #1695716e;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+
+                &_ic{
+                    color: #BABABA;
+                }
+
+            }
+
+            &_right{
+                color: #BABABA;
+                width: 1.5rem;
+                height: 1.5rem;
+                margin-left: 1rem;
+                cursor: pointer;
+            }
+
+        }
+
+    }
+
+    &_right{
+        // border: 1px solid red;
+        width: 77%;
+        background-color: #060A08;
+
+        @include respond(mini-desktop){
+            width:70%;
+        }
+
+        @include respond(tab-land){
+            width: 100%;
+        }
+
+    }
+
+}
