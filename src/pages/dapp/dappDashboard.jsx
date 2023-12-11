@@ -4,8 +4,11 @@ const DappDashboard = () => {
 
     return (
 
-        <div >
+        <div className="dappDashboard" >
             <DappHeader/>
+
+
+
         </div>
 
     );
