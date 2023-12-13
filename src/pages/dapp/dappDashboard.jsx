@@ -83,6 +83,56 @@ const DappDashboard = () => {
 
                         </div>
 
+                        <div className="dappDashboard_table_row" >
+
+                            <div className="dappDashboard_table_row_value" >
+                                <img src={WeiImg} alt="Img" />
+                                <h5>Default Goerli USDC MetaMorpho</h5>
+                            </div>
+
+                            <div className="dappDashboard_table_row_rate" >
+                                <h5>0.00%</h5>
+                            </div>
+
+                            <div className="dappDashboard_table_row_balance" >
+                                <img src={WeiImg} alt="Img" />
+                                <h5>2.00 USDC</h5>
+                            </div>
+
+                            <div className="dappDashboard_table_row_btn" >
+
+                                <button className="dappDashboard_table_row_btn_supply" >Supply</button>
+                                <button className="dappDashboard_table_row_btn_with" >Withdraw</button>
+
+                            </div>
+
+                        </div>
+
+                        <div className="dappDashboard_table_row" >
+
+                            <div className="dappDashboard_table_row_value" >
+                                <img src={WeiImg} alt="Img" />
+                                <h5>Default Goerli USDC MetaMorpho</h5>
+                            </div>
+
+                            <div className="dappDashboard_table_row_rate" >
+                                <h5>0.00%</h5>
+                            </div>
+
+                            <div className="dappDashboard_table_row_balance" >
+                                <img src={WeiImg} alt="Img" />
+                                <h5>2.00 USDC</h5>
+                            </div>
+
+                            <div className="dappDashboard_table_row_btn" >
+
+                                <button className="dappDashboard_table_row_btn_supply" >Supply</button>
+                                <button className="dappDashboard_table_row_btn_with" >Withdraw</button>
+
+                            </div>
+
+                        </div>
+
                         <div className="dappDashboard_table_btm" >
 
                         </div>
