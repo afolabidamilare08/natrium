@@ -131,44 +131,49 @@
             & div{
                 font-family: var(--poppins);
                 color: #AEAEAE;
+
+                @include respond(tab-port){
+                    font-size: .8rem;
+                }
+
             }
 
             &_value{
                 width: 30%;
-                border: 1px solid red;
+                // border: 1px solid red;
 
                 @include respond(mini-desktop){
                     width: 50%;
-                    border: 1px solid green;
+                    // border: 1px solid green;
                 }
 
             }
 
             &_rate{
                 width: 13%;
-                border: 1px solid red;
+                // border: 1px solid red;
 
                 @include respond(mini-desktop){
                     width: 20%;
-                    border: 1px solid green;
+                    // border: 1px solid green;
                 }
 
             }
 
             &_balance{
                 width: 20%;
-                border: 1px solid red;
+                // border: 1px solid red;
 
                 @include respond(mini-desktop){
                     width: 20%;
-                    border: 1px solid green;
+                    // border: 1px solid green;
                 }
 
             }
 
             &_btn{
                 width: 25%;
-                border: 1px solid red;
+                // border: 1px solid red;
 
                 @include respond(mini-desktop){
                     width: 0%;
@@ -199,13 +204,19 @@
 
                 @include respond(mini-desktop){
                     width: 50%;
-                    border: 1px solid green;
+                    // border: 1px solid green;
                 }
 
                 & img{
                     width: 1.4rem;
                     object-fit: cover;
                     height: 1.4rem;
+
+                    @include respond(tab-port){
+                        width: 1rem;
+                        height: 1rem;
+                    }
+
                 }
 
                 & h5{
@@ -219,9 +230,13 @@
                         margin-left: .5rem;
                     }
 
+                    @include respond(tab-port){
+                        font-size: .7rem;
+                    }
+
                 }
 
-                border: 1px solid red;
+                // border: 1px solid red;
             }
 
             &_rate{
@@ -229,13 +244,23 @@
 
                 @include respond(mini-desktop){
                     width: 20%;
-                    border: 1px solid green;
+                    // border: 1px solid green;
                 }
                 
                 & h5{
                     font-family: var(--poppins);
-                font-weight: 500;
-                color: #f8f8f8;
+                    font-weight: 500;
+                    color: #f8f8f8;
+
+                    @include respond(mini-desktop){
+                        font-size: .9rem;
+                        margin-left: .5rem;
+                    }
+
+                    @include respond(tab-port){
+                        font-size: .7rem;
+                    }
+
                 }
 
             }
@@ -247,13 +272,20 @@
 
                 @include respond(mini-desktop){
                     width: 20%;
-                    border: 1px solid green;
+                    // border: 1px solid green;
                 }
                 
                 & img{
                     width: 1.4rem;
                     object-fit: cover;
                     height: 1.4rem;
+
+                    @include respond(tab-port){
+                        width: 1rem;
+                        height: 1rem;
+                        display: none;
+                    }
+
                 }
 
                 & h5{
@@ -267,13 +299,18 @@
                         margin-left: .5rem;
                     }
 
+                    @include respond(tab-port){
+                        font-size: .7rem;
+                        text-align: center;
+                    }
+
                 }
 
             }
 
             &_btn{
                 width: 25%;
-                border: 1px solid red;
+                // border: 1px solid red;
                 display: flex;
 
                 @include respond(mini-desktop){
@@ -295,6 +332,13 @@
                     border-radius: 10px;
                     font-weight: 600;
                     border: 1px solid #169570;
+
+                    @include respond(tab-port){
+                        font-weight: 500;
+                        padding: .3rem .6rem;
+                        border-radius: 5px;
+                    }
+
                 }
 
                 &_with{
@@ -306,6 +350,13 @@
                     border-radius: 10px;
                     margin-left: 1rem;
                     font-weight: 600;
+
+                    @include respond(tab-port){
+                        font-weight: 500;
+                        padding: .3rem .6rem;
+                        border-radius: 5px;
+                    }
+
                 }
 
 
