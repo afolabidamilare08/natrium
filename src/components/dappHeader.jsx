@@ -3,7 +3,10 @@ import { FaAngleDown } from "react-icons/fa6";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link } from 'react-router-dom';
 
-const DappHeader = () => {
+const DappHeader = ({
+    title,
+    subTitle
+}) => {
 
     return (
 
@@ -11,8 +14,8 @@ const DappHeader = () => {
 
             <div className="dappHeader_left" >
                 <RxHamburgerMenu className='dappHeader_left_ic' />
-                <h4>Dashboard</h4>
-                <button>Manage Your Positions</button>
+                <h4>{title}</h4>
+                { subTitle === '' ? <></> : <button>{subTitle}</button> }
             </div>
 
             <div className='dappHeader_right' >

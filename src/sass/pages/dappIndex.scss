@@ -2,6 +2,7 @@
     background-color: #2F2F2F;
     min-height: 100vh;
     display: flex;
+    border: 3px solid red;
 
     &_left{
         // border: 1px solid red;
@@ -174,7 +175,7 @@
         width: 77%;
         // background-color: #060A08;
         background-image: url(../assets/right.png);
-        min-height: 100vh;
+        // min-height: 100vh;
 
         @include respond(mini-desktop){
             width:70%;

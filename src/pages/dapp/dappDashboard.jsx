@@ -1,12 +1,16 @@
 import DappHeader from "../../components/dappHeader";
 import WeiImg from '../../assets/wei.png';
+import DaiImg from '../../assets/dai.png';
 
 const DappDashboard = () => {
 
     return (
 
         <div className="dappDashboard" >
-            <DappHeader/>
+            <DappHeader
+                subTitle={"Manage Your Positions"}
+                title={"Dashboard"}
+            />
 
             <div className="dappDashboard_body" >
 
@@ -139,19 +143,74 @@ const DappDashboard = () => {
 
                     </div>
 
-                    <div className="dappDashboard_colored" >
+                    <div className="dappDashboard_colored" style={{
+                        marginTop:'6rem'
+                    }} >
                         Borrow
                     </div>
 
-                    <div className="dappDashboard_empty" >
+                    <h5 className="scroll_toLeft" >Scroll to the right to view more ...</h5>
 
-                        {/* <h4>Sign In</h4> */}
+                    {/* <div className="dappDashboard_empty" >
 
                         <h6>You have no open  positions</h6>
 
                         <button>
                             Open New Position
                         </button>
+
+                    </div> */}
+
+                    <div className="dappDashboard_table" style={{
+                        overflow:"auto",
+                    }} >
+
+                        <div className="dappDashboard_table_top dappTable_top" style={{
+                            overflow:"auto",
+                        }} >
+
+                            <div className="dappDashboard_table_top_market" >Market</div>
+                            <div className="dappDashboard_table_top_asset" >Collateral Asset</div>
+                            <div className="dappDashboard_table_top_loan" >Loan Asset</div>
+                            <div className="dappDashboard_table_top_lltv" >LLTV</div>
+                            <div className="dappDashboard_table_top_liquidity" >Liquidity Price</div>
+                            <div className="dappDashboard_table_top_rewards" >Rate & Rewards</div>
+
+                        </div>
+
+                        <div className="dappDashboard_table_row dappTable_row" style={{
+                            overflowX:"auto",
+                            // justifyContent:"flex-start"
+                        }} >
+
+                            <div className="dappDashboard_table_row_market" >
+                                <img src={DaiImg} alt="ing" />
+                                <img src={WeiImg} alt="ing" />
+                                <h5>WETH (DAI, 90%)</h5>
+                            </div>
+                            <div className="dappDashboard_table_row_asset" >
+                                <img src={WeiImg} alt="ing" />
+                                <h5>0.00 DAI</h5>
+                            </div>
+                            <div className="dappDashboard_table_row_loan" >
+                                <img src={DaiImg} alt="ing" />
+                                <h5>0.00 WETH</h5>
+                            </div>
+                            <div className="dappDashboard_table_row_lltv" >
+                                <h5>90.00%</h5>
+                            </div>
+                            <div className="dappDashboard_table_row_liquidity" >
+                                <h5>Infinity</h5>
+                            </div>
+                            <div className="dappDashboard_table_row_rewards" >
+                                <h5>3.47%</h5>
+                            </div>
+
+                        </div>
+
+                        <div className="dappDashboard_table_btm" >
+
+                        </div>
 
                     </div>
 

@@ -1,0 +1,284 @@
+.earn{
+
+    &_body{
+
+        &_top{
+            display: flex;
+            // border: 2px solid white;
+            padding: 2rem;
+            position: relative;
+
+            @include respond(mini-desktop){
+                display: block;
+            }
+
+            &_left{
+                width: 55%;
+                padding: 1rem;
+                // border: 1px solid red;
+
+                @include respond(mini-desktop){
+                    width: 100%;
+                }
+
+                & h4{
+                    color: #D1D1D1;
+                    font-size: 4rem;
+                    font-weight: 600;
+                    line-height: 3.6rem;
+
+                    @include respond(mini-desktop){
+                        text-align: center;
+                    }
+
+                    @include respond(tab-land){
+                        font-size: 2rem;
+                        line-height: 2.3rem;
+                    }
+
+                }
+    
+                & h5{
+                    margin-top: 1.5rem;
+                    color: #FFFFFF;
+                    font-size: 1.3rem;
+                    width: 87%;
+                    font-family: var(--poppins);
+
+                    @include respond(mini-desktop){
+                        text-align: center;
+                        width: 100%;
+                    }
+
+                    @include respond(tab-land){
+                        font-size: 1.1rem;
+                    }
+
+                }
+
+                & button{
+                    color: #18A57C;
+                    border: 1px solid #18A57C;
+                    background: #083A2B;
+                    padding: .7rem 1.3rem;
+                    border-radius: 5px;
+                    margin-top: 3rem;
+
+                    @include respond(mini-desktop){
+                        display: block;
+                        margin: 2rem auto;
+                    }
+
+                }
+
+            }
+
+            &_right{
+                width: 43rem;
+                position: absolute;
+                right: 0;
+
+                @include respond(mini-desktop){
+                    position: relative;
+                    width: 30rem;
+                    display: block;
+                    margin: 0 auto;
+                }
+
+                @include respond(tab-land){
+                    width: 20rem;
+                }
+
+            }
+
+        }
+
+        &_mid{
+            margin-top: 3rem;
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+
+            @include respond(mini-desktop){
+                justify-content: space-evenly;
+            }
+
+            @include respond(tab-land){
+                padding: 1rem;
+            }
+
+            &_div{
+                width: 32%;
+                border: 1px solid #083A2B;
+                background-color: #02110D;
+                padding: 1.3rem;
+                border-radius: 6px;
+
+                @include respond(mini-desktop){
+                    width: 40%;
+                    margin-top: 2rem;
+                }
+
+                @include respond(tab-land){
+                    width: 100%;
+                }
+
+                &_top{
+                    background-color: rgba(20, 255, 0, 0.20);
+                    width: 2.5rem;
+                    height: 2.5rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                & h4{
+                    font-size: 1.8rem;
+                    color: #DCF2EB;
+                    margin-top: 1.3rem;
+                    font-family: var(--poppins);
+                }
+
+                & p{
+                    color: #D1D1D1;
+                    margin-top: .4rem;
+                    font-family: var(--poppins);
+                    font-size: .8rem;
+                }
+
+            }
+
+        }
+
+        &_foot{
+            padding: 2rem;
+            border-radius: 14px;
+            background: linear-gradient(180deg, #000E0A 0%, rgba(0, 0, 0, 0.00) 100%);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+
+            @include respond(mini-desktop){
+                justify-content: space-around;
+            }
+
+            &_div{
+                width: 32%;
+                background-color: #000705;
+                // padding: 1rem;
+                border: 1px solid #083A2B;
+                border-top-left-radius:10px ;
+                border-radius: 10px;
+
+                @include respond(mini-desktop){
+                    width: 48%;
+                    margin-top: 2rem;
+                }
+
+                @include respond(tab-land){
+                    width: 100%;
+                }
+
+                &_top{
+                    border-radius: 4px;
+                    width: fit-content;
+                    padding: .5rem;
+                    font-size: .8rem;
+                    font-family: var(--poppins);
+                    background: linear-gradient(90deg, #0B8500 -3.33%, #004E37 100%);
+                    color: white;
+                    border-top-left-radius:10px ;
+                }
+
+                &_mid{
+                    padding: 1rem;
+
+                    &_cover{
+                        width: 8rem;
+                        height: 8rem;
+                        margin: 1rem auto;
+                        border: 4px solid #0B8500;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 500px;
+
+                        @include respond(mini-desktop){
+                            width: 6rem;
+                            height: 6rem;
+                        }
+
+                        & img{
+                            width: 90%;
+                            height: 90%;
+                        }
+
+                    }
+
+                    & h4{
+                        color: #DCF2EB;
+                        font-family: var(--poppins);
+                        text-align: center;
+                        font-size: 1.5rem;
+                        line-height: 1.5rem;
+                        margin-bottom: 2rem;
+                        
+                        @include respond(mini-desktop){
+                            font-size: 1.2rem;
+                        }
+                    }
+
+                    &_split{
+                        display: flex;
+                        // margin: 0 auto;
+                        // border: 1px solid red;
+                        width: fit-content;
+                        align-items: center;
+                        margin-left: 1.3rem;
+                        // margin-top: 1.5rem;
+                        margin-top: .5rem;
+
+                        & img{
+                            width: 1.6rem;
+                            margin-right: .8rem;
+                        }
+
+                        & h6{
+                            color: white;
+                            font-size: 1.2rem;
+                            font-family: var(--poppins);
+                        }
+
+                    }
+
+                    & button{
+                        color: #18A57C;
+                        border: 1px solid #18A57C;
+                        background: #083A2B;
+                        padding: .7rem 1.3rem;
+                        border-radius: 5px;
+                        display: block;
+                        margin: 0 auto;
+                        margin-top: 1.5rem;
+                    }
+
+                    & a{
+                        color: #18A57C;
+                        text-decoration: underline;
+                        display: block;
+                        width: 100%;
+                        // border: 1px solid red;
+                        text-align: center;
+                        margin: 1rem auto;
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+}
