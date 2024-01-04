@@ -41,7 +41,7 @@ const DappBorrow = () => {
                             <div className="dappDashboard_table_top_lltv" >LLTV</div>
                             <div className="dappDashboard_table_top_liquidity" >Liquidity Price</div>
                             <div className="dappDashboard_table_top_rewards" >Rate & Rewards</div>
-                            {/* <div className="dappDashboard_table_top_rewards" >Market ID</div> */}
+                            <div className="dappDashboard_table_top_marketid" >Market ID</div>
 
                         </div>
 
@@ -73,9 +73,9 @@ const DappBorrow = () => {
                             <div className="dappDashboard_table_row_rewards" >
                                 <h5>3.47%</h5>
                             </div>
-                            {/* <div className="dappDashboard_table_row_rewards" >
+                            <div className="dappDashboard_table_row_rewards" >
                                 <h5>0x3098...d5a0</h5>
-                            </div> */}
+                            </div>
 
                         </div>
 

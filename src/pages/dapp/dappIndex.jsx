@@ -114,7 +114,7 @@ const DappIndex = ({Component}) => {
 
                     <Link className="dappIndex_left_pack_link" to={'/#'} >
                         <LuLayoutDashboard className="dappIndex_left_pack_link_ic" />
-                        <h6>Dashboard</h6>
+                        <h6>Position</h6>
                     </Link>
 
                     <Link className="dappIndex_left_pack_link" to={'/#'} >

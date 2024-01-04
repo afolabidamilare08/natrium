@@ -119,8 +119,11 @@
         margin: 1rem auto;
         background-color: #083a2b67;
         // padding: 4rem;
-        border: 1px solid #083A2B;
+        // border: 1px solid #083A2B;
+        border: 3px solid red;
+        overflow: auto;
         border-radius: 10px;
+        width: 40rem;
 
         &_top{
             display: flex;
@@ -128,7 +131,8 @@
             padding: .7rem 1.1rem;
             overflow: auto;
             justify-content: space-between;
-            width: 100%;
+            // width: 100%; 
+            border: 1px solid red;
 
             & div{
                 font-family: var(--poppins);
@@ -141,11 +145,11 @@
             }
 
             &_value{
-                width: 30%;
+                width: 30rem;
                 // border: 1px solid red;
 
                 @include respond(mini-desktop){
-                    width: 50%;
+                    // width: 50%;
                     // border: 1px solid green;
                 }
 
@@ -185,13 +189,13 @@
             }
 
             &_market{
-                // border: 1px solid red;
-                width: 12rem;
+                border: 1px solid red;
+                width: 30rem;
             }
 
             &_asset{
-                // border: 1px solid red;
-                width: 9rem;
+                width: 30rem;
+                border: 1px solid red;
             }
 
             &_loan{
@@ -531,6 +535,35 @@
         color: #AEAEAE;
         margin-top: 1rem;
         font-family: var(--poppins);
+    }
+
+}
+
+
+.dashTable{
+    border: 1px solid #083A2B;
+    margin-top: 3rem;
+    height: 10rem;
+    overflow: auto;
+
+    &_top{
+        border-bottom: 1px solid #083A2B;
+        // width: 100rem;
+        display: flex;
+
+        & div{
+            display: inli;
+        }
+
+        &_1{
+            padding: .5rem;
+            color: #AEAEAE;
+            font-family: var(--poppins);
+            border-right: 1px solid #083A2B;
+            width: 1300rem;
+            
+        }
+
     }
 
 }
