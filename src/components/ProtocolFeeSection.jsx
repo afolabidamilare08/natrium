@@ -20,9 +20,9 @@ const ProtocolFeeSection = () => {
 
           <motion.div className='pfContainer_body_part'
           
-            // initial={{ scale: 0,}}
-            // whileInView={{ scale: 1, }}
-            // transition={{ duration: 0.4 }}
+            initial={{ scale: 0,}}
+            whileInView={{ scale: 1, }}
+            transition={{ duration: 0.4 }}
           
           >  
 
