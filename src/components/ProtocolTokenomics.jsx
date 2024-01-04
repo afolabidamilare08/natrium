@@ -8,7 +8,7 @@ const ProtocolTokenomics = () => {
 
         <div className="aboutContainer_Header">
             <div className="aboutContainer_Header_whiteleft"><></></div>
-            <h5>Protocol Fees</h5>
+            <h5>Tokenomics</h5>
             <div className="aboutContainer_Header_whiteright"><></></div>
         </div>
 
