@@ -45,14 +45,14 @@
     
       &_img{
         width: 28rem;
+        height: 28rem;
         margin-right: 1rem;
-
-        animation-name: spining;
-        animation-duration: 2s;
-        animation-iteration-count: infinite;
+        // border: 1px solid red;
+        position: relative;
 
         @include respond(mini-desktop){
           width: 24rem;
+          height: 24rem;
         }
 
         @include respond(tab-land){
@@ -62,6 +62,21 @@
 
         @include respond(tab-port){
           width: 15rem;
+          height: 15rem;
+        }
+
+        &_outter{
+          animation-name: spining;
+          animation-duration: 2s;
+          animation-iteration-count: infinite;
+          width: 100%;
+        }
+
+        &_inner{
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateY(-50%) translateX(-50%);
         }
         
       }

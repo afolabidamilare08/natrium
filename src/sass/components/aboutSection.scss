@@ -89,10 +89,12 @@
       }
 
       &_body{
-        background: linear-gradient(180deg, #169570 0%, rgba(115, 149, 22, 0.348) 100%);
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        // background: linear-gradient(180deg, #169570 0%, rgba(115, 149, 22, 0.348) 100%);
+        // background-clip: text;
+        // -webkit-background-clip: text;
+        // -webkit-text-fill-color: transparent;
+
+        color: white;
 
         @include respond(tab-land){
           color: #DCF2EB;

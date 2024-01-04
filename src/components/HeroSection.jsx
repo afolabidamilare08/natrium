@@ -1,4 +1,6 @@
 import heroimg from "../assets/heroimg.png"
+import outterImg from "../assets/spinouter.png"
+import innerImg from "../assets/spin_center.png"
 
 const HeroSection = () => {
   return (
@@ -12,7 +14,12 @@ const HeroSection = () => {
                 Protocol
             </h4>
 
-            <img src={heroimg} alt="hero image" className="heroContainer_top_img" />
+            {/* <img src={heroimg} alt="hero image" className="heroContainer_top_img" /> */}
+
+            <div className="heroContainer_top_img" >
+                <img src={outterImg} className="heroContainer_top_img_outter" />
+                <img src={innerImg} className="heroContainer_top_img_inner" />
+            </div>
 
         </div>
 
