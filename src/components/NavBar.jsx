@@ -33,9 +33,9 @@ const NavBar = () => {
                 </a>
             </div>
 
-            <button className="navBarContainer_navBar_navButton">
+            <Link to={'/dashboard'} className="navBarContainer_navBar_navButton">
                 Enter App
-            </button>
+            </Link>
 
             <GiHamburgerMenu className="toggleIcon" onClick={ () => setopenModal(true) } />
 
@@ -57,9 +57,9 @@ const NavBar = () => {
         <a href="#">Features</a>
         <a href="#">Security</a>
         <a href="#">Documentations</a>
-        <a href="#" className="navBarContainer_navBar_navButton" style={{
+        <Link to="/dashboard" className="navBarContainer_navBar_navButton" style={{
             fontWeight:'500'
-        }} >Enter App</a>
+        }} >Enter App</Link>
 
     </div>
 

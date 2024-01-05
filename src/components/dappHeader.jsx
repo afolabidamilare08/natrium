@@ -1,19 +1,23 @@
+import { useContext } from 'react';
 import EthImg from '../assets/eth.png';
 import { FaAngleDown } from "react-icons/fa6";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link } from 'react-router-dom';
+import AppContext from '../context/Appcontext';
 
 const DappHeader = ({
     title,
     subTitle
 }) => {
 
+    const { UpdatesideNav } = useContext(AppContext)
+
     return (
 
         <div className="dappHeader" >
 
             <div className="dappHeader_left" >
-                <RxHamburgerMenu className='dappHeader_left_ic' />
+                <RxHamburgerMenu className='dappHeader_left_ic' onClick={ () => UpdatesideNav() } />
                 <h4>{title}</h4>
                 { subTitle === '' ? <></> : <button>{subTitle}</button> }
             </div>

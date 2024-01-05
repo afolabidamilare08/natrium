@@ -548,11 +548,10 @@
 
     &_top{
         border-bottom: 1px solid #083A2B;
-        // width: 100rem;
+        width: fit-content;
         display: flex;
 
         & div{
-            display: inli;
         }
 
         &_1{
@@ -560,7 +559,27 @@
             color: #AEAEAE;
             font-family: var(--poppins);
             border-right: 1px solid #083A2B;
-            width: 1300rem;
+            width: 13rem;
+            
+        }
+
+    }
+
+    &_btm{
+        border: 1px solid #083A2B;
+        width: fit-content;
+        display: flex;
+        margin-top: 1rem;
+
+        & div{
+        }
+
+        &_1{
+            padding: .5rem;
+            color: #AEAEAE;
+            font-family: var(--poppins);
+            border-right: 1px solid #083A2B;
+            width: 13rem;
             
         }
 

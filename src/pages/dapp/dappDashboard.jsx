@@ -49,6 +49,16 @@ const DappDashboard = () => {
 
                         </div>
 
+                        <div className="dashTable_btm" >
+                            
+                            <div className="dashTable_btm_1" >
+                                <img src={DaiImg} alt="ing" />
+                                <img src={WeiImg} alt="ing" />
+                                <h5>WETH (DAI, 90%)</h5>
+                            </div>
+
+                        </div>
+
                     </div>                    
 
             </div>

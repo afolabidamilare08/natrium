@@ -1,6 +1,7 @@
 import React from 'react'
 import firsticon from "../assets/firsticon.svg"
 import { BiMovie } from "react-icons/bi";
+import { MdOutlineCurrencyExchange } from "react-icons/md";
 import { FaShuffle } from "react-icons/fa6";
 import {motion} from 'framer-motion';
 
@@ -82,7 +83,7 @@ const ProtocolFeeSection = () => {
           >  
 
             <div className='pfContainer_body_part_top' >
-              <FaShuffle className='pfContainer_body_part_top_ic' />
+              <MdOutlineCurrencyExchange className='pfContainer_body_part_top_ic' />
             </div>
 
             <div className='pfContainer_body_part_title' >Deposit and <br/> Withdrawal Fees:</div>
