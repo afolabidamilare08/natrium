@@ -45,7 +45,12 @@ const DappDashboard = () => {
                         <div className="dashTable_top" >
 
                             <h4 className="dashTable_top_1" >Market</h4>
-                            <h5 className="dashTable_top_2" >Collateral </h5>
+                            <h4 className="dashTable_top_2" >Collateral </h4>
+                            <h4 className="dashTable_top_3" >Loan Asset</h4>
+                            <h4 className="dashTable_top_4" >LLTV</h4>
+                            <h4 className="dashTable_top_5" >Liquidation Price</h4>
+                            <h4 className="dashTable_top_5" >Current Price</h4>
+                            <h4 className="dashTable_top_6" >Rate</h4>
 
                         </div>
 
@@ -55,6 +60,32 @@ const DappDashboard = () => {
                                 <img src={DaiImg} alt="ing" />
                                 <img src={WeiImg} alt="ing" />
                                 <h5>WETH (DAI, 90%)</h5>
+                            </div>
+
+                            <div className="dashTable_btm_2" >
+                                <img src={WeiImg} alt="ing" />
+                                <h5>0.001DAI</h5>
+                            </div>
+
+                            <div className="dashTable_btm_3" >
+                                <img src={DaiImg} alt="ing" />
+                                <h5>0.001WETH</h5>
+                            </div>
+
+                            <div className="dashTable_btm_4" >
+                                <h5>90%</h5>
+                            </div>
+
+                            <div className="dashTable_btm_5" >
+                                <h5>0.0002WETH/DAI</h5>
+                            </div>
+
+                            <div className="dashTable_btm_5" >
+                                <h5>0.0002WETH/DAI</h5>
+                            </div>
+
+                            <div className="dashTable_btm_6" >
+                                <h5>0.35</h5>
                             </div>
 
                         </div>
