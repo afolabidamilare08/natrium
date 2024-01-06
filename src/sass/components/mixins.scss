@@ -42,3 +42,111 @@
 
     }
 }
+
+
+
+@mixin table_cell_top($Iwidth:13rem,$Rwidth:10rem,$textAlign:center){
+
+    padding: .5rem;
+    color: #AEAEAE;
+    font-family: var(--poppins);
+    border-right: 1px solid #083A2B; 
+    width: $Iwidth;
+    text-align: $textAlign;
+    font-size: .9rem;
+
+    @include respond(mobile-land){
+        width: $Rwidth;
+    }
+
+}
+
+@mixin table_cell_btm_img($Iwidth:13rem,$Rwidth:10rem){
+    padding: .5rem;
+    color: #AEAEAE;
+    font-family: var(--poppins);
+    border-right: 1px solid #083A2B;
+    width: $Iwidth;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include respond(mobile-land){
+        width: $Rwidth;
+    }
+    
+
+    & img{
+        width: 1.1rem;
+        height: 1.1rem;
+
+        @include respond(mobile-land){
+            width: .9rem;
+            height: .9rem;
+        }
+
+        &:not(:first-child){
+            margin-left: -.5rem;
+        }
+
+    }
+
+    & h5{
+        margin-left: .3rem;
+        font-family: var(--poppins);
+        font-weight: 500;
+        font-size: .8rem;
+        color: #f8f8f8;
+    }
+}
+
+@mixin table_cell_btm_1mg($Iwidth:9rem,$Rwidth:7rem){
+    padding: .5rem;
+    color: #AEAEAE;
+    font-family: var(--poppins);
+    border-right: 1px solid #083A2B;
+    width:$Iwidth;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include respond(mobile-land){
+        width: $Rwidth;
+    }
+
+        & img{
+            width: 1.1rem;
+            height: 1.1rem;
+
+            @include respond(mobile-land){
+                width: .9rem;
+                height: .9rem;
+            }
+
+        }
+
+        & h5{
+            margin-left: .3rem;
+            font-family: var(--poppins);
+            font-weight: 500;
+            font-size: .8rem;
+            color: #f8f8f8;
+        }
+}
+
+@mixin table_cell_btm_txt($Iwidth:7rem){
+    padding: .5rem;
+    color: #AEAEAE;
+    font-family: var(--poppins);
+    border-right: 1px solid #083A2B;
+    width: $Iwidth;
+
+    & h5{
+        margin-left: .3rem;
+        font-family: var(--poppins);
+        font-weight: 500;
+        font-size: .8rem;
+        color: #f8f8f8;
+        text-align: center;
+    }
+}

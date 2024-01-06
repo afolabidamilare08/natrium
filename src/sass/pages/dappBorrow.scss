@@ -1,0 +1,102 @@
+.borrowTable{
+    // border: 1px solid #083A2B;
+    border-right: 0px solid transparent;
+    // border: 1px solid red;
+    // margin-top: 3rem;
+    width: 100%;
+    // height: 10rem;
+    overflow: auto;
+
+    &_top{
+        // border-bottom: 1px solid #083A2B;
+        background-color: #51515165;
+        border-radius: 4px;
+        width: fit-content;
+        display: flex;
+
+        & div{
+        }
+
+        &_1{
+            @include table_cell_top($Iwidth:11rem,$Rwidth:10rem);
+            border-right: 0px solid transparent;
+        }
+
+        &_2{
+            @include table_cell_top($Iwidth:9rem,$Rwidth:9rem);
+            border-right: 0px solid transparent;
+        }
+
+        &_3{
+            @include table_cell_top($Iwidth:7.5rem,$Rwidth:7rem);
+            border-right: 0px solid transparent;
+        }
+
+        &_4{
+            @include table_cell_top($Iwidth:4.5rem,$Rwidth:4.5rem);
+            border-right: 0px solid transparent;
+        }
+
+        &_5{
+            @include table_cell_top($Iwidth:9.6rem,$Rwidth:9.6rem);
+            border-right: 0px solid transparent;
+        }
+
+        &_s{
+            @include table_cell_top($Iwidth:10rem,$Rwidth:10rem);
+            border-right: 0px solid transparent;
+        }
+
+        &_6{
+            @include table_cell_top($Iwidth:9.8rem,$Rwidth:9.8rem);
+            border-right: 0px solid transparent;
+        }
+
+
+    }
+
+    &_btm{
+        width: fit-content;
+        display: flex;
+        background-color: #51515165;
+        border-radius: 4px;
+        margin-top: .5rem;
+
+        &_1{
+            @include table_cell_btm_img($Iwidth:11rem,$Rwidth:10rem);
+            border-right: 0px solid transparent;
+        }
+
+        &_2{
+            @include table_cell_btm_1mg($Iwidth:9rem,$Rwidth:9rem);
+            border-right: 0px solid transparent;
+        }
+
+        &_3{
+            @include table_cell_btm_1mg($Iwidth:7.5rem,$Rwidth:7rem);
+            border-right: 0px solid transparent;
+        }
+
+        &_4{
+            @include table_cell_btm_txt($Iwidth:4.5rem);
+            border-right: 0px solid transparent;
+        }
+
+        &_5{
+            @include table_cell_btm_1mg($Iwidth:9.6rem,$Rwidth:9.6rem);
+            border-right: 0px solid transparent;
+        }
+
+        &_s{
+            @include table_cell_btm_1mg($Iwidth:10rem,$Rwidth:10rem);
+            border-right: 0px solid transparent;
+        }
+
+        &_6{
+            @include table_cell_btm_txt($Iwidth:9.8rem);
+            border-right: 0px solid transparent;
+        }
+
+    }
+
+}

@@ -8,7 +8,7 @@ const DappDashboard = () => {
 
         <div className="dappDashboard" >
             <DappHeader
-                subTitle={"Manage Your Positions"}
+                subTitle={"Your Positions"}
                 title={"Position"}
             />
 
@@ -26,9 +26,9 @@ const DappDashboard = () => {
 
                             </div> */}
 
-                    <div className="dappDashboard_colored" >
+                    {/* <div className="dappDashboard_colored" >
                         Earn
-                    </div>
+                    </div> */}
 
                     {/* <div className="dappDashboard_empty" >
 
@@ -54,6 +54,181 @@ const DappDashboard = () => {
 
                         </div>
 
+                        <div className="dashTable_btm" >
+                            
+                            <div className="dashTable_btm_1" >
+                                <img src={DaiImg} alt="ing" />
+                                <img src={WeiImg} alt="ing" />
+                                <h5>WETH (DAI, 90%)</h5>
+                            </div>
+
+                            <div className="dashTable_btm_2" >
+                                <img src={WeiImg} alt="ing" />
+                                <h5>0.001DAI</h5>
+                            </div>
+
+                            <div className="dashTable_btm_3" >
+                                <img src={DaiImg} alt="ing" />
+                                <h5>0.001WETH</h5>
+                            </div>
+
+                            <div className="dashTable_btm_4" >
+                                <h5>90%</h5>
+                            </div>
+
+                            <div className="dashTable_btm_5" >
+                                <h5>0.0002WETH/DAI</h5>
+                            </div>
+
+                            <div className="dashTable_btm_5" >
+                                <h5>0.0002WETH/DAI</h5>
+                            </div>
+
+                            <div className="dashTable_btm_6" >
+                                <h5>0.35</h5>
+                            </div>
+
+                        </div>
+                        <div className="dashTable_btm" >
+                            
+                            <div className="dashTable_btm_1" >
+                                <img src={DaiImg} alt="ing" />
+                                <img src={WeiImg} alt="ing" />
+                                <h5>WETH (DAI, 90%)</h5>
+                            </div>
+
+                            <div className="dashTable_btm_2" >
+                                <img src={WeiImg} alt="ing" />
+                                <h5>0.001DAI</h5>
+                            </div>
+
+                            <div className="dashTable_btm_3" >
+                                <img src={DaiImg} alt="ing" />
+                                <h5>0.001WETH</h5>
+                            </div>
+
+                            <div className="dashTable_btm_4" >
+                                <h5>90%</h5>
+                            </div>
+
+                            <div className="dashTable_btm_5" >
+                                <h5>0.0002WETH/DAI</h5>
+                            </div>
+
+                            <div className="dashTable_btm_5" >
+                                <h5>0.0002WETH/DAI</h5>
+                            </div>
+
+                            <div className="dashTable_btm_6" >
+                                <h5>0.35</h5>
+                            </div>
+
+                        </div>
+                        <div className="dashTable_btm" >
+                            
+                            <div className="dashTable_btm_1" >
+                                <img src={DaiImg} alt="ing" />
+                                <img src={WeiImg} alt="ing" />
+                                <h5>WETH (DAI, 90%)</h5>
+                            </div>
+
+                            <div className="dashTable_btm_2" >
+                                <img src={WeiImg} alt="ing" />
+                                <h5>0.001DAI</h5>
+                            </div>
+
+                            <div className="dashTable_btm_3" >
+                                <img src={DaiImg} alt="ing" />
+                                <h5>0.001WETH</h5>
+                            </div>
+
+                            <div className="dashTable_btm_4" >
+                                <h5>90%</h5>
+                            </div>
+
+                            <div className="dashTable_btm_5" >
+                                <h5>0.0002WETH/DAI</h5>
+                            </div>
+
+                            <div className="dashTable_btm_5" >
+                                <h5>0.0002WETH/DAI</h5>
+                            </div>
+
+                            <div className="dashTable_btm_6" >
+                                <h5>0.35</h5>
+                            </div>
+
+                        </div>
+                        <div className="dashTable_btm" >
+                            
+                            <div className="dashTable_btm_1" >
+                                <img src={DaiImg} alt="ing" />
+                                <img src={WeiImg} alt="ing" />
+                                <h5>WETH (DAI, 90%)</h5>
+                            </div>
+
+                            <div className="dashTable_btm_2" >
+                                <img src={WeiImg} alt="ing" />
+                                <h5>0.001DAI</h5>
+                            </div>
+
+                            <div className="dashTable_btm_3" >
+                                <img src={DaiImg} alt="ing" />
+                                <h5>0.001WETH</h5>
+                            </div>
+
+                            <div className="dashTable_btm_4" >
+                                <h5>90%</h5>
+                            </div>
+
+                            <div className="dashTable_btm_5" >
+                                <h5>0.0002WETH/DAI</h5>
+                            </div>
+
+                            <div className="dashTable_btm_5" >
+                                <h5>0.0002WETH/DAI</h5>
+                            </div>
+
+                            <div className="dashTable_btm_6" >
+                                <h5>0.35</h5>
+                            </div>
+
+                        </div>
+                        <div className="dashTable_btm" >
+                            
+                            <div className="dashTable_btm_1" >
+                                <img src={DaiImg} alt="ing" />
+                                <img src={WeiImg} alt="ing" />
+                                <h5>WETH (DAI, 90%)</h5>
+                            </div>
+
+                            <div className="dashTable_btm_2" >
+                                <img src={WeiImg} alt="ing" />
+                                <h5>0.001DAI</h5>
+                            </div>
+
+                            <div className="dashTable_btm_3" >
+                                <img src={DaiImg} alt="ing" />
+                                <h5>0.001WETH</h5>
+                            </div>
+
+                            <div className="dashTable_btm_4" >
+                                <h5>90%</h5>
+                            </div>
+
+                            <div className="dashTable_btm_5" >
+                                <h5>0.0002WETH/DAI</h5>
+                            </div>
+
+                            <div className="dashTable_btm_5" >
+                                <h5>0.0002WETH/DAI</h5>
+                            </div>
+
+                            <div className="dashTable_btm_6" >
+                                <h5>0.35</h5>
+                            </div>
+
+                        </div>
                         <div className="dashTable_btm" >
                             
                             <div className="dashTable_btm_1" >

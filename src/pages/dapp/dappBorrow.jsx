@@ -26,64 +26,65 @@ const DappBorrow = () => {
 
                             </div> */}
 
-                    <div className="dappDashboard_table" style={{
-                        // width:"100px",
-                        // overflowX:"scroll"
-                    }} >
+                <div className="borrowTable" >
 
-                        <div className="dappDashboard_table_top" style={{
-                            // flexWrap:"wrap",
-                        }} >
+                    <div className="borrowTable_top" >
 
-                            <div className="dappDashboard_table_top_market" >Market</div>
-                            <div className="dappDashboard_table_top_asset" >Collateral Asset</div>
-                            <div className="dappDashboard_table_top_loan" >Loan Asset</div>
-                            <div className="dappDashboard_table_top_lltv" >LLTV</div>
-                            <div className="dappDashboard_table_top_liquidity" >Liquidity Price</div>
-                            <div className="dappDashboard_table_top_rewards" >Rate & Rewards</div>
-                            <div className="dappDashboard_table_top_marketid" >Market ID</div>
+                        <h4 className="borrowTable_top_1" >Market</h4>
+                        <h4 className="borrowTable_top_2" >Collateral Asset</h4>
+                        <h4 className="borrowTable_top_3" >Loan Asset</h4>
+                        <h4 className="borrowTable_top_4" >LLTV</h4>
+                        <h4 className="borrowTable_top_5" >Liquidity</h4>
+                        <h4 className="borrowTable_top_s" >Rate & Rewards</h4>
+                        <h4 className="borrowTable_top_6" >Market ID</h4>
 
+                    </div>
+
+                    <div className="borrowTable_btm" >
+                        
+                        <div className="borrowTable_btm_1" >
+                            <img src={DaiImg} alt="ing" />
+                            <img src={WeiImg} alt="ing" />
+                            <h5>WETH (DAI, 90%)</h5>
                         </div>
 
-                        <div className="dappDashboard_table_row" style={{
-                            // overflowX:"auto",
-                            // flexWrap:"nowrap"
-                            // justifyContent:"flex-start"
-                        }} >
-
-                            <div className="dappDashboard_table_row_market" >
-                                <img src={DaiImg} alt="ing" />
-                                <img src={WeiImg} alt="ing" />
-                                <h5>WETH (DAI, 90%)</h5>
-                            </div>
-                            <div className="dappDashboard_table_row_asset" >
-                                <img src={WeiImg} alt="ing" />
-                                <h5>0.00 DAI</h5>
-                            </div>
-                            <div className="dappDashboard_table_row_loan" >
-                                <img src={DaiImg} alt="ing" />
-                                <h5>0.00 WETH</h5>
-                            </div>
-                            <div className="dappDashboard_table_row_lltv" >
-                                <h5>90.00%</h5>
-                            </div>
-                            <div className="dappDashboard_table_row_liquidity" >
-                                <h5>Infinity</h5>
-                            </div>
-                            <div className="dappDashboard_table_row_rewards" >
-                                <h5>3.47%</h5>
-                            </div>
-                            <div className="dappDashboard_table_row_rewards" >
-                                <h5>0x3098...d5a0</h5>
-                            </div>
-
+                        <div className="borrowTable_btm_2" >
+                            <img src={WeiImg} alt="ing" />
+                            <h5>DAI</h5>
                         </div>
 
-                        <div className="dappDashboard_table_btm" >
+                        <div className="borrowTable_btm_3" >
+                            <img src={DaiImg} alt="ing" />
+                            <h5>WETH</h5>
+                        </div>
 
+                        <div className="borrowTable_btm_4" >
+                            <h5>90.00%</h5>
+                        </div>
+
+                        <div className="borrowTable_btm_5" >
+                            <img src={WeiImg} alt="ing" />
+                            <h5>0.00 DAI</h5>
+                        </div>
+
+                        <div className="borrowTable_btm_s" >
+                            <h5>3.47%</h5>
+                        </div>
+
+                        <div className="borrowTable_btm_6" >
+                            <h5>0x3098...d5a0</h5>
                         </div>
 
                     </div>
+
+                </div> 
+
+                {/* <div>
+                    
+                    <button>Supply</button>
+                    <button>withdraw</button>
+
+                </div> */}
 
             </div>
 
