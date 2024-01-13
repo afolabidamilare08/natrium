@@ -10,7 +10,7 @@ const DappHeader = ({
     subTitle
 }) => {
 
-    const { UpdatesideNav } = useContext(AppContext)
+    const { UpdatesideNav, closeWeb3, displayAccount, enableWeb3, isWeb3Enabled } = useContext(AppContext)
 
     return (
 
@@ -32,8 +32,8 @@ const DappHeader = ({
 
                 </div>
 
-                <button className='dappHeader_right_connect' >
-                    Connect Wallet
+                <button className='dappHeader_right_connect' onClick={ isWeb3Enabled ? closeWeb3 : enableWeb3 } style={{ cursor: 'pointer' }} >
+                    { isWeb3Enabled ? displayAccount : 'Connect Wallet' }
                 </button>
 
             </div>

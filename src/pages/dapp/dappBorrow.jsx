@@ -79,12 +79,14 @@ const DappBorrow = () => {
 
                 </div> 
 
-                {/* <div>
+                <div className="borrow_dialog" >
                     
-                    <button>Supply</button>
-                    <button>withdraw</button>
+                    <div className="borrow_dialog_top" >
+                        <button className="borrow_dialog_top_1" >Supply</button>
+                        <button className="borrow_dialog_top_2" >withdraw</button>
+                    </div>
 
-                </div> */}
+                </div>
 
             </div>
 

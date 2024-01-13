@@ -379,3 +379,102 @@
     height: 28px;
     width: 28px;
   }
+
+
+
+
+  .main_backdrop{
+    display: block;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #050908eb;
+    z-index: 22;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .create_market_drop{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    width: 40%;
+    // height: 30vh;
+    z-index: 30;
+    // background-color: red;
+
+    &_top{
+      color: #DDFFDA;
+      font-family: var(--poppins);
+      text-align: center;
+      font-weight: 500;
+      font-size: 1rem;
+    }
+
+    &_box{
+      border: 1px solid #B8FEB2;
+      // height: 30vh;
+      margin-top: 1rem;
+      border-radius:7px ;
+      background-color: #0d0d0dd7;
+      padding: 1.5rem;
+
+      &_div{
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &:not(:first-child){
+          margin-top: 2rem;
+        }
+
+        & h5{
+          color: white;
+          font-size: .9rem;
+          font-weight: 500;
+        }
+
+        & input{
+          background-color: #272727;
+          border: none;
+          font-size: .9rem;
+          padding: .5rem 1rem;
+          border-radius: 4px;
+          color: #B7E3D6;
+
+          &:focus{
+            outline: none;
+          }
+
+        }
+
+      }
+
+      &_btn{
+        margin: 30px auto;
+        padding: .8rem;
+        border-radius: 10px;
+        border: 1px solid #169570;
+        display: flex;
+        justify-content: center;
+        color: white;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        cursor: pointer;
+        align-items: center;
+        background-color: #083A2B;
+  
+        @include respond(tab-port){
+          font-size: .9rem;
+          padding: .8rem;
+        }
+      }
+
+    }
+
+  }

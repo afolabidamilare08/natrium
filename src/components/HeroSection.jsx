@@ -1,8 +1,13 @@
 import heroimg from "../assets/heroimg.png"
 import outterImg from "../assets/spinouter.png"
 import innerImg from "../assets/spin_center.png"
+import { useContext } from "react"
+import AppContext from "../context/Appcontext"
 
 const HeroSection = () => {
+
+    const { enableWeb3, isWeb3Enabled, displayAccount, closeWeb3 } = useContext(AppContext)
+
   return (
     <div className='heroContainer'>
 
@@ -29,8 +34,8 @@ const HeroSection = () => {
                 Revolutionary non-custodial lending protocol for unparalleled efficiency and flexibility
             </div>
 
-            <button className="heroContainer_btm_button">
-                Connect Wallet
+            <button className="heroContainer_btm_button" onClick={ isWeb3Enabled ? closeWeb3 : enableWeb3} >
+                { isWeb3Enabled ? displayAccount : 'Connect Wallet' }
             </button>
 
         </div>

@@ -1,8 +1,12 @@
 import DappHeader from "../../components/dappHeader";
 import WeiImg from '../../assets/wei.png';
 import DaiImg from '../../assets/dai.png';
+import { useContext } from "react";
+import AppContext from "../../context/Appcontext";
 
 const DappDashboard = () => {
+
+    const { UpdatesideNav, closeWeb3, displayAccount, enableWeb3, isWeb3Enabled } = useContext(AppContext)
 
     return (
 
@@ -14,17 +18,17 @@ const DappDashboard = () => {
 
             <div className="dappDashboard_body" >
 
-                {/* <div className="dappDashboard_nowallet" >
+                <div className="dappDashboard_nowallet" style={{ display: isWeb3Enabled ? 'none' : 'block' }} >
 
-                                <h4>Sign In</h4>
+                    <h4>Sign In</h4>
 
-                                <h6>Connect your wallet to see your positions</h6>
+                    <h6>Connect your wallet to see your positions</h6>
 
-                                <button>
-                                    Connect Wallet
-                                </button>
+                    <button onClick={ isWeb3Enabled ? closeWeb3 : enableWeb3 } >
+                        { isWeb3Enabled ? displayAccount : 'Connect Wallet' }
+                    </button>
 
-                            </div> */}
+                </div>
 
                     {/* <div className="dappDashboard_colored" >
                         Earn

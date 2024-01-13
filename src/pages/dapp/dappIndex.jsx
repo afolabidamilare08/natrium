@@ -7,8 +7,8 @@ import { FaRegFileAlt } from "react-icons/fa";
 import { GoArrowUpRight, GoMoon } from "react-icons/go";
 import LogoImg from '../../assets/miniLogo.png';
 import { RiFeedbackLine } from "react-icons/ri";
-import { FaAnglesLeft } from "react-icons/fa6";
-import { useContext } from 'react';
+import { FaAnglesLeft, FaShop } from "react-icons/fa6";
+import { useContext, useState } from 'react';
 import AppContext from '../../context/Appcontext';
 // import WeiImg from '../../assets/wei.png';
 // import { IoArrowBackOutline } from "react-icons/io5";
@@ -17,6 +17,9 @@ import AppContext from '../../context/Appcontext';
 const DappIndex = ({Component,path}) => {
 
     const { sideNav, UpdatesideNav } = useContext(AppContext)
+
+    const [ openModal, setopenModal ] = useState(false)
+    const [ modalContnet, setmodalContnet ] = useState('create_market')
 
     return (
 
@@ -63,6 +66,16 @@ const DappIndex = ({Component,path}) => {
                     }} >
                         <IoArrowDownCircleOutline className="dappIndex_left_pack_link_ic" />
                         <h6>Borrow</h6>
+                    </Link>
+
+                    <Link className="dappIndex_left_pack_link" to={'#'} onClick={ () => {
+                        setmodalContnet('create_market')
+                        setopenModal(true)
+                    } } style={{
+                        backgroundColor: path === 'market' ? '#083A2B' : 'transparent'
+                    }} >
+                        <FaShop className="dappIndex_left_pack_link_ic" />
+                        <h6>Create Market</h6>
                     </Link>
 
                     </div>
@@ -116,9 +129,56 @@ const DappIndex = ({Component,path}) => {
         
         : <></> }
 
-        {/* <div className='backdrop' >
+        <div className='main_backdrop' style={{
+            display: openModal ? 'block' : 'none'
+        }} onClick={ () => {
+            setopenModal(false)
+        } } >
 
         </div>
+
+        <div className='create_market_drop' style={{
+            display: openModal && modalContnet === 'create_market' ? 'block' : 'none'
+        }} >
+
+            <h5 className='create_market_drop_top' >Create Markets: (Configure isolated markets permissionlessly)</h5>
+
+            <div className='create_market_drop_box' >
+
+                <div className='create_market_drop_box_div' >
+                    <h5>Loan token:</h5>
+                    <input type='text' />
+                </div>
+
+                <div className='create_market_drop_box_div' >
+                    <h5>Collateral token:</h5>
+                    <input type='text' />
+                </div>
+
+                <div className='create_market_drop_box_div' >
+                    <h5>Oracle:</h5>
+                    <input type='text' />
+                </div>
+
+                <div className='create_market_drop_box_div' >
+                    <h5>Interest rate models:</h5>
+                    <input type='text' />
+                </div>
+
+                <div className='create_market_drop_box_div' >
+                    <h5>Liquidation loan to value ratio:</h5>
+                    <input type='text' />
+                </div>
+
+            </div>
+
+            <button className='create_market_drop_box_btn' >
+                Create market
+            </button>
+
+        </div>
+
+        {/* 
 
         <div className='backdrop_2' >
 
@@ -229,6 +289,16 @@ const DappIndex = ({Component,path}) => {
                     }} >
                         <IoArrowDownCircleOutline className="dappIndex_left_pack_link_ic" />
                         <h6>Borrow</h6>
+                    </Link>
+
+                    <Link className="dappIndex_left_pack_link" to={'#'} onClick={ () => {
+                        setmodalContnet('create_market')
+                        setopenModal(true)
+                    } } style={{
+                        backgroundColor: path === 'market' ? '#083A2B' : 'transparent'
+                    }} >
+                        <FaShop className="dappIndex_left_pack_link_ic" />
+                        <h6>Create Market</h6>
                     </Link>
 
                 </div>
