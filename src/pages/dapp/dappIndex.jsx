@@ -10,16 +10,83 @@ import { RiFeedbackLine } from "react-icons/ri";
 import { FaAnglesLeft, FaShop } from "react-icons/fa6";
 import { useContext, useState } from 'react';
 import AppContext from '../../context/Appcontext';
+import { ethers } from 'ethers';
+import { Abi } from '../../constants/abi';
+import { Spin } from 'antd';
 // import WeiImg from '../../assets/wei.png';
 // import { IoArrowBackOutline } from "react-icons/io5";
 
 
 const DappIndex = ({Component,path}) => {
 
-    const { sideNav, UpdatesideNav } = useContext(AppContext)
+    const { sideNav, UpdatesideNav, user_account, main_contract, signer, irm_contract, oracle_contract,notification } = useContext(AppContext)
 
     const [ openModal, setopenModal ] = useState(false)
     const [ modalContnet, setmodalContnet ] = useState('create_market')
+    const [ isLoading, setisLoading ] = useState(false)
+
+    const [ createMarket_params, setcreateMarket_params ] = useState({
+        loanToken:'',
+        collateralToken:'',
+        lltv:''
+    })
+
+
+    const CreateMarketFunction = async () => {
+
+        setisLoading(true)
+
+        if (!user_account) {
+            notification('error','Error','Please connect your wallet')
+            setisLoading(false);
+            return;
+        }
+
+        if ( createMarket_params.loanToken === '' || 
+             createMarket_params.collateralToken === '' || 
+             createMarket_params.lltv === '' ) {
+            setisLoading(false);
+            notification('error','Error','Please fill all fields')
+            return
+        }
+
+        try{
+
+
+            const mainS = await signer()
+            
+            const contract = new ethers.Contract(
+                main_contract,
+                Abi.Main_contract_abi,
+                mainS
+            )
+
+            const createTraderesponse = await contract.createMarket({
+                loanToken:createMarket_params.loanToken,
+                collateralToken:createMarket_params.collateralToken,
+                oracle:oracle_contract,
+                irm:irm_contract,
+                lltv:`${createMarket_params.lltv}00000000000000000`
+            })
+            console.log('got_here')
+
+            console.log(createTraderesponse)
+
+            if ( createTraderesponse.hash ) {
+                setisLoading(false);
+                notification('success','Success','Market was created successfully')
+            }
+
+        }
+        catch (error) {
+            console.log(error);
+            setisLoading(false);
+            notification('error','Error','Something went wrong while processing your transaction')
+            return;
+        }
+
+    }
+
 
     return (
 
@@ -147,33 +214,42 @@ const DappIndex = ({Component,path}) => {
 
                 <div className='create_market_drop_box_div' >
                     <h5>Loan token:</h5>
-                    <input type='text' />
+                    <input type='text' onChange={ (e) => setcreateMarket_params({
+                        ...createMarket_params,
+                        loanToken:e.target.value
+                    }) } />
                 </div>
 
                 <div className='create_market_drop_box_div' >
                     <h5>Collateral token:</h5>
-                    <input type='text' />
+                    <input type='text' onChange={ (e) => setcreateMarket_params({
+                        ...createMarket_params,
+                        collateralToken:e.target.value
+                    }) } />
                 </div>
 
                 <div className='create_market_drop_box_div' >
                     <h5>Oracle:</h5>
-                    <input type='text' />
+                    <input type='text' value={oracle_contract} disabled />
                 </div>
 
                 <div className='create_market_drop_box_div' >
                     <h5>Interest rate models:</h5>
-                    <input type='text' />
+                    <input type='text'  value={irm_contract} disabled  />
                 </div>
 
                 <div className='create_market_drop_box_div' >
                     <h5>Liquidation loan to value ratio:</h5>
-                    <input type='text' />
+                    <input type='text' onChange={ (e) => setcreateMarket_params({
+                        ...createMarket_params,
+                        lltv:e.target.value
+                    }) } />
                 </div>
 
             </div>
 
-            <button className='create_market_drop_box_btn' >
-                Create market
+            <button className='create_market_drop_box_btn' onClick={() =>  CreateMarketFunction()} >
+                { isLoading ? <Spin/> : 'Create market' }
             </button>
 
         </div>

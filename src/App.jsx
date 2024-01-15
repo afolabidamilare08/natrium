@@ -6,7 +6,9 @@ import DappBorrow from './pages/dapp/dappBorrow.jsx'
 import DappEarn from './pages/dapp/dappEarn.jsx'
 import AppContext from './context/Appcontext.js'
 import { useState } from 'react';
-import { createWeb3Modal, defaultConfig, useWeb3Modal, useWeb3ModalAccount, useWeb3ModalProvider,   } from '@web3modal/ethers/react'
+import { BrowserProvider} from 'ethers'
+import { createWeb3Modal, defaultConfig, useWeb3Modal, useWeb3ModalAccount, useWeb3ModalProvider } from '@web3modal/ethers/react'
+import { notification, Spin } from 'antd';
 
 
 
@@ -33,13 +35,28 @@ createWeb3Modal({
 function App() {
 
   const [ sideNav, setsideNav ] = useState(false)
-  const { open, close } = useWeb3Modal();
+  const { open } = useWeb3Modal();
+  const { walletProvider } = useWeb3ModalProvider()
+  const { address, isConnected,   } = useWeb3ModalAccount();
+  const main_contract = '0x44F2b80cb371F5D6C54029550c4d22c78FE28719'
+  const oracle_contract = '0xF6AaDF014E01f438B8559c1A743D6b2c4f2d456E'
+  const irm_contract = '0x9eD4EDF314EEC268AE5f08e1E256a21fD387D1E9'
 
-  const [ openComingSoon, setOpenComingSoon ] = useState(false)
+  const reSigner = async () => {
+    const provider = new BrowserProvider(walletProvider)
+    const signer = await provider.getSigner()
+    return signer
+  }
 
-  const { address, chainId, isConnected,   } = useWeb3ModalAccount();
+  const [api, contextHolder] = notification.useNotification();
 
-  // const { signer, walletProvider } = useWeb3ModalSigner()
+  const openNotificationWithIcon = (NotificationType,title,description) => {
+    api[NotificationType]({
+      message: title,
+      description:
+        description,
+    });
+  };
 
   const RpcUrl = 'https://arbitrum-goerli.infura.io/v3/a9999d0d4a744c9b893ae34318117d25'
 
@@ -64,14 +81,20 @@ function App() {
       sideNav:sideNav,
       enableWeb3: () => open(),
       UpdatesideNav: () => setsideNav(!sideNav),
+      notification:(NotificationType,title,description) => openNotificationWithIcon(NotificationType,title,description),
       closeWeb3:clearCacheData,
       isWeb3Enabled: isConnected,
       user_account: address,
       displayAccount: userWalletAddress,
-      // signer:signer,
+      signer:reSigner,
       walletProvider:useWeb3ModalProvider,
       RpcUrl:RpcUrl,
+      main_contract:main_contract,
+      irm_contract:irm_contract,
+      oracle_contract:oracle_contract
     }} >
+        {contextHolder}
+
       <Routes>
         <Route path='/' element={<LandingPage/>} />
         <Route path='/dapp' element={ <DappIndex/> } />
