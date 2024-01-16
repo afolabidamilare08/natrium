@@ -60,6 +60,7 @@ const NavBar = () => {
         <Link to="/dashboard" className="navBarContainer_navBar_navButton" style={{
             fontWeight:'500'
         }} >Enter App</Link>
+    {/* }} >Enter App</Link> */}
 
     </div>
 

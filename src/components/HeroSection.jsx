@@ -34,8 +34,12 @@ const HeroSection = () => {
                 Revolutionary non-custodial lending protocol for unparalleled efficiency and flexibility
             </div>
 
-            <button className="heroContainer_btm_button" onClick={ isWeb3Enabled ? closeWeb3 : enableWeb3} >
+            {/* <button className="heroContainer_btm_button" onClick={ isWeb3Enabled ? closeWeb3 : enableWeb3} >
                 { isWeb3Enabled ? displayAccount : 'Connect Wallet' }
+            </button> */}
+
+            <button className="heroContainer_btm_button" >
+                { isWeb3Enabled ? displayAccount : 'Launch Dapp' }
             </button>
 
         </div>

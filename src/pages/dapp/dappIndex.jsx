@@ -68,7 +68,7 @@ const DappIndex = ({Component,path}) => {
                 oracle:oracle_contract,
                 irm:irm_contract,
                 lltv:`${createMarket_params.lltv}0000000000000000`,
-                data:'0x'
+                data:'0x'                        
             })
 
             console.log(createTraderesponse)
