@@ -17,6 +17,10 @@
     font-family: var(--poppins) ;
   }
 
+  input:focus {
+    outline: none;
+  }
+
   @font-face{
     font-family: "FractulBold";
     src: local("FractulBold"),url("../assets/fonts/fractul/Fractul-Bold.ttf") format('truetype')

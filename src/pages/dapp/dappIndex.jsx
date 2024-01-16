@@ -52,7 +52,6 @@ const DappIndex = ({Component,path}) => {
 
         try{
 
-
             const mainS = await signer()
             
             const contract = new ethers.Contract(
@@ -61,31 +60,41 @@ const DappIndex = ({Component,path}) => {
                 mainS
             )
 
+            // const enableLLTV = await contract.enableLltv
+
             const createTraderesponse = await contract.createMarket({
                 loanToken:createMarket_params.loanToken,
                 collateralToken:createMarket_params.collateralToken,
                 oracle:oracle_contract,
                 irm:irm_contract,
-                lltv:`${createMarket_params.lltv}00000000000000000`
+                lltv:`${createMarket_params.lltv}0000000000000000`,
+                data:'0x'
             })
-            console.log('got_here')
 
             console.log(createTraderesponse)
 
             if ( createTraderesponse.hash ) {
+                setcreateMarket_params({
+                    lltv:'',
+                    collateralToken:'',
+                    loanToken:''
+                })
+                setopenModal(false)
                 setisLoading(false);
                 notification('success','Success','Market was created successfully')
             }
 
         }
         catch (error) {
-            console.log(error);
+            console.log(error.reason);
             setisLoading(false);
-            notification('error','Error','Something went wrong while processing your transaction')
+            notification('error','Error', error.reason ? error.reason : 'Something went wrong while processing your transaction')
             return;
         }
 
     }
+
+    // const getTokenName = 
 
 
     return (
@@ -214,15 +223,17 @@ const DappIndex = ({Component,path}) => {
 
                 <div className='create_market_drop_box_div' >
                     <h5>Loan token:</h5>
-                    <input type='text' onChange={ (e) => setcreateMarket_params({
+                    <input type='text' value={createMarket_params.loanToken} onChange={ (e) => setcreateMarket_params({
                         ...createMarket_params,
                         loanToken:e.target.value
                     }) } />
                 </div>
 
+                {/* <h6 style={{color:'gray',textAlign:'right',marginTop:'.5rem',paddingRight:'.5rem'}} >USDT</h6> */}
+
                 <div className='create_market_drop_box_div' >
                     <h5>Collateral token:</h5>
-                    <input type='text' onChange={ (e) => setcreateMarket_params({
+                    <input type='text' value={createMarket_params.collateralToken} onChange={ (e) => setcreateMarket_params({
                         ...createMarket_params,
                         collateralToken:e.target.value
                     }) } />
@@ -230,17 +241,17 @@ const DappIndex = ({Component,path}) => {
 
                 <div className='create_market_drop_box_div' >
                     <h5>Oracle:</h5>
-                    <input type='text' value={oracle_contract} disabled />
+                    <input type='text' value={'0xF6Aa......f2d456E'} disabled />
                 </div>
 
                 <div className='create_market_drop_box_div' >
                     <h5>Interest rate models:</h5>
-                    <input type='text'  value={irm_contract} disabled  />
+                    <input type='text'  value={'0x9eD4Ea2......D1E9'} disabled  />
                 </div>
 
                 <div className='create_market_drop_box_div' >
-                    <h5>Liquidation loan to value ratio:</h5>
-                    <input type='text' onChange={ (e) => setcreateMarket_params({
+                    <h5>Liquidation loan to value ratio (%):</h5>
+                    <input type='text' value={createMarket_params.lltv} onChange={ (e) => setcreateMarket_params({
                         ...createMarket_params,
                         lltv:e.target.value
                     }) } />

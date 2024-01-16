@@ -104,7 +104,7 @@
 .borrow_dialog{
     border: 1px solid #083A2B;
     margin-top: 2rem;
-    padding: 1rem;
+    padding: 3rem;
 
     &_top{
         display: flex;
@@ -136,6 +136,83 @@
             font-weight: 600;
             border-radius: 5px;
             cursor: pointer;
+        }
+
+    }
+
+    &_main{
+        background-color: #000000;
+        margin-top: 1rem;
+        padding: 3rem;
+        border-radius: 8px;
+
+        &_div{
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-evenly;
+
+            &_left{
+                border:1px solid #18A57C;
+                background-color: #0c4b38;
+                padding: .5rem;
+                color: white;
+                font-family: var(--poppins);
+                font-weight: 500;
+                width: 30%;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            &_left_2{
+                border:1px solid #18A57C;
+                background-color: transparent;
+                padding: .5rem;
+                color: white;
+                width: 30%;
+                font-family: var(--poppins);
+                font-weight: 500;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            &_right{
+                // border: 1px solid red;
+
+                & h4{
+                    color: #BABABA;
+                    font-size: .8rem;
+                }
+
+                &_btm{
+                    background-color: #272A2A;
+                    // padding: .7rem;
+                    padding: .5rem;
+                    margin-top: .4rem;
+                    border-radius: 5px;
+
+                    & input{
+                        background-color: transparent;
+                        border:none;
+                        font-size: .8rem;
+                        color: white;
+                    }
+
+                    & button{
+                        background-color: #B8FEB2;
+                        border: none;
+                        padding: .3rem;
+                        color: #515151;
+                        font-family: var(--poppins);
+                        font-weight: 500;
+                        font-size: .8rem;
+                        border-radius: 5px;
+                        cursor: pointer;
+                    }
+
+                }
+
+            }
+
         }
 
     }

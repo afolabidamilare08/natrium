@@ -407,18 +407,35 @@
     z-index: 30;
     // background-color: red;
 
+    @include respond(mini-desktop){
+      width: 50%;
+    }
+
+    @include respond(tab-land){
+      width: 70%;
+    }
+
+    @include respond(tab-port){
+      width: 90%;
+    }
+
     &_top{
       color: #DDFFDA;
       font-family: var(--poppins);
       text-align: center;
       font-weight: 500;
       font-size: 1rem;
+
+      @include respond(tab-port){
+        font-size: .8rem;
+      }
+
     }
 
     &_box{
       border: 1px solid #B8FEB2;
       // height: 30vh;
-      margin-top: 1rem;
+      margin-top: .5rem;
       border-radius:7px ;
       background-color: #0d0d0dd7;
       padding: 1.5rem;
@@ -430,25 +447,39 @@
         align-items: center;
 
         &:not(:first-child){
-          margin-top: 2rem;
+          margin-top: 1rem;
+        }
+
+        @include respond(tab-port){
+          flex-direction: column;
         }
 
         & h5{
           color: white;
           font-size: .9rem;
           font-weight: 500;
+
+          @include respond(mini-desktop){
+            font-size: .8rem;
+          }
+
         }
 
         & input{
           background-color: #272727;
           border: none;
-          font-size: .9rem;
+          font-size: .8rem;
           padding: .5rem 1rem;
           border-radius: 4px;
-          color: #B7E3D6;
+          color: #b7e3d6dd;
 
           &:focus{
             outline: none;
+          }
+
+          @include respond(tab-port){
+            width: 90%;
+            margin-top: .5rem;
           }
 
         }
