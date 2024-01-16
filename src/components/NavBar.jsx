@@ -22,11 +22,11 @@ const NavBar = () => {
             </div>
 
             <div className="navBarContainer_navBar_navLinksContainer">
-                <Link to="/dashboard" className="navBarContainer_navBar_navLinksContainer_selectedNavLink">
+                {/* <Link to="/dashboard" className="navBarContainer_navBar_navLinksContainer_selectedNavLink">
                     <p>Features</p>
-                </Link>
+                </Link> */}
                 <a href="#" className="navLink">
-                    <p>Security</p>
+                    <p>Home</p>
                 </a>
                 <a href="#" className="navLink">
                     <p>Documentation</p>
@@ -37,7 +37,7 @@ const NavBar = () => {
                 Enter App
             </Link>
 
-            <GiHamburgerMenu className="toggleIcon" onClick={ () => setopenModal(true) } />
+            {/* <GiHamburgerMenu className="toggleIcon" onClick={ () => setopenModal(true) } /> */}
 
         </div>
 
@@ -56,10 +56,10 @@ const NavBar = () => {
 
         <a href="#">Features</a>
         <a href="#">Security</a>
-        <a href="#">Documentations</a>
-        <Link to="/dashboard" className="navBarContainer_navBar_navButton" style={{
+        <a href="https://natrium-protocol.gitbook.io/natrium-docs/overview/introducing-natrium">Documentations</a>
+        <Link to="#" className="navBarContainer_navBar_navButton" style={{
             fontWeight:'500'
-        }} >Enter App</Link>
+        }} >Launch Dapp</Link>
     {/* }} >Enter App</Link> */}
 
     </div>

@@ -39,7 +39,8 @@ const HeroSection = () => {
             </button> */}
 
             <button className="heroContainer_btm_button" >
-                { isWeb3Enabled ? displayAccount : 'Launch Dapp' }
+                {/* { isWeb3Enabled ? displayAccount : 'Launch Dapp' } */}
+                {  'Launch Dapp' }
             </button>
 
         </div>

@@ -43,9 +43,9 @@ const ProtocolFeeSection = () => {
               and improvement of the protocol.
             </div>
 
-            <button>
+            <a href='https://natrium-protocol.gitbook.io/natrium-docs/overview/introducing-natrium' >
               Learn More
-            </button>
+            </a>
 
           </motion.div>
 
@@ -68,9 +68,9 @@ const ProtocolFeeSection = () => {
               This fee contributes to the sustainability and enhancement of the protocol's functionality.
             </div>
 
-            <button>
+            <a href='https://natrium-protocol.gitbook.io/natrium-docs/overview/introducing-natrium'>
               Learn More
-            </button>
+            </a>
 
           </motion.div>
 
@@ -93,9 +93,9 @@ const ProtocolFeeSection = () => {
               These fees are implemented to ensure the integrity and efficiency of the system, supporting its overall stability and continuous development.
             </div>
 
-            <button>
+            <a href='https://natrium-protocol.gitbook.io/natrium-docs/overview/introducing-natrium'>
               Learn More
-            </button>
+            </a>
 
           </motion.div>
 
