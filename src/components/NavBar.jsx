@@ -37,7 +37,7 @@ const NavBar = () => {
                 Enter App
             </Link>
 
-            {/* <GiHamburgerMenu className="toggleIcon" onClick={ () => setopenModal(true) } /> */}
+            <GiHamburgerMenu className="toggleIcon" onClick={ () => setopenModal(true) } />
 
         </div>
 
