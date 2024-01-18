@@ -276,7 +276,6 @@ const DappDashboard = () => {
         </div>
 
     );
-
 }
 
 export default DappDashboard;

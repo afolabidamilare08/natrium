@@ -102,9 +102,13 @@
 }
 
 .borrow_dialog{
-    border: 1px solid #083A2B;
+    // border: 1px solid #083A2B;
     margin-top: 2rem;
     padding: 3rem;
+
+    @include respond(mini-desktop){
+        padding: 1rem;
+    }
 
     &_top{
         display: flex;
@@ -146,10 +150,18 @@
         padding: 3rem;
         border-radius: 8px;
 
+        @include respond(mini-desktop){
+            padding: 3rem 1rem;
+        }
+
         &_div{
             display: flex;
             align-items: flex-end;
             justify-content: space-evenly;
+
+            @include respond(tab-port){
+                flex-direction: column;
+            }
 
             &_left{
                 border:1px solid #18A57C;
@@ -161,6 +173,12 @@
                 width: 30%;
                 border-radius: 5px;
                 cursor: pointer;
+
+                @include respond(tab-port){
+                    width: 100%;
+                    margin-top: 1rem;
+                }
+
             }
 
             &_left_2{
@@ -173,10 +191,20 @@
                 font-weight: 500;
                 border-radius: 5px;
                 cursor: pointer;
+
+                @include respond(tab-port){
+                    width: 100%;
+                    margin-top: 1rem;
+                }
+
             }
 
             &_right{
                 // border: 1px solid red;
+
+                @include respond(tab-port){
+                    width: 100%;
+                }
 
                 & h4{
                     color: #BABABA;
@@ -189,6 +217,12 @@
                     padding: .5rem;
                     margin-top: .4rem;
                     border-radius: 5px;
+                    // border: 1px solid red;
+
+                    @include respond(tab-port){
+                        display: flex;
+                        justify-content: space-between;
+                    }
 
                     & input{
                         background-color: transparent;
@@ -207,6 +241,7 @@
                         font-size: .8rem;
                         border-radius: 5px;
                         cursor: pointer;
+
                     }
 
                 }
