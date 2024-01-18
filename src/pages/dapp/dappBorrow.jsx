@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import AppContext from "../../context/Appcontext";
 import { ethers } from "ethers";
 import { Abi } from "../../constants/abi";
+import { Spin } from "antd";
 
 const DappBorrow = () => {
 
@@ -20,7 +21,9 @@ const DappBorrow = () => {
     const [ wcollateralAmount, setwcollateralAmount ] = useState('')
 
     const loanToken = '0xC734D5f31C61a1b716017E0BcF7698Fe01BC2717'
+    const loanTokenName = 'Dai'
     const collateralToken = '0x167287Ae959fb06C6e6b50844fe8a970bED2689a'
+    const collateralTokenName = 'Weth'
 
 
     const HandleSupplyCollateral = async () => {
@@ -73,7 +76,7 @@ const DappBorrow = () => {
             if ( supplyCollateral.hash ) {
                 setcollateralAmount('')
                 setisLoading(false);
-                notification('success','Success','Collateral was successfully supplied')
+                notification('success','Success',`Collateral of ${collateralAmount} ${collateralTokenName} was successfully supplied`)
             }
 
         }
@@ -141,7 +144,7 @@ const DappBorrow = () => {
             if ( borrowTokrn.hash ) {
                 setborrowAmount('')
                 setisLoading(false);
-                notification('success','Success','Borrow was successfull please check your wallet')
+                notification('success','Success',`You ve successfully borrowed ${borrowAmount} ${loanTokenName} please check your wallet`)
             }
 
 
@@ -207,7 +210,7 @@ const DappBorrow = () => {
             if ( repayTokrn.hash ) {
                 setrepayAmount('')
                 setisLoading(false);
-                notification('success','Success','You ve successfully repaid your loan')
+                notification('success','Success',`You ve successfully repaid your loan of ${repayAmount} ${loanTokenName}`)
             }
 
         }
@@ -261,7 +264,7 @@ const DappBorrow = () => {
             if ( wCollateral.hash ) {
                 setwcollateralAmount('')
                 setisLoading(false);
-                notification('success','Success','You ve successfully withdrawn your collateral')
+                notification('success','Success',`You ve successfully withdrawn your collateral of ${wcollateralAmount} ${collateralTokenName}`)
             }
             
         }
@@ -365,7 +368,7 @@ const DappBorrow = () => {
                                 <div className="borrow_dialog_main_div" >
 
                                     <div className="borrow_dialog_main_div_right" >
-                                        <h4>0.00$</h4>
+                                        <h4>{collateralTokenName}</h4>
                                         <div className="borrow_dialog_main_div_right_btm" >
                                             <input placeholder="0.00" value={collateralAmount} onChange={ (e) => setcollateralAmount(e.target.value) } />
                                             <button>Max</button>
@@ -373,7 +376,7 @@ const DappBorrow = () => {
                                     </div>
                                 
                                     <button className="borrow_dialog_main_div_left" onClick={ () => HandleSupplyCollateral() } >
-                                        Supply Collateral
+                                        { isLoading ? <Spin/> : 'Supply Collateral'}
                                     </button>
 
                                 </div>
@@ -383,7 +386,7 @@ const DappBorrow = () => {
                                 }} >
 
                                     <div className="borrow_dialog_main_div_right" >
-                                        <h4>0.00$</h4>
+                                        <h4>{loanTokenName}</h4>
                                         <div className="borrow_dialog_main_div_right_btm" >
                                             <input placeholder="0.00" value={borrowAmount} onChange={ (e) => setborrowAmount(e.target.value) } />
                                             <button >Max</button>
@@ -391,7 +394,7 @@ const DappBorrow = () => {
                                     </div>
 
                                     <button className="borrow_dialog_main_div_left_2" onClick={ () => HandleBorrow() } >
-                                        Borrow
+                                        { isLoading ? <Spin/> : 'Borrow' }
                                     </button>
 
                                 </div>
@@ -406,7 +409,7 @@ const DappBorrow = () => {
                                 <div className="borrow_dialog_main_div" >
 
                                     <div className="borrow_dialog_main_div_right" >
-                                        <h4>0.00$</h4>
+                                        <h4>{collateralTokenName}</h4>
                                         <div className="borrow_dialog_main_div_right_btm" >
                                             <input placeholder="0.00" value={wcollateralAmount} onChange={ (e) => setwcollateralAmount(e.target.value) } />
                                             <button>Max</button>
@@ -414,7 +417,7 @@ const DappBorrow = () => {
                                     </div>
 
                                     <button className="borrow_dialog_main_div_left" onClick={ () => HandlewCollateral() } >
-                                        Withdraw Collateral
+                                        { isLoading ? <Spin/> : 'Withdraw Collateral' }
                                     </button>
 
                                 </div>
@@ -424,7 +427,7 @@ const DappBorrow = () => {
                                 }} >
 
                                     <div className="borrow_dialog_main_div_right" >
-                                        <h4>0.00$</h4>
+                                        <h4>{loanTokenName}</h4>
                                         <div className="borrow_dialog_main_div_right_btm" >
                                             <input placeholder="0.00" value={repayAmount} onChange={ (e) => setrepayAmount(e.target.value) } />
                                             <button >Max</button>
@@ -432,7 +435,7 @@ const DappBorrow = () => {
                                     </div>
 
                                     <button className="borrow_dialog_main_div_left_2" onClick={ () => HandleRepay() } >
-                                        Repay
+                                        { isLoading ? <Spin/> : 'Repay' }
                                     </button>
 
                                 </div>

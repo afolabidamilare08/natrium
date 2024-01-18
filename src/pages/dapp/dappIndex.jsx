@@ -123,28 +123,28 @@ const DappIndex = ({Component,path}) => {
 
                     <div className='dappIndex_left_pack' >
 
-                    <Link className="dappIndex_left_pack_link" to={'/dashboard'} style={{
+                    <Link className="dappIndex_left_pack_link" onClick={ () => UpdatesideNav() } to={'/dashboard'} style={{
                         backgroundColor: path === 'dashboard' ? '#083A2B' : 'transparent'
                     }} >
                         <LuLayoutDashboard className="dappIndex_left_pack_link_ic" />
                         <h6>Position</h6>
                     </Link>
 
-                    <Link className="dappIndex_left_pack_link" to={'/earn'} style={{
+                    <Link className="dappIndex_left_pack_link" onClick={ () => UpdatesideNav() } to={'/earn'} style={{
                         backgroundColor: path === 'earn' ? '#083A2B' : 'transparent'
                     }} >
                         <BiDollarCircle className="dappIndex_left_pack_link_ic" />
                         <h6>Earn</h6>
                     </Link>
 
-                    <Link className="dappIndex_left_pack_link" to={'/borrow'} style={{
+                    <Link className="dappIndex_left_pack_link" onClick={ () => UpdatesideNav() } to={'/borrow'} style={{
                         backgroundColor: path === 'borrow' ? '#083A2B' : 'transparent'
                     }} >
                         <IoArrowDownCircleOutline className="dappIndex_left_pack_link_ic" />
                         <h6>Borrow</h6>
                     </Link>
 
-                    <Link className="dappIndex_left_pack_link" to={'#'} onClick={ () => {
+                    <Link className="dappIndex_left_pack_link" onClick={ () => UpdatesideNav() } to={'#'} onClick={ () => {
                         setmodalContnet('create_market')
                         setopenModal(true)
                     } } style={{
@@ -357,28 +357,28 @@ const DappIndex = ({Component,path}) => {
 
                     <div className='dappIndex_left_pack' >
 
-                    <Link className="dappIndex_left_pack_link" to={'/dashboard'} style={{
+                    <Link className="dappIndex_left_pack_link" onClick={ () => UpdatesideNav() } to={'/dashboard'} style={{
                         backgroundColor: path === 'dashboard' ? '#083A2B' : 'transparent'
                     }} >
                         <LuLayoutDashboard className="dappIndex_left_pack_link_ic" />
                         <h6>Position</h6>
                     </Link>
 
-                    <Link className="dappIndex_left_pack_link" to={'/earn'} style={{
+                    <Link className="dappIndex_left_pack_link" onClick={ () => UpdatesideNav() } to={'/earn'} style={{
                         backgroundColor: path === 'earn' ? '#083A2B' : 'transparent'
                     }} >
                         <BiDollarCircle className="dappIndex_left_pack_link_ic" />
                         <h6>Earn</h6>
                     </Link>
 
-                    <Link className="dappIndex_left_pack_link" to={'/borrow'} style={{
+                    <Link className="dappIndex_left_pack_link" onClick={ () => UpdatesideNav() } to={'/borrow'} style={{
                         backgroundColor: path === 'borrow' ? '#083A2B' : 'transparent'
                     }} >
                         <IoArrowDownCircleOutline className="dappIndex_left_pack_link_ic" />
                         <h6>Borrow</h6>
                     </Link>
 
-                    <Link className="dappIndex_left_pack_link" to={'#'} onClick={ () => {
+                    <Link className="dappIndex_left_pack_link" onClick={ () => UpdatesideNav() } to={'#'} onClick={ () => {
                         setmodalContnet('create_market')
                         setopenModal(true)
                     } } style={{
