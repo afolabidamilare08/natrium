@@ -57,7 +57,7 @@ const NavBar = () => {
         <a href="#">Features</a>
         <a href="#">Security</a>
         <a href="https://natrium-protocol.gitbook.io/natrium-docs/overview/introducing-natrium">Documentations</a>
-        <Link to="#" className="navBarContainer_navBar_navButton" style={{
+        <Link to="/dashboard" className="navBarContainer_navBar_navButton" style={{
             fontWeight:'500'
         }} >Launch Dapp</Link>
     {/* }} >Enter App</Link> */}
