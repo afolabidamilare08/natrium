@@ -14,13 +14,15 @@ import { useContext, useState } from 'react';
 import AppContext from '../../context/Appcontext';
 import { ethers } from 'ethers';
 import { Abi } from '../../constants/abi';
-import { Spin } from 'antd';
+import { Spin, Modal } from 'antd';
 
 const DappEarn = () => {
 
     const { sideNav, UpdatesideNav, user_account, main_contract, signer, irm_contract, oracle_contract,notification } = useContext(AppContext)
 
     const [ isLoading, setisLoading ] = useState(false)
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const [ openModal, setopenModal ] = useState(true)
     

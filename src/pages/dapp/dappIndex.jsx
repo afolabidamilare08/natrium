@@ -144,9 +144,10 @@ const DappIndex = ({Component,path}) => {
                         <h6>Borrow</h6>
                     </Link>
 
-                    <Link className="dappIndex_left_pack_link" onClick={ () => UpdatesideNav() } to={'#'} onClick={ () => {
+                    <Link className="dappIndex_left_pack_link" to={'#'} onClick={ () => {
                         setmodalContnet('create_market')
                         setopenModal(true)
+                        UpdatesideNav()
                     } } style={{
                         backgroundColor: path === 'market' ? '#083A2B' : 'transparent'
                     }} >
@@ -192,11 +193,11 @@ const DappIndex = ({Component,path}) => {
 
                     <div className='dappIndex_left_split' >
 
-                        <div className='dappIndex_left_split_left' >
+                        {/* <div className='dappIndex_left_split_left' >
                             <FaAnglesLeft className='dappIndex_left_split_left_ic' />
-                        </div>
-
-                        <GoMoon className='dappIndex_left_split_right' />
+                        </div> */}
+{/* 
+                        <GoMoon className='dappIndex_left_split_right' /> */}
 
                     </div>
 
@@ -426,11 +427,11 @@ const DappIndex = ({Component,path}) => {
 
                     <div className='dappIndex_left_split' >
 
-                        <div className='dappIndex_left_split_left' >
+                        {/* <div className='dappIndex_left_split_left' >
                             <FaAnglesLeft className='dappIndex_left_split_left_ic' />
-                        </div>
+                        </div> */}
 
-                        <GoMoon className='dappIndex_left_split_right' />
+                        {/* <GoMoon className='dappIndex_left_split_right' /> */}
 
                     </div>
 

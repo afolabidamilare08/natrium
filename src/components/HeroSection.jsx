@@ -3,6 +3,7 @@ import outterImg from "../assets/spinouter.png"
 import innerImg from "../assets/spin_center.png"
 import { useContext } from "react"
 import AppContext from "../context/Appcontext"
+import { Link } from "react-router-dom"
 
 const HeroSection = () => {
 
@@ -38,10 +39,9 @@ const HeroSection = () => {
                 { isWeb3Enabled ? displayAccount : 'Connect Wallet' }
             </button> */}
 
-            <button className="heroContainer_btm_button" >
-                {/* { isWeb3Enabled ? displayAccount : 'Launch Dapp' } */}
-                {  'Launch Dapp' }
-            </button>
+            <Link to={'/dashboard'} className="heroContainer_btm_button" >
+                Launch Dapp
+            </Link>
 
         </div>
         

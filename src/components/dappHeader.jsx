@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import EthImg from '../assets/eth.png';
+import EthImg from '../assets/blast_.png';
 import { FaAngleDown } from "react-icons/fa6";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link } from 'react-router-dom';
@@ -27,8 +27,8 @@ const DappHeader = ({
                 <div className='tokenChange' >
 
                     <img src={EthImg} alt='img' />
-                    <h4>ETH</h4>
-                    <FaAngleDown className='tokenChange_ic' />
+                    <h4>BLAST</h4>
+                    {/* <FaAngleDown className='tokenChange_ic' /> */}
 
                 </div>
 

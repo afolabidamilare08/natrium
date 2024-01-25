@@ -25,10 +25,10 @@ const NavBar = () => {
                 {/* <Link to="/dashboard" className="navBarContainer_navBar_navLinksContainer_selectedNavLink">
                     <p>Features</p>
                 </Link> */}
-                <a href="#" className="navLink">
+                <a href="https://www.natriumdapp.xyz/" className="navLink">
                     <p>Home</p>
                 </a>
-                <a href="#" className="navLink">
+                <a href="https://natrium-protocol.gitbook.io/natrium-docs/overview/introducing-natrium" className="navLink">
                     <p>Documentation</p>
                 </a>
             </div>
@@ -54,8 +54,7 @@ const NavBar = () => {
         display: openModal ? 'block' : 'none'
     }}>
 
-        <a href="#">Features</a>
-        <a href="#">Security</a>
+        <a href="https://www.natriumdapp.xyz/">Home</a>
         <a href="https://natrium-protocol.gitbook.io/natrium-docs/overview/introducing-natrium">Documentations</a>
         <Link to="/dashboard" className="navBarContainer_navBar_navButton" style={{
             fontWeight:'500'
