@@ -10,7 +10,7 @@ import dollarIcon from '../../assets/dollars.png';
 import finIcon from '../../assets/fin.png';
 import userIcon from '../../assets/user.png';
 import { Link } from "react-router-dom";
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import AppContext from '../../context/Appcontext';
 import { ethers } from 'ethers';
 import { Abi } from '../../constants/abi';
@@ -39,11 +39,138 @@ const DappEarn = () => {
     const collateralTokenName = 'Weth';
     const lltv = '900000000000000000';
 
-    const ConvertTobase256 = (unit_number) => {
-        const TheNumber = Number(unit_number)/10**18
-        return(TheNumber)
+    const [ marketList, setmarketList ] = useState([ '0xc6b6b56565ae8aba1d1efdab684a200229d84e523fb50a41431a89964058470c' ,'0xad6b6cfc771c88bbb79c952b5b31d145cda37c8ea96125f561e2036442325dc6' ])
+    const [ marketListDetails, setmarketListDetails ] = useState()
+
+    const [ analysisMarket, setanalysisMarket ] = useState(null)
+    const [ currentBalnce, setcurrentBalnce ] = useState('')
+    const [ totaluserSupply, settotaluserSupply ] = useState('')
+
+
+
+    useEffect( () => {
+
+        Getallmarketdetails()
+
+    }, [] )
+
+
+    const Getallmarketdetails = async () => {
+
+        try{
+
+            let TheMarket = [] ;
+
+            for (let k = 0; k < marketList.length; k++) {
+                const marketId = marketList[k];
+                const getdetail = await getMarketDetails(marketId)
+                const getmarket = await getMarket(marketId)
+                const loanToken = getdetail[0]
+                const collateralToken = getdetail[1]
+                const oracleAddress = getdetail[2]
+                const irmAddress = getdetail[3]
+                const lltv = getdetail[4]
+                const loantokenDetails = await getTokendetails(loanToken)
+                const collateraltokenDetails = await getTokendetails(collateralToken)
+                const Totalsupplyasset = getmarket[0]
+                const totalsupplyshares = getmarket[1]
+                const Totalborrowasset = getmarket[2]
+                const Totalborrowshares = getmarket[3]
+                const lastUpdate = getmarket[4]
+                const fee = getmarket[5]
+                const borrowAPY = await getBorrowAPY(
+                    loanToken,
+                    collateralToken,
+                    oracleAddress,
+                    irmAddress,
+                    lltv,
+                    marketId,
+                    Totalsupplyasset,
+                    totalsupplyshares,
+                    Totalborrowasset,
+                    Totalborrowshares,
+                    lastUpdate,
+                    fee
+                )
+                const supplyAPY = await getsupplyAPY(
+                    loanToken,
+                    collateralToken,
+                    oracleAddress,
+                    irmAddress,
+                    lltv,
+                    marketId,
+                    Totalsupplyasset,
+                    totalsupplyshares,
+                    Totalborrowasset,
+                    Totalborrowshares,
+                    lastUpdate,
+                    fee
+                )
+
+
+                TheMarket.push({
+                    market_id:marketId,
+                    loan_token_address:loanToken,
+                    loan_token_name:loantokenDetails.token_name,
+                    loan_token_symbol:loantokenDetails.token_symbol,
+                    collateral_token_address:collateralToken,
+                    collateral_token_name:collateraltokenDetails.token_name,
+                    collateral_token_symbol:collateraltokenDetails.token_symbol,
+                    oracle_address:oracleAddress,
+                    irm_address:irmAddress,
+                    lltv:lltv,
+                    totalsupplyasset:Totalsupplyasset,
+                    totalsupplyshares:totalsupplyshares,
+                    totalborrowassset:Totalborrowasset,
+                    totalborrowshares:Totalborrowshares,
+                    lastUpdate: lastUpdate,
+                    fee: fee,
+                    borrow_apy:borrowAPY,
+                    supply_apy:supplyAPY,
+
+                })
+
+            }
+
+            setmarketListDetails(TheMarket)
+
+            console.log(TheMarket)
+
+        }
+        catch(error){
+            console.log(error)
+        }
+
     }
 
+
+    const ConvertTobase256 = (unit_number,fixed_number) => {
+        const TheNumber = Number(unit_number)/10**18
+        return( TheNumber.toFixed( fixed_number ? fixed_number : 2 ) )
+    }
+
+    const getTokendetails = async (tokenAddress) => {
+
+        try{
+
+            const mainS = await signer()
+
+            const contract = new ethers.Contract(
+                tokenAddress,
+                Abi.ERC20ABI,
+                mainS
+            )
+
+            const tokenName = await contract.name()
+            const tokenSymbol = await contract.symbol()
+            return { token_name: tokenName, token_symbol: tokenSymbol }
+
+        }
+        catch(error){
+            console.log(error)
+        }
+
+    }
 
     const HandleSupplyCollateral = async () => {
 
@@ -61,7 +188,7 @@ const DappEarn = () => {
             return;
         }
 
-        const updatedcollateralAmount = `${collateralAmount}000000000000000000`
+        const updatedcollateralAmount = ethers.parseEther(collateralAmount)
 
         try{
 
@@ -74,7 +201,7 @@ const DappEarn = () => {
             )
 
             const approveCollateral = new ethers.Contract(
-                loanToken,
+                analysisMarket.loan_token_address,
                 Abi.ERC20ABI,
                 mainS
             )
@@ -85,17 +212,17 @@ const DappEarn = () => {
             )
 
             const supplyCollateral = await contract.supply({
-                loanToken:loanToken,
-                collateralToken:collateralToken,
-                oracle:oracle_contract,
-                irm:irm_contract,
-                lltv:`900000000000000000`
+                loanToken:analysisMarket.loan_token_address,
+                collateralToken:analysisMarket.collateral_token_address,
+                oracle:analysisMarket.oracle_address,
+                irm:analysisMarket.irm_address,
+                lltv:analysisMarket.lltv
             },updatedcollateralAmount,0,user_account,'0x')
 
             if ( supplyCollateral.hash ) {
                 setcollateralAmount('')
                 setisLoading(false);
-                notification('success','Success',`${collateralAmount} ${loanTokenName} was supplied successfully`)
+                notification('success','Success',`${collateralAmount} ${analysisMarket.loan_token_symbol} was supplied successfully`)
             }
 
         }
@@ -124,7 +251,7 @@ const DappEarn = () => {
             return;
         }
 
-        const updatedwcollateralAmount = `${wcollateralAmount}000000000000000000`
+        const updatedwcollateralAmount = ethers.parseEther(wcollateralAmount)
 
         try{
 
@@ -137,11 +264,11 @@ const DappEarn = () => {
             )
 
             const wCollateral = await contract.withdraw({
-                loanToken:loanToken,
-                collateralToken:collateralToken,
-                oracle:oracle_contract,
-                irm:irm_contract,
-                lltv:`900000000000000000`
+                loanToken:analysisMarket.loan_token_address,
+                collateralToken:analysisMarket.collateral_token_address,
+                oracle:analysisMarket.oracle_address,
+                irm:analysisMarket.irm_address,
+                lltv:analysisMarket.lltv
             },updatedwcollateralAmount,0,user_account,user_account)
 
             // console.log(wCollateral)
@@ -149,7 +276,7 @@ const DappEarn = () => {
             if ( wCollateral.hash ) {
                 setwcollateralAmount('')
                 setisLoading(false);
-                notification('success','Success',`You ve successfully withdrawn ${wcollateralAmount} ${loanTokenName}`)
+                notification('success','Success',`You ve successfully withdrawn ${wcollateralAmount} ${analysisMarket.loan_token_symbol}`)
             }
             
         }
@@ -161,7 +288,7 @@ const DappEarn = () => {
         }
     }
 
-    const getMarket = async () => {
+    const getMarket = async (market_id) => {
 
         try{
 
@@ -173,15 +300,56 @@ const DappEarn = () => {
                 mainS
             )
 
-            const getMarketdetail = await contract.market('0xc6b6b56565ae8aba1d1efdab684a200229d84e523fb50a41431a89964058470c')
+            const getMarketdetail = await contract.market(market_id)
 
-            console.log('Market - detail',getMarketdetail[0])
+            return getMarketdetail
 
-            let x = Number(getMarketdetail[0])
+        }
+        catch(error){
+            console.log(error)
+        }
 
-            let y = x/10**18
+    }
 
-            console.log('Market - detail',y)
+    const getMarketDetails = async (marketId) => {
+
+        try{
+
+            const mainS = await signer()
+
+            const contract = new ethers.Contract(
+                main_contract,
+                Abi.Main_contract_abi,
+                mainS
+            )
+
+            const getMarketdetail = await contract.idToMarketParams(marketId)
+
+            console.log('Market - main',getMarketdetail)
+            return getMarketdetail
+
+        }
+        catch(error){
+            console.log(error)
+        }
+
+    }
+
+    const getCollateralBalance = async (collateral_asset) => {
+
+        try{
+
+            const mainS = await signer()
+            const contract = new ethers.Contract(
+                collateral_asset,
+                Abi.ERC20ABI,
+                mainS
+            )
+
+            const balance = await contract.balanceOf(user_account);
+
+            setcurrentBalnce( ConvertTobase256(balance) )
+
 
         }
         catch(error){
@@ -218,7 +386,7 @@ const DappEarn = () => {
         }
     }
 
-    const SupplyAssetUser = async () => {
+    const SupplyAssetUser = async (market) => {
 
         try{
 
@@ -231,14 +399,14 @@ const DappEarn = () => {
             )
 
             const supplyAssetuserHadeler = await contract.supplyAssetsUser({
-                loanToken:loanToken,
-                collateralToken:collateralToken,
-                oracle:oracle_contract,
-                irm:irm_contract,
-                lltv:lltv,
+                loanToken:market.loan_token_address,
+                collateralToken:market.collateral_token_address,
+                oracle:market.oracle_address,
+                irm:market.irm_address,
+                lltv:market.lltv,
             },user_account)
 
-            console.log('supplyAssetUser',ConvertTobase256(supplyAssetuserHadeler))
+            settotaluserSupply(ConvertTobase256(supplyAssetuserHadeler))
 
         }
         catch(error){
@@ -324,7 +492,20 @@ const DappEarn = () => {
         }
     }
 
-    const getsupplyAPY = async () => {
+    const getsupplyAPY = async (
+        loan_token,
+        collateral_token,
+        oracle,
+        irm,
+        lltv,
+        market_id,
+        total_supply_assets,
+        total_supply_shares,
+        total_borrow_assets,
+        total_borrow_shares,
+        last_update,
+        fee
+    ) => {
 
         try{
 
@@ -337,24 +518,22 @@ const DappEarn = () => {
             )
 
             const getSupplyAPY = await contract.supplyAPY({
-                loanToken:loanToken,
-                collateralToken:collateralToken,
-                oracle:oracle_contract,
-                irm:irm_contract,
+                loanToken:loan_token,
+                collateralToken:collateral_token,
+                oracle:oracle,
+                irm:irm,
                 lltv:lltv,
             },{
-                market:'0xc6b6b56565ae8aba1d1efdab684a200229d84e523fb50a41431a89964058470c',
-                totalSupplyAssets:'60000000039619031766',
-                totalSupplyShares:'59999998851048650800568091',
-                totalBorrowAssets:'39619031766',
-                totalBorrowShares:'39595891350178177',
-                lastUpdate:'1705376964',
-                fee:'0'
+                market:market_id,
+                totalSupplyAssets:total_supply_assets,
+                totalSupplyShares:total_supply_shares,
+                totalBorrowAssets:total_borrow_assets,
+                totalBorrowShares:total_borrow_shares,
+                lastUpdate:last_update,
+                fee:fee
             })
 
-            let y = Number(getSupplyAPY) /10**18
-
-            console.log('supply-apy',y.toString())
+            return getSupplyAPY
 
         }
         catch(error){
@@ -363,7 +542,20 @@ const DappEarn = () => {
 
     }
 
-    const getBorrowAPY = async () => {
+    const getBorrowAPY = async (
+        loan_token,
+        collateral_token,
+        oracle,
+        irm,
+        lltv,
+        market_id,
+        total_supply_assets,
+        total_supply_shares,
+        total_borrow_assets,
+        total_borrow_shares,
+        last_update,
+        fee
+    ) => {
 
         try{
 
@@ -376,24 +568,22 @@ const DappEarn = () => {
             )
 
             const getBorrowAPY = await contract.borrowAPY({
-                loanToken:loanToken,
-                collateralToken:collateralToken,
-                oracle:oracle_contract,
-                irm:irm_contract,
+                loanToken:loan_token,
+                collateralToken:collateral_token,
+                oracle:oracle,
+                irm:irm,
                 lltv:lltv,
             },{
-                market:'0xc6b6b56565ae8aba1d1efdab684a200229d84e523fb50a41431a89964058470c',
-                totalSupplyAssets:'60000000039619031766',
-                totalSupplyShares:'59999998851048650800568091',
-                totalBorrowAssets:'39619031766',
-                totalBorrowShares:'39595891350178177',
-                lastUpdate:'1705376964',
-                fee:'0'
+                market:market_id,
+                totalSupplyAssets:total_supply_assets,
+                totalSupplyShares:total_supply_shares,
+                totalBorrowAssets:total_borrow_assets,
+                totalBorrowShares:total_borrow_shares,
+                lastUpdate:last_update,
+                fee:fee
             })
 
-            let y = Number(getBorrowAPY) /10**18
-
-            console.log('borrow-apy',y.toString())
+            return getBorrowAPY
 
         }
         catch(error){
@@ -513,276 +703,73 @@ const DappEarn = () => {
                             <input type="search" placeholder="Search for markets" />
                             <button>
                                 <FaSearch className="search_ic" />
-                                Search
+                                <h4>Search</h4>
                             </button>
                         </div>
-
-
-                        <div className="featured_tag" >Featured Markets</div>
-
-                        <div className="borrowTable" style={{
-                            // border:'1px solid red',
-                            // margin:"1rem auto",
-                            // width:"fit-content"
-                        }} >
-
-                            <div className="borrowTable_top" >
-
-                                <h4 className="borrowTable_top_1" >Market</h4>
-                                <h4 className="borrowTable_top_2" >Collateral Asset</h4>
-                                <h4 className="borrowTable_top_3" >Loan Asset</h4>
-                                <h4 className="borrowTable_top_4" >LLTV</h4>
-                                <h4 className="borrowTable_top_5" >Liquidity</h4>
-                                <h4 className="borrowTable_top_s" >Rate & Rewards</h4>
-                                <h4 className="borrowTable_top_6" >Market ID</h4>
-
-                            </div>
-
-                            <div className="borrowTable_btm" style={{
-                                cursor:"pointer",
-                            }} onClick={ () => setopenModal(true) }  >
-                                
-                                <div className="borrowTable_btm_1" >
-                                    <img src={DaiImg} alt="ing" />
-                                    <img src={WeiImg} alt="ing" />
-                                    <h5>WETH (DAI, 90%)</h5>
-                                </div>
-
-                                <div className="borrowTable_btm_2" >
-                                    <img src={WeiImg} alt="ing" />
-                                    <h5>DAI</h5>
-                                </div>
-
-                                <div className="borrowTable_btm_3" >
-                                    <img src={DaiImg} alt="ing" />
-                                    <h5>WETH</h5>
-                                </div>
-
-                                <div className="borrowTable_btm_4" >
-                                    <h5>90.00%</h5>
-                                </div>
-
-                                <div className="borrowTable_btm_5" >
-                                    <img src={WeiImg} alt="ing" />
-                                    <h5>0.00 DAI</h5>
-                                </div>
-
-                                <div className="borrowTable_btm_s" >
-                                    <h5>3.47%</h5>
-                                </div>
-
-                                <div className="borrowTable_btm_6" >
-                                    <h5>0x3098...d5a0</h5>
-                                </div>
-
-                            </div>
-
-                        </div> 
+                        
                     </div>
 
-                    <button onClick={ () => getBorrowAPY() } >
-                        get BorrowAPY
-                    </button>
-
-                    <button onClick={ () => getsupplyAPY() } >
-                        get SupplyAPY
-                    </button>
-
-                    <button onClick={ () => getMarket() } >
-                        get market details
-                    </button>
-
-                    <button onClick={ () => BorrowAssetUser() } >
-                        get user borrow asset
-                    </button>
-
-                    <button onClick={ () => SupplyAssetUser() } >
-                        get user supply asset
-                    </button>
-
-                    <button onClick={ () => CollateralAssetUser() } >
-                        get user collateral asset
-                    </button>
-
-                    <button onClick={ () => MarketTotalBorrow() } >
-                        get total market borrow
-                    </button>
-
-                    <button onClick={ () => MarketTotalSupply() } >
-                        get total market supply
-                    </button>
-
-                    <button onClick={ () => userHealthFactor() } >
-                        user health Factor
-                    </button>
-
-                    {/* <div className="earn_body_foot" style={{
+                    <div className="earn_body_foot" style={{
                         justifyContent:'center'
                     }} >
 
-                        <div className="earn_body_foot_div" >
+                        { marketListDetails ? 
+                        
+                            marketListDetails.map( (market) => {
 
-                            <div className="earn_body_foot_div_top" >Featured vaults</div>
+                                return (
 
-                            <div className="earn_body_foot_div_mid" >
+                                    <div className="market_list" key={market.market_id} >
 
-                                <div className="earn_body_foot_div_mid_cover" >
-                                    <img src={EthImg} />
-                                </div>
+                                        <div className="market_list_top" >
+                                            <h4>{market.loan_token_name}</h4>
+                                            <h6>{market.loan_token_symbol}</h6>
+                                        </div>
 
-                                <h4>Default Goerli Weth Natrium</h4>
+                                        <div className="market_list_main" >
+                                            <h4>Total supplied</h4>
+                                            <h6>{ConvertTobase256(market.totalsupplyasset)} {market.loan_token_symbol}</h6>
+                                        </div>
 
-                                <div className="earn_body_foot_div_mid_split" >
-                                    <img src={dollarIcon} />
-                                    <h6>$21k TVL</h6>
-                                </div>
+                                        <div className="market_list_main" style={{
+                                            borderBottom:"1px solid gray",
+                                            paddingBottom:".5rem"
+                                        }} >
+                                            <h4>Supply APY</h4>
+                                            <h6>{ConvertTobase256(market.supply_apy)}%</h6>
+                                        </div>
 
-                                <div className="earn_body_foot_div_mid_split" >
-                                    <img src={EthImg} />
-                                    <h6>WETH</h6>
-                                </div>
+                                        <div className="market_list_main" >
+                                            <h4>Total borrowed</h4>
+                                            <h6>{ConvertTobase256(market.totalborrowassset)} {market.loan_token_symbol}</h6> 
+                                        </div>
 
-                                <div className="earn_body_foot_div_mid_split" >
-                                    <img src={finIcon} />
-                                    <h6>0.01%</h6>
-                                </div>
+                                        <div className="market_list_main" style={{
+                                            borderBottom:"1px solid gray",
+                                            paddingBottom:".5rem"
+                                        }} >
+                                            <h4>Borrow APY</h4>
+                                            <h6>{ConvertTobase256(market.borrow_apy)}%</h6>
+                                        </div>
 
-                                <div className="earn_body_foot_div_mid_split" >
-                                    <img src={userIcon} />
-                                    <h6>0x50d0..6644</h6>
-                                </div>
+                                        <button onClick={ () => {
+                                            getCollateralBalance(market.loan_token_address)
+                                            SupplyAssetUser(market)
+                                            setopenModal(true)
+                                            setanalysisMarket(market)
+                                        } } >
+                                            View details
+                                        </button>
 
-                                <button>Supply</button>
+                                    </div>
 
-                                <Link>View Vault</Link>
+                                );
 
-                            </div>
-
-                        </div>
-
-                        <div className="earn_body_foot_div" >
-
-                            <div className="earn_body_foot_div_top" >Featured vaults</div>
-
-                            <div className="earn_body_foot_div_mid" >
-
-                                <div className="earn_body_foot_div_mid_cover" >
-                                    <img src={WeiImg} />
-                                </div>
-
-                                <h4>Default Goerli Dai Natrium</h4>
-
-                                <div className="earn_body_foot_div_mid_split" >
-                                    <img src={dollarIcon} />
-                                    <h6>$21k TVL</h6>
-                                </div>
-
-                                <div className="earn_body_foot_div_mid_split" >
-                                    <img src={WeiImg} />
-                                    <h6>DAI</h6>
-                                </div>
-
-                                <div className="earn_body_foot_div_mid_split" >
-                                    <img src={finIcon} />
-                                    <h6>0.01%</h6>
-                                </div>
-
-                                <div className="earn_body_foot_div_mid_split" >
-                                    <img src={userIcon} />
-                                    <h6>0x50d0..6644</h6>
-                                </div>
-
-                                {/* <button>Supply</button>
-
-                                <Link>View Vault</Link>
-
-                            </div>
-
-                        </div> 
-
-                        <div className="earn_body_foot_div" >
-
-                            <div className="earn_body_foot_div_top" >Featured vaults</div>
-
-                            <div className="earn_body_foot_div_mid" >
-
-                                <div className="earn_body_foot_div_mid_cover" >
-                                    <img src={DaiImg} />
-                                </div>
-
-                                <h4>Default Goerli Weth Natrium</h4>
-
-                                <div className="earn_body_foot_div_mid_split" >
-                                    <img src={dollarIcon} />
-                                    <h6>$21k TVL</h6>
-                                </div>
-
-                                <div className="earn_body_foot_div_mid_split" >
-                                    <img src={DaiImg} />
-                                    <h6>USDC</h6>
-                                </div>
-
-                                <div className="earn_body_foot_div_mid_split" >
-                                    <img src={finIcon} />
-                                    <h6>0.01%</h6>
-                                </div>
-
-                                <div className="earn_body_foot_div_mid_split" >
-                                    <img src={userIcon} />
-                                    <h6>0x50d0..6644</h6>
-                                </div>
-
-                                <button>Supply</button>
-
-                                <Link>View Vault</Link>
-
-                            </div>
-
-                        </div>
+                            } )
+                        
+                        : <Spin/> }
 
                     </div>
-{/* 
-                    <div style={{
-                        marginBottom:'2rem',
-                        width:'100%',
-                        padding:'2rem'
-                    }} >
-                        
-                        <div className="borrow_dialog_main_div" >
-
-                            <div className="borrow_dialog_main_div_right" >
-                                <h4>{loanTokenName}</h4>
-                                <div className="borrow_dialog_main_div_right_btm" >
-                                    <input placeholder="0.00" value={collateralAmount} onChange={ (e) => setcollateralAmount(e.target.value) } />
-                                    <button>Max</button>
-                                </div>
-                            </div>
-                        
-                            <button className="borrow_dialog_main_div_left" onClick={ () => HandleSupplyCollateral() } >
-                               { isLoading ? <Spin/> :  'Supply Token'}
-                            </button>
-
-                        </div>
-
-                        <div className="borrow_dialog_main_div" style={{
-                            marginTop:'1rem'
-                        }} >
-
-                            <div className="borrow_dialog_main_div_right" >
-                                <h4>{loanTokenName}</h4>
-                                <div className="borrow_dialog_main_div_right_btm" >
-                                    <input placeholder="0.00" value={wcollateralAmount} onChange={ (e) => setwcollateralAmount(e.target.value) } />
-                                    <button >Max</button>
-                                </div>
-                            </div>
-
-                            <button className="borrow_dialog_main_div_left_2" onClick={ () => HandlewCollateral() } >
-                               { isLoading ? <Spin/> :  'Withdraw Token'}
-                            </button>
-
-                        </div>
-                    
-                    </div> */}
 
                 </div>
 
@@ -794,6 +781,12 @@ const DappEarn = () => {
                     display: openModal ? 'block' : 'none'
                 }} >
 
+                    { analysisMarket ?
+                    
+                    
+                    
+                    <>
+                    
                     <FaArrowLeft style={{
                         color:'white'
                     }} className="side_div_nav_back" onClick={ () => setopenModal(false) } />
@@ -801,8 +794,8 @@ const DappEarn = () => {
                     <div className="side_div_nav_title" >
                         <img src={DaiImg} className="side_div_nav_title_left" />
                         <div className="side_div_nav_title_right" >
-                            <h4>wETH</h4>
-                            <h5>Wrappeth Ethereum</h5>
+                            <h4>{ analysisMarket.collateral_token_symbol }</h4>
+                            <h5>{ analysisMarket.collateral_token_name }</h5>
                         </div>
                     </div>
 
@@ -810,12 +803,12 @@ const DappEarn = () => {
 
                         <div className="side_div_nav_tabs_div" >
                             <h5>Borrow APY</h5>
-                            <h6>2.2%</h6>
+                            <h6>{ConvertTobase256(analysisMarket.borrow_apy,10)}%</h6>
                         </div>
 
                         <div className="side_div_nav_tabs_div" >
                             <h5>Supply APY</h5>
-                            <h6>1.2%</h6>
+                            <h6>{ConvertTobase256(analysisMarket.supply_apy,10)}%</h6>
                         </div>
 
                     </div>
@@ -828,7 +821,7 @@ const DappEarn = () => {
                         </div>
                         <div className="side_div_nav_token_info_right" >
                             <h5>Collateral Token:</h5>
-                            <h4>Wrapped Etherumn</h4>
+                            <h4>{analysisMarket.collateral_token_name}</h4>
                         </div>
                     </div>
 
@@ -838,7 +831,7 @@ const DappEarn = () => {
                         </div>
                         <div className="side_div_nav_token_info_right" >
                             <h5>Loan Token:</h5>
-                            <h4>DAI</h4>
+                            <h4>{analysisMarket.loan_token_name}</h4>
                         </div>
                     </div>
 
@@ -846,12 +839,12 @@ const DappEarn = () => {
 
                         <div className="side_div_nav_tabs_div" >
                             <h5>Total Market Borrow</h5>
-                            <h6>200wEth</h6>
+                            <h6>{ ConvertTobase256(analysisMarket.totalborrowassset,10) } {analysisMarket.loan_token_symbol}</h6>
                         </div>
 
                         <div className="side_div_nav_tabs_div" >
-                            <h5>Total Market Borrow</h5>
-                            <h6>30wEth</h6>
+                            <h5>Total Market Supply</h5>
+                            <h6>{ ConvertTobase256(analysisMarket.totalsupplyasset,2) } {analysisMarket.collateral_token_symbol}</h6>
                         </div>
 
                     </div>
@@ -862,7 +855,7 @@ const DappEarn = () => {
                         marginTop:'2rem'
                     }} >
 
-                        <h4 className="borrow_dialog_main_2div_part_top" >{'4000'} {'wEth'}</h4>
+                        <h4 className="borrow_dialog_main_2div_part_top" >{ currentBalnce} {analysisMarket.loan_token_symbol}</h4>
                         <div className="borrow_dialog_main_2div_part_btm" >
 
                             {/* <div className="borrow_dialog_main_2div_part_btm_left" >
@@ -874,23 +867,23 @@ const DappEarn = () => {
                             }} >
                                 <input placeholder="0.00" style={{
                                 width:"86%"
-                            }} />
-                                <button >Max</button>
+                            }} value={collateralAmount} onChange={ (e) => setcollateralAmount(e.target.value) } />
+                                <button onClick={ () => setcollateralAmount(currentBalnce) } >Max</button>
                             </div>
 
                         </div>
 
                     </div>      
 
-                    <button className="borrow_dialog_main_2div_btn" >
-                        { isLoading ? <Spin/> : 'Supply wEth' }
+                    <button className="borrow_dialog_main_2div_btn" onClick={ () => HandleSupplyCollateral() } >
+                        { isLoading ? <Spin/> : `Supply ${analysisMarket.loan_token_symbol}` }
                     </button>              
 
                     <div className="borrow_dialog_main_2div_part" style={{
                         marginTop:'2rem'
                     }} >
 
-                        <h4 className="borrow_dialog_main_2div_part_top" >{'4000'} {'wEth'}</h4>
+                        <h4 className="borrow_dialog_main_2div_part_top" >{totaluserSupply} {analysisMarket.loan_token_symbol}</h4>
                         <div className="borrow_dialog_main_2div_part_btm" >
 
                             {/* <div className="borrow_dialog_main_2div_part_btm_left" >
@@ -902,17 +895,24 @@ const DappEarn = () => {
                             }} >
                                 <input placeholder="0.00" style={{
                                 width:"86%"
-                            }} />
-                                <button >Max</button>
+                            }} value={wcollateralAmount} onChange={ (e) => setwcollateralAmount(e.target.value) } />
+                                <button onClick={ () => setwcollateralAmount(totaluserSupply) } >Max</button>
                             </div>
 
                         </div>
 
                     </div>      
 
-                    <button className="borrow_dialog_main_2div_btn" >
-                        { isLoading ? <Spin/> : 'Withdraw wEth' }
+                    <button className="borrow_dialog_main_2div_btn" onClick={ () => HandlewCollateral() } >
+                        { isLoading ? <Spin/> : `Withdraw ${analysisMarket.loan_token_symbol}` }
                     </button> 
+
+                    
+                    </>
+                    
+                    
+                    
+                    : <Spin/> }
 
                 </div>
 

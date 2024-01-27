@@ -5,7 +5,7 @@ import DappDashboard from './pages/dapp/dappDashboard.jsx'
 import DappBorrow from './pages/dapp/dappBorrow.jsx'
 import DappEarn from './pages/dapp/dappEarn.jsx'
 import AppContext from './context/Appcontext.js'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserProvider} from 'ethers'
 import { createWeb3Modal, defaultConfig, useWeb3Modal, useWeb3ModalAccount, useWeb3ModalProvider } from '@web3modal/ethers/react'
 import { notification, Spin } from 'antd';
@@ -49,6 +49,8 @@ function App() {
     return signer
   }
 
+  const [ Loading, setLoading ] = useState(true)
+
   const [api, contextHolder] = notification.useNotification();
 
   const openNotificationWithIcon = (NotificationType,title,description) => {
@@ -77,6 +79,14 @@ function App() {
     window.location.reload()
 };
 
+useEffect( () => {
+
+  setTimeout(() => {
+    setLoading(false)
+  }, 6000);
+
+}, [] )
+
   return (
     <AppContext.Provider value={{
       sideNav:sideNav,
@@ -97,7 +107,11 @@ function App() {
     }} >
         {contextHolder}
 
-      <Routes>
+      { Loading ? <div style={{
+        width:"100%",
+        height:'100vh',
+        backgroundColor:"black"
+      }} ></div> : <Routes>
         <Route path='/' element={<LandingPage/>} />
         <Route path='/dapp' element={ <DappIndex/> } />
         <Route path='/dashboard' element={ <DappIndex
@@ -113,6 +127,8 @@ function App() {
           path={'earn'}
         /> } />
       </Routes>
+ }
+
     </AppContext.Provider>
   )
 }
