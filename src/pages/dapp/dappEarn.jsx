@@ -20,7 +20,7 @@ import { BsBank } from "react-icons/bs";
 
 const DappEarn = () => {
 
-    const { sideNav, UpdatesideNav, user_account, main_contract, signer, irm_contract, market_info_contract ,oracle_contract,notification } = useContext(AppContext)
+    const { sideNav, UpdatesideNav, user_account, main_contract, signer, irm_contract, market_info_contract ,oracle_contract,notification, closeWeb3, enableWeb3,isWeb3Enabled, displayAccount } = useContext(AppContext)
 
     const [ isLoading, setisLoading ] = useState(false)
 
@@ -45,14 +45,15 @@ const DappEarn = () => {
     const [ analysisMarket, setanalysisMarket ] = useState(null)
     const [ currentBalnce, setcurrentBalnce ] = useState('')
     const [ totaluserSupply, settotaluserSupply ] = useState('')
+    const [ pageLoading, setpageLoading ] = useState(false)
 
 
 
     useEffect( () => {
 
-        Getallmarketdetails()
+        Getallmarketdetails(user_account)
 
-    }, [] )
+    }, [user_account] )
 
 
     const Getallmarketdetails = async () => {
@@ -767,7 +768,27 @@ const DappEarn = () => {
 
                             } )
                         
-                        : <Spin/> }
+                        :
+                        
+                            pageLoading ? <Spin/>
+
+                            :
+
+
+                            <div className="dappDashboard_nowallet" style={{ display: isWeb3Enabled ? 'none' : 'block' }} >
+
+                                <h4>Sign In</h4>
+
+                                <h6>Connect your wallet to start earning</h6>
+
+                                <button onClick={ isWeb3Enabled ? closeWeb3 : enableWeb3 } >
+                                    { isWeb3Enabled ? displayAccount : 'Connect Wallet' }
+                                </button>
+
+                            </div>
+
+                        
+                        }
 
                     </div>
 
