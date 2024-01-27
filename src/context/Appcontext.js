@@ -9,6 +9,7 @@ const AppContext = React.createContext({
   irm_contract:false,
   isWeb3Enabled: false,
   main_contract:false,
+  market_info_contract:false,
   notification:() => {},
   user_account: false,
   displayAccount: false,

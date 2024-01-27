@@ -39,6 +39,7 @@ function App() {
   const { walletProvider } = useWeb3ModalProvider()
   const { address, isConnected,   } = useWeb3ModalAccount();
   const main_contract = '0x44F2b80cb371F5D6C54029550c4d22c78FE28719'
+  const market_info_contract = '0xBF25F8076f095F4e7EA057A3CF7b1dC92b967c91'
   const oracle_contract = '0xF6AaDF014E01f438B8559c1A743D6b2c4f2d456E'
   const irm_contract = '0x9eD4EDF314EEC268AE5f08e1E256a21fD387D1E9'
 
@@ -91,7 +92,8 @@ function App() {
       RpcUrl:RpcUrl,
       main_contract:main_contract,
       irm_contract:irm_contract,
-      oracle_contract:oracle_contract
+      oracle_contract:oracle_contract,
+      market_info_contract:market_info_contract
     }} >
         {contextHolder}
 

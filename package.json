@@ -12,7 +12,7 @@
   "dependencies": {
     "@web3modal/ethers": "^3.5.6",
     "antd": "^5.13.1",
-    "ethers": "^6.9.2",
+    "ethers": "^6.10.0",
     "framer-motion": "^10.16.10",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",

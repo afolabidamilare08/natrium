@@ -13,7 +13,7 @@ const DappBorrow = () => {
 
     const [ isLoading, setisLoading ] = useState(false)
 
-    const [ modal, setmodal ] = useState(false)
+    const [ modal, setmodal ] = useState(true)
 
     const [ openModal, setopenModal ] = useState(false);
 
@@ -88,7 +88,7 @@ const DappBorrow = () => {
             return;
         }
 
-        const updatedcollateralAmount = `${collateralAmount}000000000000000000`;
+        const updatedcollateralAmount = ethers.parseEther(collateralAmount);
 
         try{
 
@@ -160,7 +160,8 @@ const DappBorrow = () => {
 
         let updatedborrowAmount = Math.round(borrowAmount)
             // updatedborrowAmount = updatedborrowAmount * 1000000000000000000
-            updatedborrowAmount = `${String(borrowAmount)}000000000000000000`
+            updatedborrowAmount = `${String(borrowAmount)}000000000000000000`;
+            
 
         try{
 

@@ -1,12 +1,52 @@
 import DappHeader from "../../components/dappHeader";
 import WeiImg from '../../assets/wei.png';
 import DaiImg from '../../assets/dai.png';
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import AppContext from "../../context/Appcontext";
 
 const DappDashboard = () => {
 
-    const { UpdatesideNav, closeWeb3, displayAccount, enableWeb3, isWeb3Enabled } = useContext(AppContext)
+    const { UpdatesideNav, closeWeb3, displayAccount, enableWeb3, isWeb3Enabled, user_account } = useContext(AppContext)
+
+    const GetUserTransactions = async () => {
+
+        // setLoadingTransactions(true)
+
+        try{
+
+            // if ( !initialTxlist ) {
+                const response = await fetch(`https://api-sepolia.etherscan.io/api?module=account&action=txlist&address=${user_account}&startblock=0&endblock=99999999&page=1&offset=990&sort=desc&apikey=7XQU2ETHQR9FAX2Z81YM3T83NWRXJK7JEG`)
+
+                var json = await response.json()
+
+                if ( json.status === 0 ) {
+                    alert('Please Reconnect your wallet')
+                    // setLoadingTransactions(false)
+                    return
+                }
+
+            for (let f = 0; f < json.result.length; f++) {
+                var trx = json.result[f]; 
+
+                console.log(trx)
+
+            }
+
+        }
+        catch(error){
+            console.log(error)
+            // setLoadingTransactions(false)
+            // setErorr('Could not get transactions')
+        }
+
+    }
+
+    useEffect( () => {
+
+        GetUserTransactions()
+
+    } , [] )
+
 
     return (
 
@@ -30,6 +70,8 @@ const DappDashboard = () => {
 
                 </div>
 
+                
+
                     {/* <div className="dappDashboard_colored" >
                         Earn
                     </div> */}
@@ -43,7 +85,7 @@ const DappDashboard = () => {
                         </button>
 
                     </div> */}
-{/* 
+
                     <div className="dashTable" >
 
                         <div className="dashTable_top" >
@@ -52,8 +94,8 @@ const DappDashboard = () => {
                             <h4 className="dashTable_top_2" >Collateral </h4>
                             <h4 className="dashTable_top_3" >Loan Asset</h4>
                             <h4 className="dashTable_top_4" >LLTV</h4>
+                            <h4 className="dashTable_top_5" >Health Factor</h4>
                             <h4 className="dashTable_top_5" >Liquidation Price</h4>
-                            <h4 className="dashTable_top_5" >Current Price</h4>
                             <h4 className="dashTable_top_6" >Rate</h4>
 
                         </div>
@@ -269,7 +311,7 @@ const DappDashboard = () => {
 
                         </div>
 
-                    </div>                     */}
+                    </div>                    
 
             </div>
 
