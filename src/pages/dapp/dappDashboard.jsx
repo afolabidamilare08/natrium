@@ -86,7 +86,7 @@ const DappDashboard = () => {
 
                     </div> */}
 
-                    <div className="dashTable" >
+                    {/* <div className="dashTable" >
 
                         <div className="dashTable_top" >
 
@@ -311,7 +311,7 @@ const DappDashboard = () => {
 
                         </div>
 
-                    </div>                    
+                    </div>                     */}
 
             </div>
 
