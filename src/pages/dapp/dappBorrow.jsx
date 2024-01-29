@@ -972,6 +972,11 @@ const DappBorrow = () => {
                                         <div>{Percentage}%</div>
                                     </div>
 
+                                    <div className="borrow_dialog_main_2div_lltv" >
+                                        <h4>Liquidation Price</h4>
+                                        <div>N/A</div>
+                                    </div>
+
                                     <input type="range" className="borrow_dialog_main_2div_slider" value={Percentage} onChange={ (e) => {
                                         let newCol
                                         var perc = e.target.value/100

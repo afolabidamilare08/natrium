@@ -99,10 +99,11 @@
             color: #BABABA;
         }
 
-        & button{
+        & a{
             cursor: pointer;
             display: block;
             margin: 1rem auto;
+            width: fit-content;
             border: none;
             background-color: transparent;
             border: 1px solid #169570;
@@ -111,6 +112,7 @@
             color: white;
             font-family: var(--poppins);
             font-weight: 600;
+            font-size: .8rem;
         }
 
     }

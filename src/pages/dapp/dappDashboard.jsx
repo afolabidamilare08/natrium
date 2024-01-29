@@ -3,6 +3,7 @@ import WeiImg from '../../assets/wei.png';
 import DaiImg from '../../assets/dai.png';
 import { useContext, useEffect } from "react";
 import AppContext from "../../context/Appcontext";
+import { Link } from "react-router-dom";
 
 const DappDashboard = () => {
 
@@ -72,19 +73,33 @@ const DappDashboard = () => {
 
                 
 
-                    {/* <div className="dappDashboard_colored" >
+                    <div className="dappDashboard_colored" >
                         Earn
-                    </div> */}
+                    </div>
 
-                    {/* <div className="dappDashboard_empty" >
+                    <div className="dappDashboard_empty" >
 
                         <h6>You have no open  positions</h6>
 
-                        <button>
+                        <Link to={'/earn'} >
                             Open New Position
-                        </button>
+                        </Link>
 
-                    </div> */}
+                    </div>
+
+                    <div className="dappDashboard_colored" >
+                        Borrow
+                    </div>
+
+                    <div className="dappDashboard_empty" >
+
+                        <h6>You have no open  positions</h6>
+
+                        <Link to={'/borrow'} >
+                            Open New Position
+                        </Link>
+
+                    </div>
 
                     {/* <div className="dashTable" >
 
