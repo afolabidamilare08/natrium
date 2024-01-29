@@ -14,9 +14,12 @@ import { useContext, useEffect, useState } from 'react';
 import AppContext from '../../context/Appcontext';
 import { ethers } from 'ethers';
 import { Abi } from '../../constants/abi';
-import { FaSearch, FaArrowLeft, FaExchangeAlt } from "react-icons/fa";
+import { FaSearch, FaArrowLeft, FaExchangeAlt, FaPiggyBank, FaCopy } from "react-icons/fa";
 import { Spin, Modal } from 'antd';
 import { BsBank } from "react-icons/bs";
+import { PiPottedPlant } from "react-icons/pi";
+import { FaHandshake } from "react-icons/fa6";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 const DappEarn = () => {
 
@@ -47,13 +50,13 @@ const DappEarn = () => {
     const [ totaluserSupply, settotaluserSupply ] = useState('')
     const [ pageLoading, setpageLoading ] = useState(false)
 
+    const [ Searchparams ,setSearchparams ] = useState('')
 
 
-    useEffect( () => {
 
-        Getallmarketdetails(user_account)
-
-    }, [user_account] )
+    useEffect(() => {
+        Getallmarketdetails()
+    }, [user_account])
 
 
     const Getallmarketdetails = async () => {
@@ -63,9 +66,16 @@ const DappEarn = () => {
             let TheMarket = [] ;
 
             for (let k = 0; k < marketList.length; k++) {
+
+                // console.log(getdetail)
+
                 const marketId = marketList[k];
                 const getdetail = await getMarketDetails(marketId)
                 const getmarket = await getMarket(marketId)
+
+                console.log(getdetail)
+
+
                 const loanToken = getdetail[0]
                 const collateralToken = getdetail[1]
                 const oracleAddress = getdetail[2]
@@ -136,6 +146,20 @@ const DappEarn = () => {
             setmarketListDetails(TheMarket)
 
             console.log(TheMarket)
+
+        }
+        catch(error){
+            console.log(error)
+        }
+
+    }
+
+
+    const SearchMarket = async () => {
+
+        try{
+
+
 
         }
         catch(error){
@@ -331,7 +355,7 @@ const DappEarn = () => {
 
         }
         catch(error){
-            console.log(error)
+            console.log("dami",error)
         }
 
     }
@@ -723,12 +747,27 @@ const DappEarn = () => {
                                     <div className="market_list" key={market.market_id} >
 
                                         <div className="market_list_top" >
-                                            <h4>{market.loan_token_name}</h4>
+                                            <h4 style={{
+                                                display:'flex',
+                                                alignItems:'center',
+                                                justifyContent:'space-between'
+                                            }} >{market.loan_token_name} <FaCopy style={{
+                                                width:'.9rem',
+                                                height:'.9rem'}} /> </h4>
                                             <h6>{market.loan_token_symbol}</h6>
                                         </div>
 
                                         <div className="market_list_main" >
-                                            <h4>Total supplied</h4>
+                                            <h4 style={{
+                                                display:"flex",
+                                                alignItems:'center'
+                                            }} >
+                                                <FaPiggyBank style={{
+                                                    width:"1.2rem",
+                                                    height:"1.2rem",
+                                                    marginRight:'.5rem'
+                                                }} />
+                                                Total supplied</h4>
                                             <h6>{ConvertTobase256(market.totalsupplyasset)} {market.loan_token_symbol}</h6>
                                         </div>
 
@@ -736,12 +775,30 @@ const DappEarn = () => {
                                             borderBottom:"1px solid gray",
                                             paddingBottom:".5rem"
                                         }} >
-                                            <h4>Supply APY</h4>
+                                            <h4  style={{
+                                                display:"flex",
+                                                alignItems:'center'
+                                            }} >
+                                                <PiPottedPlant style={{
+                                                    width:"1.2rem",
+                                                    height:"1.2rem",
+                                                    marginRight:'.5rem'
+                                                }} />
+                                                Supply APY</h4>
                                             <h6>{ConvertTobase256(market.supply_apy)}%</h6>
                                         </div>
 
                                         <div className="market_list_main" >
-                                            <h4>Total borrowed</h4>
+                                            <h4 style={{
+                                                display:"flex",
+                                                alignItems:'center'
+                                            }} >
+                                                <BsBank style={{
+                                                    width:"1rem",
+                                                    height:"1rem",
+                                                    marginRight:'.5rem'
+                                                }} />
+                                                Total borrowed</h4>
                                             <h6>{ConvertTobase256(market.totalborrowassset)} {market.loan_token_symbol}</h6> 
                                         </div>
 
@@ -749,7 +806,16 @@ const DappEarn = () => {
                                             borderBottom:"1px solid gray",
                                             paddingBottom:".5rem"
                                         }} >
-                                            <h4>Borrow APY</h4>
+                                            <h4 style={{
+                                                display:"flex",
+                                                alignItems:'center'
+                                            }} >
+                                                <FaHandshake style={{
+                                                    width:"1.2rem",
+                                                    height:"1.2rem",
+                                                    marginRight:'.5rem'
+                                                }} />
+                                                Borrow APY</h4>
                                             <h6>{ConvertTobase256(market.borrow_apy)}%</h6>
                                         </div>
 
@@ -813,10 +879,10 @@ const DappEarn = () => {
                     }} className="side_div_nav_back" onClick={ () => setopenModal(false) } />
 
                     <div className="side_div_nav_title" >
-                        <img src={DaiImg} className="side_div_nav_title_left" />
+                        {/* <img src={DaiImg} className="side_div_nav_title_left" /> */}
                         <div className="side_div_nav_title_right" >
-                            <h4>{ analysisMarket.collateral_token_symbol }</h4>
-                            <h5>{ analysisMarket.collateral_token_name }</h5>
+                            <h4>{ analysisMarket.loan_token_name }</h4>
+                            <h5>{ analysisMarket.loan_token_symbol }</h5>
                         </div>
                     </div>
 
@@ -842,11 +908,11 @@ const DappEarn = () => {
                         </div>
                         <div className="side_div_nav_token_info_right" >
                             <h5>Collateral Token:</h5>
-                            <h4>{analysisMarket.collateral_token_name}</h4>
+                            <h4>{analysisMarket.loan_token_name}</h4>
                         </div>
                     </div>
 
-                    <div className="side_div_nav_token_info" >
+                    {/* <div className="side_div_nav_token_info" >
                         <div className="side_div_nav_token_info_w" >
                             <FaExchangeAlt className="sside_div_nav_token_info_w_ic" />
                         </div>
@@ -854,7 +920,7 @@ const DappEarn = () => {
                             <h5>Loan Token:</h5>
                             <h4>{analysisMarket.loan_token_name}</h4>
                         </div>
-                    </div>
+                    </div> */}
 
                     <div className="side_div_nav_tabs" >
 
@@ -865,7 +931,7 @@ const DappEarn = () => {
 
                         <div className="side_div_nav_tabs_div" >
                             <h5>Total Market Supply</h5>
-                            <h6>{ ConvertTobase256(analysisMarket.totalsupplyasset,2) } {analysisMarket.collateral_token_symbol}</h6>
+                            <h6>{ ConvertTobase256(analysisMarket.totalsupplyasset,2) } {analysisMarket.loan_token_symbol}</h6>
                         </div>
 
                     </div>

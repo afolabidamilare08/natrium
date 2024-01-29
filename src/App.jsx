@@ -7,7 +7,7 @@ import DappEarn from './pages/dapp/dappEarn.jsx'
 import AppContext from './context/Appcontext.js'
 import { useEffect, useState } from 'react';
 import { BrowserProvider} from 'ethers'
-import { createWeb3Modal, defaultConfig, useWeb3Modal, useWeb3ModalAccount, useWeb3ModalProvider } from '@web3modal/ethers/react'
+import { createWeb3Modal, defaultConfig, useWeb3Modal, useWeb3ModalAccount, useWeb3ModalProvider } from '@web3modal/ethers/react';
 import { notification, Spin } from 'antd';
 
 
@@ -20,7 +20,7 @@ const chains = [11155111]
 // 3. Create modal
 const metadata = {
   name: 'Natruim',
-  description: 'Innovative DeFi tool for secure OTC trading experience',
+  description: 'Next-gen permissionless  primitive money market. Powered by Blast L2',
   url: 'https://www.natruimdapp.xyz',
   icons: ['https://avatars.mywebsite.com/']
 }
