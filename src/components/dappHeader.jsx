@@ -24,7 +24,7 @@ const DappHeader = ({
 
             <div className='dappHeader_right' >
 
-                <div className='tokenChange' >
+                <div className='tokenChange' onClick={  closeWeb3  } >
 
                     <img src={EthImg} alt='img' />
                     <h4>BLAST</h4>

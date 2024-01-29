@@ -159,7 +159,92 @@ const DappEarn = () => {
 
         try{
 
+            if ( Searchparams === '' ) {
+                return
+            }
 
+            const getdetail = await getMarketDetails(Searchparams);
+            
+            if ( !getdetail ) {
+                notification('error','Result not found', 'Market dose not exist')
+            }
+
+            const getmarket = await getMarket(Searchparams)
+
+            const loanToken = getdetail[0]
+            const collateralToken = getdetail[1]
+            const oracleAddress = getdetail[2]
+            const irmAddress = getdetail[3]
+            const lltv = getdetail[4]
+            const loantokenDetails = await getTokendetails(loanToken)
+            const collateraltokenDetails = await getTokendetails(collateralToken)
+            const Totalsupplyasset = getmarket[0]
+            const totalsupplyshares = getmarket[1]
+            const Totalborrowasset = getmarket[2]
+            const Totalborrowshares = getmarket[3]
+            const lastUpdate = getmarket[4]
+            const fee = getmarket[5]
+            const borrowAPY = await getBorrowAPY(
+                loanToken,
+                collateralToken,
+                oracleAddress,
+                irmAddress,
+                lltv,
+                Searchparams,
+                Totalsupplyasset,
+                totalsupplyshares,
+                Totalborrowasset,
+                Totalborrowshares,
+                lastUpdate,
+                fee
+            )
+            const supplyAPY = await getsupplyAPY(
+                loanToken,
+                collateralToken,
+                oracleAddress,
+                irmAddress,
+                lltv,
+                Searchparams,
+                Totalsupplyasset,
+                totalsupplyshares,
+                Totalborrowasset,
+                Totalborrowshares,
+                lastUpdate,
+                fee
+            )
+
+
+            setanalysisMarket({
+                market_id:Searchparams,
+                loan_token_address:loanToken,
+                loan_token_name:loantokenDetails.token_name,
+                loan_token_symbol:loantokenDetails.token_symbol,
+                collateral_token_address:collateralToken,
+                collateral_token_name:collateraltokenDetails.token_name,
+                collateral_token_symbol:collateraltokenDetails.token_symbol,
+                oracle_address:oracleAddress,
+                irm_address:irmAddress,
+                lltv:lltv,
+                totalsupplyasset:Totalsupplyasset,
+                totalsupplyshares:totalsupplyshares,
+                totalborrowassset:Totalborrowasset,
+                totalborrowshares:Totalborrowshares,
+                lastUpdate: lastUpdate,
+                fee: fee,
+                borrow_apy:borrowAPY,
+                supply_apy:supplyAPY,
+
+            })
+
+            getCollateralBalance(loanToken)
+            SupplyAssetUser({
+                loanToken:loanToken,
+                collateralToken:collateralToken,
+                oracle:oracleAddress,
+                irm:irmAddress,
+                lltv:lltv,
+            })
+            setopenModal(true)
 
         }
         catch(error){
@@ -725,8 +810,8 @@ const DappEarn = () => {
 
 
                         <div className="search_div" >
-                            <input type="search" placeholder="Search for markets" />
-                            <button>
+                            <input type="search" placeholder="Search for markets" value={Searchparams} onChange={ (e) => setSearchparams(e.target.value) } />
+                            <button onClick={SearchMarket} >
                                 <FaSearch className="search_ic" />
                                 <h4>Search</h4>
                             </button>
@@ -751,9 +836,15 @@ const DappEarn = () => {
                                                 display:'flex',
                                                 alignItems:'center',
                                                 justifyContent:'space-between'
-                                            }} >{market.loan_token_name} <FaCopy style={{
+                                            }} >{market.loan_token_name} <CopyToClipboard text={ market.market_id } onCopy={ () => {
+                                                notification('success','Copied',`You ve successfully copied the market id`)
+                                            } } >
+                                                <FaCopy style={{
                                                 width:'.9rem',
-                                                height:'.9rem'}} /> </h4>
+                                                height:'.9rem',
+                                                cursor:"pointer"
+                                                }} />
+                                                </CopyToClipboard> </h4>
                                             <h6>{market.loan_token_symbol}</h6>
                                         </div>
 
@@ -834,7 +925,7 @@ const DappEarn = () => {
 
                             } )
                         
-                        :
+                            :
                         
                             pageLoading ? <Spin/>
 

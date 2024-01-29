@@ -161,7 +161,7 @@ const DappIndex = ({Component,path}) => {
 
                 <div className='dappIndex_left_lastP' >
 
-                    <Link className='dappIndex_left_lastP_link' >
+                    <a className='dappIndex_left_lastP_link' href='https://natrium-protocol.gitbook.io/natrium-docs/overview/introducing-natrium' >
                         
                         <div className='dappIndex_left_lastP_link_left' >
                             <FaRegFileAlt className='dappIndex_left_lastP_link_left_ic' />
@@ -169,9 +169,9 @@ const DappIndex = ({Component,path}) => {
                         </div>
 
                         <GoArrowUpRight className='dappIndex_left_lastP_link_ic' />
-                    </Link>
+                    </a>
 
-                    <Link className='dappIndex_left_lastP_link' >
+                    {/* <Link className='dappIndex_left_lastP_link' >
                         
                         <div className='dappIndex_left_lastP_link_left' >
                             <img src={LogoImg} alt='img' />
@@ -179,9 +179,9 @@ const DappIndex = ({Component,path}) => {
                         </div>
 
                         <GoArrowUpRight className='dappIndex_left_lastP_link_ic' />
-                    </Link>
+                    </Link> */}
 
-                    <Link className='dappIndex_left_lastP_link' >
+                    <a className='dappIndex_left_lastP_link' href={'https://natrium-protocol.gitbook.io/natrium-docs/overview/introducing-natrium'} >
                         
                         <div className='dappIndex_left_lastP_link_left' >
                             <RiFeedbackLine className='dappIndex_left_lastP_link_left_ic' />
@@ -189,7 +189,7 @@ const DappIndex = ({Component,path}) => {
                         </div>
 
                         <GoArrowUpRight className='dappIndex_left_lastP_link_ic' />
-                    </Link>
+                    </a>
 
                     <div className='dappIndex_left_split' >
 
@@ -395,7 +395,7 @@ const DappIndex = ({Component,path}) => {
 
                 <div className='dappIndex_left_lastP' >
 
-                    <Link className='dappIndex_left_lastP_link' >
+                    <a href='https://natrium-protocol.gitbook.io/natrium-docs/overview/introducing-natrium' className='dappIndex_left_lastP_link' >
                         
                         <div className='dappIndex_left_lastP_link_left' >
                             <FaRegFileAlt className='dappIndex_left_lastP_link_left_ic' />
@@ -403,19 +403,9 @@ const DappIndex = ({Component,path}) => {
                         </div>
 
                         <GoArrowUpRight className='dappIndex_left_lastP_link_ic' />
-                    </Link>
+                    </a>
 
-                    <Link className='dappIndex_left_lastP_link' >
-                        
-                        <div className='dappIndex_left_lastP_link_left' >
-                            <img src={LogoImg} alt='img' />
-                            <h6>Natrium Optimizers</h6>
-                        </div>
-
-                        <GoArrowUpRight className='dappIndex_left_lastP_link_ic' />
-                    </Link>
-
-                    <Link className='dappIndex_left_lastP_link' >
+                    <a href='https://natrium-protocol.gitbook.io/natrium-docs/overview/introducing-natrium' className='dappIndex_left_lastP_link' >
                         
                         <div className='dappIndex_left_lastP_link_left' >
                             <RiFeedbackLine className='dappIndex_left_lastP_link_left_ic' />
@@ -423,7 +413,7 @@ const DappIndex = ({Component,path}) => {
                         </div>
 
                         <GoArrowUpRight className='dappIndex_left_lastP_link_ic' />
-                    </Link>
+                    </a>
 
                     <div className='dappIndex_left_split' >
 
