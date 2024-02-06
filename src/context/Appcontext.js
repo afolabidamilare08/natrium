@@ -19,7 +19,8 @@ const AppContext = React.createContext({
   MainControllercontractAddress:false,
   PresaleSmartContractAddress:false,
   RpcUrl: false,
-  comingsoon:false
+  comingsoon:false,
+  setPageLoading:false
 });
 
 export default AppContext;

@@ -111,7 +111,8 @@ useEffect( () => {
       main_contract:main_contract,
       irm_contract:irm_contract,
       oracle_contract:oracle_contract,
-      market_info_contract:market_info_contract
+      market_info_contract:market_info_contract,
+      setPageLoading: () => setLoading(true)
     }} >
         {contextHolder}
 

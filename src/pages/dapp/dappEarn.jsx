@@ -1,21 +1,14 @@
 import DappHeader from "../../components/dappHeader";
-import WeiImg from '../../assets/wei.png';
-import DaiImg from '../../assets/dai.png';
-import EthImg from '../../assets/eth.png';
 import natImg from '../../assets/nat.png';
 import financeImg from '../../assets/mdi_finance.png'; 
 import asteriskImg from '../../assets/fontisto_asterisk.png'; 
 import heroIcon from '../../assets/heroicons.png';
-import dollarIcon from '../../assets/dollars.png';
-import finIcon from '../../assets/fin.png';
-import userIcon from '../../assets/user.png';
-import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from 'react';
 import AppContext from '../../context/Appcontext';
 import { ethers } from 'ethers';
 import { Abi } from '../../constants/abi';
 import { FaSearch, FaArrowLeft, FaExchangeAlt, FaPiggyBank, FaCopy } from "react-icons/fa";
-import { Spin, Modal } from 'antd';
+import { Spin } from 'antd';
 import { BsBank } from "react-icons/bs";
 import { PiPottedPlant } from "react-icons/pi";
 import { FaHandshake } from "react-icons/fa6";
@@ -23,23 +16,17 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 const DappEarn = () => {
 
-    const { sideNav, UpdatesideNav, user_account, main_contract, signer, irm_contract, market_info_contract ,oracle_contract,notification, closeWeb3, enableWeb3,isWeb3Enabled, displayAccount } = useContext(AppContext)
+    const { user_account, main_contract ,signer, irm_contract, market_info_contract ,oracle_contract,notification, closeWeb3, enableWeb3,isWeb3Enabled, displayAccount } = useContext(AppContext)
 
     const [ isLoading, setisLoading ] = useState(false)
-
-    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const [ openModal, setopenModal ] = useState(false)
     
     const [ collateralAmount, setcollateralAmount ] = useState('')
-    const [ borrowAmount, setborrowAmount ] = useState('')
-    const [ repayAmount, setrepayAmount ] = useState('')
     const [ wcollateralAmount, setwcollateralAmount ] = useState('')
 
     const loanToken = '0xC734D5f31C61a1b716017E0BcF7698Fe01BC2717';
-    const loanTokenName = 'Dai';
     const collateralToken = '0x167287Ae959fb06C6e6b50844fe8a970bED2689a';
-    const collateralTokenName = 'Weth';
     const lltv = '900000000000000000';
 
     const marketList = [ '0x2dba925e5cdab443de71527ca7014773296350b1e0099c09587048b6eae229af' ,'0x1ba5055ba04bdb2fac8bc00e674629a97c03f277e2328a75f823c87233aaafef' ]
@@ -50,7 +37,7 @@ const DappEarn = () => {
     const [ analysisMarket, setanalysisMarket ] = useState(null)
     const [ currentBalnce, setcurrentBalnce ] = useState('')
     const [ totaluserSupply, settotaluserSupply ] = useState('')
-    const [ pageLoading, setpageLoading ] = useState(false)
+    const [ pageLoading, setpageLoading ] = useState(true)
 
     const [ Searchparams ,setSearchparams ] = useState('')
 
@@ -62,6 +49,8 @@ const DappEarn = () => {
 
 
     const Getallmarketdetails = async () => {
+
+        // setpageLoading(true)
 
         try{
 
@@ -146,9 +135,12 @@ const DappEarn = () => {
 
             console.log(TheMarket)
 
+            setpageLoading(false)
+
         }
         catch(error){
             console.log(error)
+            setpageLoading(false)
         }
 
     }
@@ -843,8 +835,13 @@ const DappEarn = () => {
                         
                     </div>
 
+                    <Spin style={{
+                        display: pageLoading ? 'block' : 'none'
+                    }} />
+
                     <div className="earn_body_foot" style={{
-                        justifyContent:'center'
+                        justifyContent:'center',
+                        display: pageLoading ? 'none' : 'flex'
                     }} >
 
                         { marketListDetails ? 
@@ -949,10 +946,6 @@ const DappEarn = () => {
 
                             } )
                         
-                            :
-                        
-                            pageLoading ? <Spin/>
-
                             :
 
 
