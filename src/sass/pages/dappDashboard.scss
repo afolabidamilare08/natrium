@@ -618,3 +618,50 @@
     }
 
 }
+
+
+
+
+.index_img{
+    width: 15rem;
+    height: 15rem;
+    margin-right: 1rem;
+    // border: 1px solid red;
+    position: relative;
+
+    @include respond(mini-desktop){
+      width: 24rem;
+      height: 24rem;
+    }
+
+    @include respond(tab-land){
+      display: block;
+      margin: 1rem auto;
+    }
+
+    @include respond(tab-port){
+      width: 15rem;
+      height: 15rem;
+    }
+
+    &_outter{
+      animation-name: spining;
+      animation-duration: 2s;
+      animation-iteration-count: infinite;
+      width: 100%;
+    }
+
+    &_inner{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 50%;
+      transform: translateY(-50%) translateX(-50%);
+
+      @include respond(mobile-land){
+        width: 50%;
+      }
+
+    }
+    
+  }

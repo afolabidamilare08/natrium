@@ -10,6 +10,8 @@ import { BrowserProvider} from 'ethers'
 import { createWeb3Modal, defaultConfig, useWeb3Modal, useWeb3ModalAccount, useWeb3ModalProvider } from '@web3modal/ethers/react';
 import { notification, Spin, Alert } from 'antd';
 import Logo from './assets/logo.png';
+import outterImg from "./assets/spinouter.png"
+import innerImg from "./assets/spin_center.png"
 
 
 
@@ -120,11 +122,12 @@ useEffect( () => {
         display:"flex",
         alignItems:"center",
         justifyContent:"center",
-        flexDirection:"column"
+        flexDirection:"column",
+        position:'relative'
       }} >
 
 
-        <div style={{
+        {/* <div style={{
           display:'flex',
           alignItems:"center"
         }} >
@@ -138,19 +141,30 @@ useEffect( () => {
             fontWeight:'600',
             fontSize:'2rem'
           }} >Natrium</h5>
-        </div>
+        </div> */}
 
-        <Spin size='large' style={{
-          marginTop:"1rem",
-          color:"white"
-        }} tip="Loading Dapp" >
+<div className="index_img" >
+                <img src={outterImg} className="index_img_outter" />
+                <img src={innerImg} className="index_img_inner" />
+            </div>
 
-{/* <Alert
-        message="Alert message title"
-        description="Further details about the context of this alert."
-        type="info"
-      /> */}
-        </Spin>
+        <h4 style={{
+          color:"gray",
+          marginTop:'.8rem',
+          fontSize:'.9rem',
+          position:"absolute",
+          bottom:"4rem",
+          textAlign:"center"
+        }} > Please make sure you connect your wallet to the blast testnet</h4>
+
+        <a href='https://docs.blast.io/using-blast' style={{
+          color:"gray",
+          marginTop:'.8rem',
+          fontSize:'.9rem',
+          position:"absolute",
+          bottom:"2rem",
+          textDecoration:"underline"
+        }} >Click here to learn more</a>
 
       </div> : <Routes>
         <Route path='/' element={<LandingPage/>} />
