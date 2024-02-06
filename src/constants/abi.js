@@ -2,14 +2,7 @@ export const Abi = {
 
     ERC20ABI:[
       {
-        "inputs": [
-          {
-            "internalType": "uint256",
-            "name": "chainId_",
-            "type": "uint256"
-          }
-        ],
-        "payable": false,
+        "inputs": [],
         "stateMutability": "nonpayable",
         "type": "constructor"
       },
@@ -19,60 +12,23 @@ export const Abi = {
           {
             "indexed": true,
             "internalType": "address",
-            "name": "src",
+            "name": "owner",
             "type": "address"
           },
           {
             "indexed": true,
             "internalType": "address",
-            "name": "guy",
+            "name": "spender",
             "type": "address"
           },
           {
             "indexed": false,
             "internalType": "uint256",
-            "name": "wad",
+            "name": "value",
             "type": "uint256"
           }
         ],
         "name": "Approval",
-        "type": "event"
-      },
-      {
-        "anonymous": true,
-        "inputs": [
-          {
-            "indexed": true,
-            "internalType": "bytes4",
-            "name": "sig",
-            "type": "bytes4"
-          },
-          {
-            "indexed": true,
-            "internalType": "address",
-            "name": "usr",
-            "type": "address"
-          },
-          {
-            "indexed": true,
-            "internalType": "bytes32",
-            "name": "arg1",
-            "type": "bytes32"
-          },
-          {
-            "indexed": true,
-            "internalType": "bytes32",
-            "name": "arg2",
-            "type": "bytes32"
-          },
-          {
-            "indexed": false,
-            "internalType": "bytes",
-            "name": "data",
-            "type": "bytes"
-          }
-        ],
-        "name": "LogNote",
         "type": "event"
       },
       {
@@ -81,19 +37,19 @@ export const Abi = {
           {
             "indexed": true,
             "internalType": "address",
-            "name": "src",
+            "name": "from",
             "type": "address"
           },
           {
             "indexed": true,
             "internalType": "address",
-            "name": "dst",
+            "name": "to",
             "type": "address"
           },
           {
             "indexed": false,
             "internalType": "uint256",
-            "name": "wad",
+            "name": "value",
             "type": "uint256"
           }
         ],
@@ -101,46 +57,15 @@ export const Abi = {
         "type": "event"
       },
       {
-        "constant": true,
-        "inputs": [],
-        "name": "DOMAIN_SEPARATOR",
-        "outputs": [
-          {
-            "internalType": "bytes32",
-            "name": "",
-            "type": "bytes32"
-          }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-      },
-      {
-        "constant": true,
-        "inputs": [],
-        "name": "PERMIT_TYPEHASH",
-        "outputs": [
-          {
-            "internalType": "bytes32",
-            "name": "",
-            "type": "bytes32"
-          }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-      },
-      {
-        "constant": true,
         "inputs": [
           {
             "internalType": "address",
-            "name": "",
+            "name": "owner",
             "type": "address"
           },
           {
             "internalType": "address",
-            "name": "",
+            "name": "spender",
             "type": "address"
           }
         ],
@@ -152,21 +77,19 @@ export const Abi = {
             "type": "uint256"
           }
         ],
-        "payable": false,
         "stateMutability": "view",
         "type": "function"
       },
       {
-        "constant": false,
         "inputs": [
           {
             "internalType": "address",
-            "name": "usr",
+            "name": "spender",
             "type": "address"
           },
           {
             "internalType": "uint256",
-            "name": "wad",
+            "name": "amount",
             "type": "uint256"
           }
         ],
@@ -178,16 +101,14 @@ export const Abi = {
             "type": "bool"
           }
         ],
-        "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
       },
       {
-        "constant": true,
         "inputs": [
           {
             "internalType": "address",
-            "name": "",
+            "name": "account",
             "type": "address"
           }
         ],
@@ -199,32 +120,60 @@ export const Abi = {
             "type": "uint256"
           }
         ],
-        "payable": false,
         "stateMutability": "view",
         "type": "function"
       },
       {
-        "constant": false,
         "inputs": [
           {
-            "internalType": "address",
-            "name": "usr",
-            "type": "address"
-          },
-          {
             "internalType": "uint256",
-            "name": "wad",
+            "name": "amount",
             "type": "uint256"
           }
         ],
         "name": "burn",
         "outputs": [],
-        "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
       },
       {
-        "constant": true,
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "account",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount",
+            "type": "uint256"
+          }
+        ],
+        "name": "burnFrom",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "name": "counter",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
         "inputs": [],
         "name": "decimals",
         "outputs": [
@@ -234,72 +183,89 @@ export const Abi = {
             "type": "uint8"
           }
         ],
-        "payable": false,
         "stateMutability": "view",
         "type": "function"
       },
       {
-        "constant": false,
         "inputs": [
           {
             "internalType": "address",
-            "name": "guy",
-            "type": "address"
-          }
-        ],
-        "name": "deny",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "constant": false,
-        "inputs": [
-          {
-            "internalType": "address",
-            "name": "usr",
+            "name": "spender",
             "type": "address"
           },
           {
             "internalType": "uint256",
-            "name": "wad",
+            "name": "subtractedValue",
             "type": "uint256"
+          }
+        ],
+        "name": "decreaseAllowance",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "spender",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "addedValue",
+            "type": "uint256"
+          }
+        ],
+        "name": "increaseAllowance",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "to",
+            "type": "address"
           }
         ],
         "name": "mint",
         "outputs": [],
-        "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
       },
       {
-        "constant": false,
         "inputs": [
           {
             "internalType": "address",
-            "name": "src",
-            "type": "address"
-          },
-          {
-            "internalType": "address",
-            "name": "dst",
+            "name": "to",
             "type": "address"
           },
           {
             "internalType": "uint256",
-            "name": "wad",
+            "name": "amount",
             "type": "uint256"
           }
         ],
-        "name": "move",
+        "name": "mintAny",
         "outputs": [],
-        "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
       },
       {
-        "constant": true,
         "inputs": [],
         "name": "name",
         "outputs": [
@@ -309,138 +275,10 @@ export const Abi = {
             "type": "string"
           }
         ],
-        "payable": false,
         "stateMutability": "view",
         "type": "function"
       },
       {
-        "constant": true,
-        "inputs": [
-          {
-            "internalType": "address",
-            "name": "",
-            "type": "address"
-          }
-        ],
-        "name": "nonces",
-        "outputs": [
-          {
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-          }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-      },
-      {
-        "constant": false,
-        "inputs": [
-          {
-            "internalType": "address",
-            "name": "holder",
-            "type": "address"
-          },
-          {
-            "internalType": "address",
-            "name": "spender",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "nonce",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "expiry",
-            "type": "uint256"
-          },
-          {
-            "internalType": "bool",
-            "name": "allowed",
-            "type": "bool"
-          },
-          {
-            "internalType": "uint8",
-            "name": "v",
-            "type": "uint8"
-          },
-          {
-            "internalType": "bytes32",
-            "name": "r",
-            "type": "bytes32"
-          },
-          {
-            "internalType": "bytes32",
-            "name": "s",
-            "type": "bytes32"
-          }
-        ],
-        "name": "permit",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "constant": false,
-        "inputs": [
-          {
-            "internalType": "address",
-            "name": "usr",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "wad",
-            "type": "uint256"
-          }
-        ],
-        "name": "pull",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "constant": false,
-        "inputs": [
-          {
-            "internalType": "address",
-            "name": "usr",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "wad",
-            "type": "uint256"
-          }
-        ],
-        "name": "push",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "constant": false,
-        "inputs": [
-          {
-            "internalType": "address",
-            "name": "guy",
-            "type": "address"
-          }
-        ],
-        "name": "rely",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "constant": true,
         "inputs": [],
         "name": "symbol",
         "outputs": [
@@ -450,12 +288,10 @@ export const Abi = {
             "type": "string"
           }
         ],
-        "payable": false,
         "stateMutability": "view",
         "type": "function"
       },
       {
-        "constant": true,
         "inputs": [],
         "name": "totalSupply",
         "outputs": [
@@ -465,21 +301,19 @@ export const Abi = {
             "type": "uint256"
           }
         ],
-        "payable": false,
         "stateMutability": "view",
         "type": "function"
       },
       {
-        "constant": false,
         "inputs": [
           {
             "internalType": "address",
-            "name": "dst",
+            "name": "to",
             "type": "address"
           },
           {
             "internalType": "uint256",
-            "name": "wad",
+            "name": "amount",
             "type": "uint256"
           }
         ],
@@ -491,26 +325,24 @@ export const Abi = {
             "type": "bool"
           }
         ],
-        "payable": false,
         "stateMutability": "nonpayable",
         "type": "function"
       },
       {
-        "constant": false,
         "inputs": [
           {
             "internalType": "address",
-            "name": "src",
+            "name": "from",
             "type": "address"
           },
           {
             "internalType": "address",
-            "name": "dst",
+            "name": "to",
             "type": "address"
           },
           {
             "internalType": "uint256",
-            "name": "wad",
+            "name": "amount",
             "type": "uint256"
           }
         ],
@@ -522,44 +354,7 @@ export const Abi = {
             "type": "bool"
           }
         ],
-        "payable": false,
         "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "constant": true,
-        "inputs": [],
-        "name": "version",
-        "outputs": [
-          {
-            "internalType": "string",
-            "name": "",
-            "type": "string"
-          }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-      },
-      {
-        "constant": true,
-        "inputs": [
-          {
-            "internalType": "address",
-            "name": "",
-            "type": "address"
-          }
-        ],
-        "name": "wards",
-        "outputs": [
-          {
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-          }
-        ],
-        "payable": false,
-        "stateMutability": "view",
         "type": "function"
       }
     ],
@@ -2611,5 +2406,165 @@ export const Abi = {
         "stateMutability": "nonpayable",
         "type": "function"
       }
+    ],
+
+    Pricing_oracle_abi:[{
+      "inputs": [
+       {
+        "internalType": "bytes32",
+        "name": "_FEEIDBASE",
+        "type": "bytes32"
+       },
+       {
+        "internalType": "bytes32",
+        "name": "_FEEIDQUOTE",
+        "type": "bytes32"
+       },
+       {
+        "internalType": "contract IPyth",
+        "name": "_PYTH",
+        "type": "address"
+       },
+       {
+        "internalType": "contract IERC4626",
+        "name": "_VAULT",
+        "type": "address"
+       },
+       {
+        "internalType": "uint256",
+        "name": "_VAULT_CONVERSION_SAMPLE",
+        "type": "uint256"
+       },
+       {
+        "internalType": "uint256",
+        "name": "_baseTokenDecimals",
+        "type": "uint256"
+       },
+       {
+        "internalType": "uint256",
+        "name": "_quoteTokenDecimals",
+        "type": "uint256"
+       }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+     },
+     {
+      "inputs": [],
+      "name": "baseTokenDecimals",
+      "outputs": [
+       {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+       }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+     },
+     {
+      "inputs": [],
+      "name": "FEEID_BASE",
+      "outputs": [
+       {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+       }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+     },
+     {
+      "inputs": [],
+      "name": "FEEID_QUOTE",
+      "outputs": [
+       {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+       }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+     },
+     {
+      "inputs": [],
+      "name": "price",
+      "outputs": [
+       {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+       }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+     },
+     {
+      "inputs": [],
+      "name": "PYTH",
+      "outputs": [
+       {
+        "internalType": "contract IPyth",
+        "name": "",
+        "type": "address"
+       }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+     },
+     {
+      "inputs": [],
+      "name": "quoteTokenDecimals",
+      "outputs": [
+       {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+       }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+     },
+     {
+      "inputs": [],
+      "name": "SCALE_FACTOR",
+      "outputs": [
+       {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+       }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+     },
+     {
+      "inputs": [],
+      "name": "VAULT",
+      "outputs": [
+       {
+        "internalType": "contract IERC4626",
+        "name": "",
+        "type": "address"
+       }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+     },
+     {
+      "inputs": [],
+      "name": "VAULT_CONVERSION_SAMPLE",
+      "outputs": [
+       {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+       }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+     }
     ]
 }

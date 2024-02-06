@@ -42,7 +42,9 @@ const DappEarn = () => {
     const collateralTokenName = 'Weth';
     const lltv = '900000000000000000';
 
-    const [ marketList, setmarketList ] = useState([ '0xc6b6b56565ae8aba1d1efdab684a200229d84e523fb50a41431a89964058470c' ,'0xad6b6cfc771c88bbb79c952b5b31d145cda37c8ea96125f561e2036442325dc6' ])
+    const marketList = [ '0x2dba925e5cdab443de71527ca7014773296350b1e0099c09587048b6eae229af' ,'0x1ba5055ba04bdb2fac8bc00e674629a97c03f277e2328a75f823c87233aaafef' ]
+    const marketListOracles = [ '0x5B1b6f96360b3Ca3C7018DB4d3A59Eb8784297F1' ,'0xC858A1B9ECCf8045F22701467066F7c6dCc53194' ]
+
     const [ marketListDetails, setmarketListDetails ] = useState()
 
     const [ analysisMarket, setanalysisMarket ] = useState(null)
@@ -67,15 +69,10 @@ const DappEarn = () => {
 
             for (let k = 0; k < marketList.length; k++) {
 
-                // console.log(getdetail)
-
                 const marketId = marketList[k];
                 const getdetail = await getMarketDetails(marketId)
                 const getmarket = await getMarket(marketId)
-
                 console.log(getdetail)
-
-
                 const loanToken = getdetail[0]
                 const collateralToken = getdetail[1]
                 const oracleAddress = getdetail[2]
@@ -118,6 +115,8 @@ const DappEarn = () => {
                     fee
                 )
 
+               const collateral_token_price = await getPrice(marketListOracles[k])
+
 
                 TheMarket.push({
                     market_id:marketId,
@@ -137,8 +136,8 @@ const DappEarn = () => {
                     lastUpdate: lastUpdate,
                     fee: fee,
                     borrow_apy:borrowAPY,
-                    supply_apy:supplyAPY,
-
+                    supply_apy:supplyAPY,   
+                    collateral_token_price:collateral_token_price
                 })
 
             }
@@ -257,6 +256,31 @@ const DappEarn = () => {
     const ConvertTobase256 = (unit_number,fixed_number) => {
         const TheNumber = Number(unit_number)/10**18
         return( TheNumber.toFixed( fixed_number ? fixed_number : 2 ) )
+    }
+
+    const getPrice = async (oracleAddress) => {
+
+        try{
+
+            const mainS = await signer()
+
+            const contract = new ethers.Contract(
+                oracleAddress,
+                Abi.Pricing_oracle_abi,
+                mainS
+            )
+
+            const tokenPrice = await contract.price()
+
+            const fixedPrice = ConvertTobase256(tokenPrice)/10000
+
+            return Math.floor(fixedPrice)
+
+        }
+        catch(error){
+            console.log(error)
+        }
+
     }
 
     const getTokendetails = async (tokenAddress) => {
@@ -836,7 +860,7 @@ const DappEarn = () => {
                                                 display:'flex',
                                                 alignItems:'center',
                                                 justifyContent:'space-between'
-                                            }} >{market.loan_token_name} <CopyToClipboard text={ market.market_id } onCopy={ () => {
+                                            }} >{market.loan_token_symbol}/{market.collateral_token_symbol} <CopyToClipboard text={ market.market_id } onCopy={ () => {
                                                 notification('success','Copied',`You ve successfully copied the market id`)
                                             } } >
                                                 <FaCopy style={{
@@ -845,7 +869,7 @@ const DappEarn = () => {
                                                 cursor:"pointer"
                                                 }} />
                                                 </CopyToClipboard> </h4>
-                                            <h6>{market.loan_token_symbol}</h6>
+                                            <h6>{market.loan_token_name}/{market.collateral_token_name}</h6>
                                         </div>
 
                                         <div className="market_list_main" >
@@ -972,8 +996,8 @@ const DappEarn = () => {
                     <div className="side_div_nav_title" >
                         {/* <img src={DaiImg} className="side_div_nav_title_left" /> */}
                         <div className="side_div_nav_title_right" >
-                            <h4>{ analysisMarket.loan_token_name }</h4>
-                            <h5>{ analysisMarket.loan_token_symbol }</h5>
+                            <h4>{analysisMarket.loan_token_name}/{analysisMarket.collateral_token_name}</h4>
+                            <h5>{analysisMarket.loan_token_symbol}/{analysisMarket.collateral_token_symbol}</h5>
                         </div>
                     </div>
 
@@ -999,19 +1023,19 @@ const DappEarn = () => {
                         </div>
                         <div className="side_div_nav_token_info_right" >
                             <h5>Collateral Token:</h5>
-                            <h4>{analysisMarket.loan_token_name}</h4>
+                            <h4>{analysisMarket.collateral_token_name}({analysisMarket.collateral_token_symbol})</h4>
                         </div>
                     </div>
 
-                    {/* <div className="side_div_nav_token_info" >
+                    <div className="side_div_nav_token_info" >
                         <div className="side_div_nav_token_info_w" >
                             <FaExchangeAlt className="sside_div_nav_token_info_w_ic" />
                         </div>
                         <div className="side_div_nav_token_info_right" >
                             <h5>Loan Token:</h5>
-                            <h4>{analysisMarket.loan_token_name}</h4>
+                            <h4>{analysisMarket.loan_token_name}({analysisMarket.loan_token_symbol})</h4>
                         </div>
-                    </div> */}
+                    </div>
 
                     <div className="side_div_nav_tabs" >
 

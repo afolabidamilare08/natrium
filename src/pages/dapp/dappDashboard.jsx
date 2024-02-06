@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const DappDashboard = () => {
 
-    const { UpdatesideNav, closeWeb3, displayAccount, enableWeb3, isWeb3Enabled, user_account } = useContext(AppContext)
+    const { UpdatesideNav, closeWeb3, displayAccount, enableWeb3, isWeb3Enabled, user_account, main_contract } = useContext(AppContext)
 
     const GetUserTransactions = async () => {
 
@@ -26,12 +26,19 @@ const DappDashboard = () => {
                     return
                 }
 
+                let transaction_list = [] ;
+
             for (let f = 0; f < json.result.length; f++) {
                 var trx = json.result[f]; 
+                
+                // console.log(trx)
 
-                console.log(trx)
-
+                if ( trx.to == main_contract ) {
+                    transaction_list.push(trx)
+                }
             }
+
+            console.log(transaction_list)
 
         }
         catch(error){

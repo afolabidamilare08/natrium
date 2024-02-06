@@ -6,6 +6,10 @@ import AppContext from "../../context/Appcontext";
 import { ethers } from "ethers";
 import { Abi } from "../../constants/abi";
 import { Spin, Table } from "antd";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { FaCopy } from "react-icons/fa";
+
+
 
 const DappBorrow = () => {
 
@@ -34,7 +38,8 @@ const DappBorrow = () => {
     const collateralTokenPrice = '2200'
     const lltv = '900000000000000000'
     
-    const [ marketList, setmarketList ] = useState([ '0xc6b6b56565ae8aba1d1efdab684a200229d84e523fb50a41431a89964058470c' ,'0xad6b6cfc771c88bbb79c952b5b31d145cda37c8ea96125f561e2036442325dc6' ])
+    const marketList = [ '0x2dba925e5cdab443de71527ca7014773296350b1e0099c09587048b6eae229af' ,'0x1ba5055ba04bdb2fac8bc00e674629a97c03f277e2328a75f823c87233aaafef' ]
+    const marketListOracles = [ '0x5B1b6f96360b3Ca3C7018DB4d3A59Eb8784297F1' ,'0xC858A1B9ECCf8045F22701467066F7c6dCc53194' ]
     const [ marketListDetails, setmarketListDetails ] = useState()
     const [ analysisMarket, setanalysisMarket ] = useState(null)
     const [ pageLoading, setpageLoading ] = useState(false)
@@ -58,8 +63,6 @@ const DappBorrow = () => {
                 const marketId = marketList[k];
                 const getdetail = await getMarketDetails(marketId)
                 const getmarket = await getMarket(marketId)
-
-                console.log(getdetail)
 
 
                 const loanToken = getdetail[0]
@@ -118,6 +121,18 @@ const DappBorrow = () => {
                     fee
                 )
 
+            //    let collateral_token_price = await getPrice(marketListOracles[k])
+
+            //    let fixedPrice = ConvertTobase256(collateral_token_price)/10000
+
+            //     fixedPrice = Math.floor(fixedPrice)
+
+            //     alert(fixedPrice)
+
+                const PriceIt = await getPrice(marketListOracles[1])
+
+                console.log({priceIt:PriceIt})
+
 
                 TheMarket.push({
                     market_id:marketId,
@@ -139,14 +154,65 @@ const DappBorrow = () => {
                     borrow_apy:borrowAPY,
                     supply_apy:supplyAPY,
                     market_total_borrow:marketTotalborrow,
-                    market_total_supply:marketTotalsupply
+                    market_total_supply:marketTotalsupply,
+                    collateral_token_price:Math.floor(PriceIt)/100000
                 })
 
             }
 
             setmarketListDetails(TheMarket)
 
-            console.log(TheMarket)
+            // console.log(TheMarket)
+
+        }
+        catch(error){
+            console.log(error)
+        }
+
+    }
+
+
+    const HandleOpenModal = async (market,index) => {
+
+        console.log(market.collateral_token_price)
+
+        try{
+
+            getCollateralBalance(market.collateral_token_address)
+            setPercentage(ConvertTobase256(market.lltv)*100)
+            setanalysisMarket({
+                ...market,
+                max_percentage:ConvertTobase256(market.lltv)*100
+            })
+            setopenModal(true)            
+
+        }
+        catch(error){
+            console.log(error)
+        }
+
+    }
+
+
+    const getPrice = async (oracleAddress) => {
+
+        try{
+
+            const mainS = await signer()
+
+            const contract = new ethers.Contract(
+                oracleAddress,
+                Abi.Pricing_oracle_abi,
+                mainS
+            )
+
+            let tokenPrice = await contract.price()
+
+            tokenPrice = ConvertTobase256(tokenPrice)
+
+            console.log(tokenPrice)
+
+            return tokenPrice
 
         }
         catch(error){
@@ -243,6 +309,7 @@ const DappBorrow = () => {
 
         let updatedborrowAmount = Math.round(borrowAmount)
             updatedborrowAmount = `${updatedborrowAmount}000000000000000000`
+            // updatedborrowAmount = ethers.parseEther(updatedborrowAmount)
             // updatedborrowAmount = ethers.parseEther(borrowAmount);
             
 
@@ -447,6 +514,8 @@ const DappBorrow = () => {
 
             const tokenName = await contract.name()
             const tokenSymbol = await contract.symbol()
+            // const tokenDecimal = await contract.decimal()
+            // console.log(tokenDecimal)
             return { token_name: tokenName, token_symbol: tokenSymbol }
 
         }
@@ -632,6 +701,8 @@ const DappBorrow = () => {
                 lltv:lltv,
             })
 
+            // console.log(marketTotalBorrowhandler)
+
             return marketTotalBorrowhandler
 
         }
@@ -796,7 +867,7 @@ const DappBorrow = () => {
 
             let y = Number(getBorrowAPY) /10**18
 
-            console.log('userHealthFactor',y.toString())
+            // console.log('userHealthFactor',y.toString())
 
         }
         catch(error){
@@ -805,6 +876,7 @@ const DappBorrow = () => {
 
     }
  
+
 
 
 
@@ -854,11 +926,7 @@ const DappBorrow = () => {
                                 return <div className="borrowTable_btm" style={{
                                     cursor:"pointer",
                                     alignItems:"center"
-                                }} onClick={ () => {
-                                    getCollateralBalance(market.collateral_token_address)
-                                    setanalysisMarket(market)
-                                    setopenModal(true)
-                                } } key={index}  >
+                                }} onClick={ () => HandleOpenModal(market,index) } key={index}  >
                                     
                                     <div className="borrowTable_btm_1" >
                                         {/* <img src={DaiImg} alt="ing" />
@@ -891,8 +959,21 @@ const DappBorrow = () => {
                                         <h5>{ConvertTobase256(market.market_total_borrow,10)} {market.loan_token_symbol}</h5>
                                     </div>
         
-                                    <div className="borrowTable_btm_6" >
+                                    <div className="borrowTable_btm_6" style={{
+                                        display:'flex',
+                                        justifyContent:"center"
+                                    }} >
                                         <h5>{ `${market.market_id[0]}${market.market_id[1]}${market.market_id[2]}${market.market_id[3]}${market.market_id[4]}` }</h5>
+                                        <CopyToClipboard text={ market.market_id } onCopy={ () => {
+                                                notification('success','Copied',`You ve successfully copied the market id`)
+                                            } } >
+                                                <FaCopy style={{
+                                                width:'.9rem',
+                                                height:'.9rem',
+                                                cursor:"pointer",
+                                                marginLeft:'1rem'
+                                                }} />
+                                                </CopyToClipboard>
                                     </div>
         
                                 </div>
@@ -924,7 +1005,7 @@ const DappBorrow = () => {
 
                                     <div className="borrow_dialog_main_2div_part" >
 
-                                        <h4 className="borrow_dialog_main_2div_part_top" >{collateralBalance} {analysisMarket.collateral_token_symbol}</h4>
+                                        <h4 className="borrow_dialog_main_2div_part_top" >Wallet Balance - {collateralBalance} {analysisMarket.collateral_token_symbol}</h4>
                                         <div className="borrow_dialog_main_2div_part_btm" >
 
                                             <div className="borrow_dialog_main_2div_part_btm_left" >
@@ -932,7 +1013,17 @@ const DappBorrow = () => {
                                             </div>
 
                                             <div className="borrow_dialog_main_2div_part_btm_right" >
-                                                <input placeholder="0.00" value={collateralAmount} onChange={ (e) => setcollateralAmount(e.target.value) } />
+                                                <input placeholder="0.00" value={collateralAmount} onChange={ (e) => {
+                                                    setcollateralAmount(e.target.value)
+                                                    let percentage = analysisMarket.max_percentage / 100
+                                                    if ( e.target.value !== '' ) {
+                                                        setborrowAmount(
+                                                            ((analysisMarket.collateral_token_price*e.target.value)*percentage).toFixed(2)
+                                                        )
+                                                    }else{
+                                                        setborrowAmount(0)
+                                                    }
+                                                } } />
                                                 <button onClick={ () => setcollateralAmount(collateralBalance) } >Max</button>
                                             </div>
 
@@ -942,7 +1033,9 @@ const DappBorrow = () => {
 
                                     <div className="borrow_dialog_main_2div_part" >
 
-                                        <h4 className="borrow_dialog_main_2div_part_top" >{ConvertTobase256(analysisMarket.market_total_supply,10) - ConvertTobase256(analysisMarket.market_total_borrow,10)} {analysisMarket.loan_token_symbol}</h4>
+                                        {/* <h4 className="borrow_dialog_main_2div_part_top" >
+                                            {ConvertTobase256(analysisMarket.market_total_supply,10) - ConvertTobase256(analysisMarket.market_total_borrow,10)} {analysisMarket.loan_token_symbol}
+                                        </h4> */}
                                         <div className="borrow_dialog_main_2div_part_btm" >
 
                                             <div className="borrow_dialog_main_2div_part_btm_left" >
@@ -957,7 +1050,7 @@ const DappBorrow = () => {
                                                     }
 
                                                     setborrowAmount(ConvertTobase256(analysisMarket.market_total_supply,10) - ConvertTobase256(analysisMarket.market_total_borrow,10))
-                                                    setPercentage(90)
+                                                    setPercentage(Percentage)
 
 
                                                 } } >Max</button>
@@ -977,14 +1070,18 @@ const DappBorrow = () => {
                                         <div>N/A</div>
                                     </div>
 
-                                    <input type="range" className="borrow_dialog_main_2div_slider" value={Percentage} onChange={ (e) => {
+                                    <input type="range" value={Percentage} className="borrow_dialog_main_2div_slider" 
+                                    onChange={ (e) => {
                                         let newCol
                                         var perc = e.target.value/100
-                                        newCol = ConvertTobase256(analysisMarket.market_total_supply,2) - ConvertTobase256(analysisMarket.market_total_borrow,2)
-                                        newCol = newCol * perc
+
+                                        newCol = analysisMarket.collateral_token_price*collateralAmount
+                                        newCol = newCol*perc
+                                        newCol = newCol.toFixed(2)
                                         setPercentage(e.target.value)
                                         setborrowAmount(newCol)
-                                    } } max={90} min={10} />
+                                    } } 
+                                    max={analysisMarket.max_percentage} min={10} />
 
                                     <button className="borrow_dialog_main_2div_btn" onClick={ () => HandleSupplyCollateral() } >
                                         { isLoading ? <Spin/> : 'Borrow' }
@@ -1015,7 +1112,7 @@ const DappBorrow = () => {
                                                     <input placeholder="0.00" value={repayAmount} onChange={ (e) => {
                                                         
                                                         setrepayAmount(e.target.value)
-                                                        setwcollateralAmount(e.target.value/collateralTokenPrice)
+                                                        setwcollateralAmount(e.target.value/analysisMarket.collateral_token_price)
 
                                                     } } />
                                                     <button onClick={ () => {
@@ -1046,7 +1143,10 @@ const DappBorrow = () => {
                                                 </div>
 
                                                 <div className="borrow_dialog_main_2div_part_btm_right" >
-                                                    <input placeholder="0.00" value={wcollateralAmount} onChange={ (e) => setwcollateralAmount(e.target.value) } />
+                                                    <input placeholder="0.00" value={wcollateralAmount} onChange={ (e) =>{
+                                                        setrepayAmount(e.target.value*analysisMarket.collateral_token_price)
+                                                         setwcollateralAmount(e.target.value)
+                                                         } } />
                                                     {/* <button onClick={ () => setcollateralAmount(collateralBalance) } >Max</button> */}
                                                 </div>
 
